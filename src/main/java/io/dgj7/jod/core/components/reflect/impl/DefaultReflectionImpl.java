@@ -1,7 +1,7 @@
-package io.dgj7.jod.core.reflect.impl;
+package io.dgj7.jod.core.components.reflect.impl;
 
 import io.dgj7.jod.model.exc.ReflectionException;
-import io.dgj7.jod.core.reflect.IReflection;
+import io.dgj7.jod.core.components.reflect.IReflection;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

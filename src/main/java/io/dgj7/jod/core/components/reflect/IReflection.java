@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.reflect;
+package io.dgj7.jod.core.components.reflect;
 
 import java.lang.reflect.Field;
 import java.util.List;
