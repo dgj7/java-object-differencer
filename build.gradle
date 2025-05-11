@@ -1,9 +1,9 @@
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id "io.freefair.lombok" version "8.13.1"
 }
 
-version = '0.1.0'
+version = '0.1.1'
 
 apply from: 'gradle/dependencies.gradle'
 
