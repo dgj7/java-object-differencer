@@ -14,7 +14,7 @@ public class DefaultCollectionHandler implements ICollectionHandler {
      * {@inheritDoc}
      */
     @Override
-    public boolean isCollection() {
+    public boolean isCollection(final Object expected, final Object actual) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 

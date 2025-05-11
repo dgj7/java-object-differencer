@@ -1,6 +1,5 @@
 package io.dgj7.jod.core.components.collection;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,10 +11,10 @@ public interface IMapHandler {
     /**
      * Determine if the given object is a list.
      */
-    boolean isMap();
+    boolean isMap(final Object expected, final Object actual);
 
     /**
      * Get elements in the collection.
      */
-    <K, V> List<Map.Entry<K, V>> findAllElements(final Object object);
+    <K, V> Map<K, V> findAllElements(final Object object);
 }

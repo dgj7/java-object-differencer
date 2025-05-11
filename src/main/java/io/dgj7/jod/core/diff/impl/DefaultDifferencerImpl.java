@@ -1,5 +1,7 @@
 package io.dgj7.jod.core.diff.impl;
 
+import io.dgj7.jod.core.components.collection.ICollectionHandler;
+import io.dgj7.jod.core.components.collection.IMapHandler;
 import io.dgj7.jod.core.diff.IDifferencer;
 import io.dgj7.jod.model.Metadata;
 import io.dgj7.jod.model.config.DiffConfig;
@@ -9,6 +11,7 @@ import io.dgj7.jod.model.delta.DeltaType;
 import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -49,6 +52,10 @@ public class DefaultDifferencerImpl implements IDifferencer {
         /* storage */
         final List<Delta> deltas = new LinkedList<>();
 
+        /* tools */
+        final ICollectionHandler ch = config.getCollectionHandler();
+        final IMapHandler mh = config.getMapHandler();
+
         /* loop over fields */
         for (Field field : config.getReflection().fields(expected)) {
             final String path = prefixPath + "." + field.getName();
@@ -58,6 +65,10 @@ public class DefaultDifferencerImpl implements IDifferencer {
 
             if (expectedFieldValue == null || actualFieldValue == null) {
                 handleNulls(path, deltas, expectedFieldValue, actualFieldValue);
+            } else if (config.getCollectionHandler().isCollection(expectedFieldValue, actualFieldValue)) {
+                deltas.addAll(diffLists(config, path, ch.findAllElements(expectedFieldValue), ch.findAllElements(actualFieldValue)));
+            } else if (config.getMapHandler().isMap(expectedFieldValue, actualFieldValue)) {
+                deltas.addAll(diffMaps(config, path, mh.findAllElements(expectedFieldValue), mh.findAllElements(actualFieldValue)));
             } else if (config.getShouldRecurse().test(expectedFieldValue, actualFieldValue)) {
                 deltas.addAll(diffRecurse(config, path, expectedFieldValue, actualFieldValue));
             } else if (!config.getEqualsTester().test(expectedFieldValue, actualFieldValue)) {
@@ -67,6 +78,20 @@ public class DefaultDifferencerImpl implements IDifferencer {
 
         /* done */
         return deltas;
+    }
+
+    /**
+     * Handle lists.
+     */
+    private <T> List<Delta> diffLists(final DiffConfig config, final String prefixPath, final List<T> expected, final List<T> actual) {
+        throw new UnsupportedOperationException("not yet implemented");
+    }
+
+    /**
+     * Handle maps.
+     */
+    private <K, V> List<Delta> diffMaps(final DiffConfig config, final String prefixPath, final Map<K, V> expected, final Map<K, V> actual) {
+        throw new UnsupportedOperationException("not yet implemented");
     }
 
     /**
