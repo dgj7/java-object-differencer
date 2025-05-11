@@ -2,7 +2,10 @@ package io.dgj7.jod.core.components.collection.impl;
 
 import io.dgj7.jod.core.components.collection.ICollectionHandler;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -15,14 +18,18 @@ public class DefaultCollectionHandler implements ICollectionHandler {
      */
     @Override
     public boolean isCollection(final Object expected, final Object actual) {
-        throw new UnsupportedOperationException("not yet implemented");
+        return Stream.of(expected, actual)
+                .filter(Objects::nonNull)
+                .map(Object::getClass)
+                .anyMatch(Collection.class::isAssignableFrom);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Object> findAllElements(Object object) {
-        throw new UnsupportedOperationException("not yet implemented");
+    @SuppressWarnings("unchecked")
+    public List<Object> findAllElements(final Object object) {
+        return (List<Object>) object;
     }
 }

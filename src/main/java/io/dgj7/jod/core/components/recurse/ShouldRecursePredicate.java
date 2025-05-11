@@ -1,6 +1,8 @@
 package io.dgj7.jod.core.components.recurse;
 
-import java.util.function.BiPredicate;
+import io.dgj7.jod.model.Metadata;
+
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -9,12 +11,15 @@ import java.util.function.Predicate;
  * into the object graph, or not (and thus compare the values).
  * </p>
  */
-public class ShouldRecursePredicate implements BiPredicate<Object, Object> {
+public class ShouldRecursePredicate extends AbstractShouldRecursePredicate {
     /**
      * {@inheritDoc}
      */
     @Override
     public boolean test(final Object expected, final Object actual) {
-        throw new UnsupportedOperationException("not yet implemented");
+        final Object object = Optional.ofNullable(expected).orElse(actual);
+        final Metadata md = Metadata.from(object);
+
+        return isDirectlyEquatable(md);
     }
 }

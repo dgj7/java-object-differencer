@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public interface IMapHandler {
     /**
-     * Determine if the given object is a list.
+     * Determine if the given object is a collection.
      */
     boolean isMap(final Object expected, final Object actual);
 
