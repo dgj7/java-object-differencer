@@ -1,8 +1,8 @@
 package io.dgj7.jod.model.config;
 
 import io.dgj7.jod.pattern.builder.Builder;
-import io.dgj7.jod.pattern.reflect.IReflection;
-import io.dgj7.jod.pattern.reflect.impl.DefaultReflectionImpl;
+import io.dgj7.jod.core.reflect.IReflection;
+import io.dgj7.jod.core.reflect.impl.DefaultReflectionImpl;
 import lombok.Getter;
 
 /**
