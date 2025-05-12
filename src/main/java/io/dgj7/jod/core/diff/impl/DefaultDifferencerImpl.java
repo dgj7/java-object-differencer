@@ -35,7 +35,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
             final Metadata emd = Metadata.from(expected);
             final Metadata amd = Metadata.from(actual);
             if (emd.equals(amd)) {
-                diffRecurse(config, deltas, path, expected, actual);
+                diffObjects(config, deltas, path, expected, actual);
             } else {
                 deltas.add(new Delta(DeltaType.DIFFERENT_TYPES, path, expected.getClass().getSimpleName(), actual.getClass().getSimpleName()));
             }
@@ -49,10 +49,6 @@ public class DefaultDifferencerImpl implements IDifferencer {
      * Recursively iterate over object trees.
      */
     private <T> void diffRecurse(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final T expected, final T actual) {
-        /* tools */
-        final ICollectionHandler ch = config.getCollectionHandler();
-        final IMapHandler mh = config.getMapHandler();
-
         /* loop over fields */
         for (Field field : config.getReflection().fields(expected)) {
             final String path = prefixPath + "." + field.getName();
@@ -60,17 +56,27 @@ public class DefaultDifferencerImpl implements IDifferencer {
             final Object expectedFieldValue = config.getReflection().fieldTo(field, expected);
             final Object actualFieldValue = config.getReflection().fieldTo(field, actual);
 
-            if (expectedFieldValue == null || actualFieldValue == null) {
-                handleNulls(path, deltas, expectedFieldValue, actualFieldValue);
-            } else if (config.getCollectionHandler().isCollection(expectedFieldValue, actualFieldValue)) {
-                diffLists(config, deltas, path, ch.findAllElements(expectedFieldValue), ch.findAllElements(actualFieldValue));
-            } else if (config.getMapHandler().isMap(expectedFieldValue, actualFieldValue)) {
-                diffMaps(config, deltas, path, mh.findAllElements(expectedFieldValue), mh.findAllElements(actualFieldValue));
-            } else if (config.getShouldRecurse().test(expectedFieldValue, actualFieldValue)) {
-                diffRecurse(config, deltas, path, expectedFieldValue, actualFieldValue);
-            } else if (!config.getEqualsTester().test(expectedFieldValue, actualFieldValue)) {
-                deltas.add(new Delta(DeltaType.NOT_EQUAL, path, expectedFieldValue.toString(), actualFieldValue.toString()));
-            }
+            diffObjects(config, deltas, path, expectedFieldValue, actualFieldValue);
+        }
+    }
+
+    /**
+     * Diff two objects.
+     */
+    private <T> void diffObjects(final DiffConfig config, final List<Delta> deltas, final String path, final T expected, final T actual) {
+        final ICollectionHandler ch = config.getCollectionHandler();
+        final IMapHandler mh = config.getMapHandler();
+
+        if (expected == null || actual == null) {
+            handleNulls(path, deltas, expected, actual);
+        } else if (config.getCollectionHandler().isCollection(expected, actual)) {
+            diffLists(config, deltas, path, ch.findAllElements(expected), ch.findAllElements(actual));
+        } else if (config.getMapHandler().isMap(expected, actual)) {
+            diffMaps(config, deltas, path, mh.findAllElements(expected), mh.findAllElements(actual));
+        } else if (config.getShouldRecurse().test(expected, actual)) {
+            diffRecurse(config, deltas, path, expected, actual);
+        } else if (!config.getEqualsTester().test(expected, actual)) {
+            deltas.add(new Delta(DeltaType.NOT_EQUAL, path, expected.toString(), actual.toString()));
         }
     }
 
