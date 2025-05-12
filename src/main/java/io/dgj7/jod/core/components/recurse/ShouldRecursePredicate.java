@@ -27,6 +27,8 @@ public class ShouldRecursePredicate implements BiPredicate<Object, Object> {
         final Object object = Optional.ofNullable(expected).orElse(actual);
         final Metadata md = Metadata.from(object);
 
-        return DIRECTLY_EQUATABLE_PACKAGES.contains(md.getPackageName());
+        final boolean notDirectlyEquatable = !DIRECTLY_EQUATABLE_PACKAGES.contains(md.getPackageName());
+
+        return notDirectlyEquatable;
     }
 }

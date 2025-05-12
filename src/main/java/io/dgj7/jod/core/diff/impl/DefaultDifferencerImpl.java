@@ -48,7 +48,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Recursively iterate over object trees.
      */
-    private <T> void diffRecurse(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final T expected, final T actual) {
+    protected <T> void diffRecurse(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final T expected, final T actual) {
         /* loop over fields */
         for (Field field : config.getReflection().fields(expected)) {
             final String path = prefixPath + "." + field.getName();
@@ -63,7 +63,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Diff two objects.
      */
-    private <T> void diffObjects(final DiffConfig config, final List<Delta> deltas, final String path, final T expected, final T actual) {
+    protected <T> void diffObjects(final DiffConfig config, final List<Delta> deltas, final String path, final T expected, final T actual) {
         final ICollectionHandler ch = config.getCollectionHandler();
         final IMapHandler mh = config.getMapHandler();
 
@@ -83,7 +83,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Handle lists.
      */
-    private <T> void diffLists(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final List<T> expectedList, final List<T> actualList) {
+    protected <T> void diffLists(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final List<T> expectedList, final List<T> actualList) {
         if (expectedList.size() == actualList.size()) {
             for (int c = 0; c < expectedList.size(); c++) {
                 final T expected = expectedList.get(c);
@@ -99,7 +99,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Handle maps.
      */
-    private <K, V> void diffMaps(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap) {
+    protected <K, V> void diffMaps(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap) {
         if (expectedMap.size() == actualMap.size()) {
             for (K key : expectedMap.keySet()) {
                 final V expected = expectedMap.get(key);
@@ -115,13 +115,13 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Handle nulls.
      */
-    private <T> void handleNulls(final String path, final List<Delta> deltas, final T expected, final T actual) {
+    protected <T> void handleNulls(final String path, final List<Delta> deltas, final T expected, final T actual) {
         if (expected == null && actual == null) {
             return;
         } else if (expected == null) {
-            deltas.add(new Delta(DeltaType.NULLITY, path, "null", actual.getClass().getSimpleName()));
+            deltas.add(new Delta(DeltaType.NULLITY, path, "null", actual.toString()));
         } else if (actual == null) {
-            deltas.add(new Delta(DeltaType.NULLITY, path, expected.getClass().getSimpleName(), "null"));
+            deltas.add(new Delta(DeltaType.NULLITY, path, expected.toString(), "null"));
         } else {
             throw new IllegalStateException("handleNulls() called with no nulls supplied");
         }
@@ -130,13 +130,13 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Determine the initial path.
      */
-    private String determineRootPath(final Object expected, final Object actual) {
+    protected String determineRootPath(final Object expected, final Object actual) {
         if (expected != null) {
             final Metadata md = Metadata.from(expected);
-            return md.getPackageName() + md.getClassName();
+            return md.getPackageName() + "." + md.getClassName();
         } else if (actual != null) {
             final Metadata md = Metadata.from(actual);
-            return md.getPackageName() + md.getClassName();
+            return md.getPackageName() + "." + md.getClassName();
         } else {
             return "";
         }

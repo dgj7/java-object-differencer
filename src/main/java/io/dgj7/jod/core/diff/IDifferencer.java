@@ -14,5 +14,5 @@ public interface IDifferencer {
     /**
      * Find differences in the form of deltas.
      */
-    List<Delta> difference(final DiffConfig config, final Object left, final Object right);
+    List<Delta> difference(final DiffConfig config, final Object expected, final Object actual);
 }
