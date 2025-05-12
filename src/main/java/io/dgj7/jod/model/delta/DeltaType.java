@@ -9,5 +9,7 @@ public enum DeltaType {
     DIFFERENT_TYPES,
     NULLITY,
     NOT_EQUAL,
+    COLLECTION_SIZES_NOT_EQUAL,
+    MAP_SIZES_NOT_EQUAL,
     ;
 }

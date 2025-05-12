@@ -35,7 +35,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
             final Metadata emd = Metadata.from(expected);
             final Metadata amd = Metadata.from(actual);
             if (emd.equals(amd)) {
-                deltas.addAll(diffRecurse(config, path, expected, actual));
+                diffRecurse(config, deltas, path, expected, actual);
             } else {
                 deltas.add(new Delta(DeltaType.DIFFERENT_TYPES, path, expected.getClass().getSimpleName(), actual.getClass().getSimpleName()));
             }
@@ -48,10 +48,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Recursively iterate over object trees.
      */
-    private <T> List<Delta> diffRecurse(final DiffConfig config, final String prefixPath, final T expected, final T actual) {
-        /* storage */
-        final List<Delta> deltas = new LinkedList<>();
-
+    private <T> void diffRecurse(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final T expected, final T actual) {
         /* tools */
         final ICollectionHandler ch = config.getCollectionHandler();
         final IMapHandler mh = config.getMapHandler();
@@ -66,32 +63,47 @@ public class DefaultDifferencerImpl implements IDifferencer {
             if (expectedFieldValue == null || actualFieldValue == null) {
                 handleNulls(path, deltas, expectedFieldValue, actualFieldValue);
             } else if (config.getCollectionHandler().isCollection(expectedFieldValue, actualFieldValue)) {
-                deltas.addAll(diffLists(config, path, ch.findAllElements(expectedFieldValue), ch.findAllElements(actualFieldValue)));
+                diffLists(config, deltas, path, ch.findAllElements(expectedFieldValue), ch.findAllElements(actualFieldValue));
             } else if (config.getMapHandler().isMap(expectedFieldValue, actualFieldValue)) {
-                deltas.addAll(diffMaps(config, path, mh.findAllElements(expectedFieldValue), mh.findAllElements(actualFieldValue)));
+                diffMaps(config, deltas, path, mh.findAllElements(expectedFieldValue), mh.findAllElements(actualFieldValue));
             } else if (config.getShouldRecurse().test(expectedFieldValue, actualFieldValue)) {
-                deltas.addAll(diffRecurse(config, path, expectedFieldValue, actualFieldValue));
+                diffRecurse(config, deltas, path, expectedFieldValue, actualFieldValue);
             } else if (!config.getEqualsTester().test(expectedFieldValue, actualFieldValue)) {
                 deltas.add(new Delta(DeltaType.NOT_EQUAL, path, expectedFieldValue.toString(), actualFieldValue.toString()));
             }
         }
-
-        /* done */
-        return deltas;
     }
 
     /**
      * Handle lists.
      */
-    private <T> List<Delta> diffLists(final DiffConfig config, final String prefixPath, final List<T> expected, final List<T> actual) {
-        throw new UnsupportedOperationException("not yet implemented");
+    private <T> void diffLists(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final List<T> expectedList, final List<T> actualList) {
+        if (expectedList.size() == actualList.size()) {
+            for (int c = 0; c < expectedList.size(); c++) {
+                final T expected = expectedList.get(c);
+                final T actual = actualList.get(c);
+                final String path = prefixPath + "[" + c + "]";
+                diffRecurse(config, deltas, path, expected, actual);
+            }
+        } else {
+            deltas.add(new Delta(DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, "" + expectedList.size(), "" + actualList.size()));
+        }
     }
 
     /**
      * Handle maps.
      */
-    private <K, V> List<Delta> diffMaps(final DiffConfig config, final String prefixPath, final Map<K, V> expected, final Map<K, V> actual) {
-        throw new UnsupportedOperationException("not yet implemented");
+    private <K, V> void diffMaps(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap) {
+        if (expectedMap.size() == actualMap.size()) {
+            for (K key : expectedMap.keySet()) {
+                final V expected = expectedMap.get(key);
+                final V actual = actualMap.get(key);
+                final String path = prefixPath + "[" + key + "]";
+                diffRecurse(config, deltas, path, expected, actual);
+            }
+        } else {
+            deltas.add(new Delta(DeltaType.MAP_SIZES_NOT_EQUAL, prefixPath, "" + expectedMap.size(), "" + actualMap.size()));
+        }
     }
 
     /**
