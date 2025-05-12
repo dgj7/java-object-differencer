@@ -9,12 +9,12 @@ import java.util.Map;
  */
 public interface IMapHandler {
     /**
-     * Determine if the given object is a collection.
+     * Determine if the given object is a map.
      */
     boolean isMap(final Object expected, final Object actual);
 
     /**
-     * Get elements in the collection.
+     * Get elements in the map.
      */
     <K, V> Map<K, V> findAllElements(final Object object);
 }

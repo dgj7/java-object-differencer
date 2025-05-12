@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ICollectionHandler {
     /**
-     * Determine if the given object is a list.
+     * Determine if the given object is a collection.
      */
     boolean isCollection(final Object expected, final Object actual);
 

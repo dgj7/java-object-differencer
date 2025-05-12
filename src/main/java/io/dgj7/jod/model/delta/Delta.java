@@ -28,4 +28,12 @@ public class Delta {
         this.expectedValue = pExpectedValue;
         this.actualValue = pActualValue;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return type + ": " + path + "; expected=[" + expectedValue + "], actual=[" + actualValue + "]";
+    }
 }
