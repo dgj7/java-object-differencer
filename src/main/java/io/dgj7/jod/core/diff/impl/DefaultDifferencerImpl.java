@@ -37,7 +37,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
             if (emd.equals(amd)) {
                 diffObjects(config, deltas, path, expected, actual);
             } else {
-                deltas.add(new Delta(DeltaType.DIFFERENT_TYPES, path, expected.getClass().getSimpleName(), actual.getClass().getSimpleName()));
+                deltas.add(Delta.from(DeltaType.DIFFERENT_TYPES, path, expected, actual));
             }
         }
 
@@ -76,7 +76,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
         } else if (config.getShouldRecurse().test(expected, actual)) {
             diffRecurse(config, deltas, path, expected, actual);
         } else if (!config.getEqualsTester().test(expected, actual)) {
-            deltas.add(new Delta(DeltaType.NOT_EQUAL, path, expected.toString(), actual.toString()));
+            deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
         }
     }
 
@@ -92,7 +92,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
                 diffRecurse(config, deltas, path, expected, actual);
             }
         } else {
-            deltas.add(new Delta(DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, "" + expectedList.size(), "" + actualList.size()));
+            deltas.add(Delta.from(DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
         }
     }
 
@@ -108,7 +108,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
                 diffRecurse(config, deltas, path, expected, actual);
             }
         } else {
-            deltas.add(new Delta(DeltaType.MAP_SIZES_NOT_EQUAL, prefixPath, "" + expectedMap.size(), "" + actualMap.size()));
+            deltas.add(Delta.from(DeltaType.MAP_SIZES_NOT_EQUAL, prefixPath, expectedMap.size(), actualMap.size()));
         }
     }
 
@@ -118,10 +118,8 @@ public class DefaultDifferencerImpl implements IDifferencer {
     protected <T> void handleNulls(final String path, final List<Delta> deltas, final T expected, final T actual) {
         if (expected == null && actual == null) {
             return;
-        } else if (expected == null) {
-            deltas.add(new Delta(DeltaType.NULLITY, path, "null", actual.toString()));
-        } else if (actual == null) {
-            deltas.add(new Delta(DeltaType.NULLITY, path, expected.toString(), "null"));
+        } else if (expected == null || actual == null) {
+            deltas.add(Delta.from(DeltaType.NULLITY, path, expected, actual));
         } else {
             throw new IllegalStateException("handleNulls() called with no nulls supplied");
         }

@@ -14,7 +14,7 @@ public class StringEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NULLITY: java.lang.String; expected=[null], actual=[test]", results.get(0).toString());
+        Assert.assertEquals("NULLITY: java.lang.String (java.lang.String): expected=[null], actual=[test]", results.get(0).toString());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class StringEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NULLITY: java.lang.String; expected=[test], actual=[null]", results.get(0).toString());
+        Assert.assertEquals("NULLITY: java.lang.String (java.lang.String): expected=[test], actual=[null]", results.get(0).toString());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class StringEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NOT_EQUAL: java.lang.String; expected=[test], actual=[f]", results.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.lang.String (java.lang.String): expected=[test], actual=[f]", results.get(0).toString());
     }
 
     @Test

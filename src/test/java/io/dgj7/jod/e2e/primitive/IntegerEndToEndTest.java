@@ -14,7 +14,7 @@ public class IntegerEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NULLITY: java.lang.Integer; expected=[null], actual=[0]", results.get(0).toString());
+        Assert.assertEquals("NULLITY: java.lang.Integer (java.lang.Integer): expected=[null], actual=[0]", results.get(0).toString());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class IntegerEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NULLITY: java.lang.Integer; expected=[1], actual=[null]", results.get(0).toString());
+        Assert.assertEquals("NULLITY: java.lang.Integer (java.lang.Integer): expected=[1], actual=[null]", results.get(0).toString());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class IntegerEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NOT_EQUAL: java.lang.Integer; expected=[1], actual=[0]", results.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.lang.Integer (java.lang.Integer): expected=[1], actual=[0]", results.get(0).toString());
     }
 
     @Test
