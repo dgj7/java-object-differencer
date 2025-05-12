@@ -1,7 +1,7 @@
 package io.dgj7.jod.model;
 
-import io.dgj7.jod.model.config.DiffConfig;
 import io.dgj7.jod.core.components.reflect.IReflection;
+import io.dgj7.jod.model.config.DiffConfig;
 import lombok.Getter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

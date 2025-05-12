@@ -27,6 +27,6 @@ public class DefaultMapHandler implements IMapHandler {
     @Override
     @SuppressWarnings("unchecked")
     public <K, V> Map<K, V> findAllElements(final Object object) {
-        return (Map<K,V>) object;
+        return (Map<K, V>) object;
     }
 }
