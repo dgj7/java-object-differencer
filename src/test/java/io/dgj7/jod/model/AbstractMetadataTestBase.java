@@ -1,7 +1,7 @@
 package io.dgj7.jod.model;
 
 import io.dgj7.jod.TestBase;
-import io.dgj7.jod.model.config.DiffConfig;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +11,7 @@ import lombok.Setter;
  * </p>
  */
 abstract class AbstractMetadataTestBase extends TestBase {
-    protected final DiffConfig config = DiffConfig.builder()
+    protected final DifferencerConfiguration config = DifferencerConfiguration.builder()
             .build();
 
     static class GenericHost<T, U, V> {

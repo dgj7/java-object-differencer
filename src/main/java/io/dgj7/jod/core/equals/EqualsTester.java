@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.components.equals;
+package io.dgj7.jod.core.equals;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 

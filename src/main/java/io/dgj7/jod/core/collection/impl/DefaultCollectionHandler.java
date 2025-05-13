@@ -1,6 +1,6 @@
-package io.dgj7.jod.core.components.collection.impl;
+package io.dgj7.jod.core.collection.impl;
 
-import io.dgj7.jod.core.components.collection.ICollectionHandler;
+import io.dgj7.jod.core.collection.ICollectionHandler;
 
 import java.util.Collection;
 import java.util.List;

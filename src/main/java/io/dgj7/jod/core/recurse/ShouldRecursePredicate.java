@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.components.recurse;
+package io.dgj7.jod.core.recurse;
 
 import io.dgj7.jod.model.Metadata;
 

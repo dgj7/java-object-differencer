@@ -1,13 +1,13 @@
 package io.dgj7.jod.model;
 
-import io.dgj7.jod.model.config.DiffConfig;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
 
 /**
- * Test {@link Metadata#from(DiffConfig, Field, Object)}.
+ * Test {@link Metadata#from(DifferencerConfiguration, Field, Object)}.
  */
 public class MetadataFromFieldTest extends AbstractMetadataTestBase {
     @Test

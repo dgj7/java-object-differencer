@@ -1,10 +1,9 @@
-package io.dgj7.jod.core.diff.impl;
+package io.dgj7.jod;
 
-import io.dgj7.jod.core.components.collection.ICollectionHandler;
-import io.dgj7.jod.core.components.collection.IMapHandler;
-import io.dgj7.jod.core.diff.IDifferencer;
+import io.dgj7.jod.core.collection.ICollectionHandler;
+import io.dgj7.jod.core.collection.IMapHandler;
 import io.dgj7.jod.model.Metadata;
-import io.dgj7.jod.model.config.DiffConfig;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 
@@ -15,15 +14,18 @@ import java.util.Map;
 
 /**
  * <p>
- * Default {@link IDifferencer} implementation.
+ * Object differencer implementation.
+ * </p>
+ * <p>
+ * helper methods in this class are protected, so that it's easy
+ * to extend this class and modify how those methods work, if needed.
  * </p>
  */
-public class DefaultDifferencerImpl implements IDifferencer {
+public class Differencer {
     /**
      * {@inheritDoc}
      */
-    @Override
-    public List<Delta> difference(final DiffConfig config, final Object expected, final Object actual) {
+    public List<Delta> difference(final DifferencerConfiguration config, final Object expected, final Object actual) {
         /* storage */
         final List<Delta> deltas = new LinkedList<>();
         final String path = determineRootPath(expected, actual);
@@ -48,7 +50,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Recursively iterate over object trees.
      */
-    protected <T> void diffRecurse(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final T expected, final T actual) {
+    protected <T> void diffRecurse(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final T expected, final T actual) {
         /* loop over fields */
         for (Field field : config.getReflection().fields(expected)) {
             final String path = prefixPath + "." + field.getName();
@@ -63,7 +65,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Diff two objects.
      */
-    protected <T> void diffObjects(final DiffConfig config, final List<Delta> deltas, final String path, final T expected, final T actual) {
+    protected <T> void diffObjects(final DifferencerConfiguration config, final List<Delta> deltas, final String path, final T expected, final T actual) {
         final ICollectionHandler ch = config.getCollectionHandler();
         final IMapHandler mh = config.getMapHandler();
 
@@ -83,7 +85,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Handle lists.
      */
-    protected <T> void diffLists(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final List<T> expectedList, final List<T> actualList) {
+    protected <T> void diffLists(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final List<T> expectedList, final List<T> actualList) {
         if (expectedList.size() == actualList.size()) {
             for (int c = 0; c < expectedList.size(); c++) {
                 final T expected = expectedList.get(c);
@@ -99,7 +101,7 @@ public class DefaultDifferencerImpl implements IDifferencer {
     /**
      * Handle maps.
      */
-    protected <K, V> void diffMaps(final DiffConfig config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap) {
+    protected <K, V> void diffMaps(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap) {
         if (expectedMap.size() == actualMap.size()) {
             for (K key : expectedMap.keySet()) {
                 final V expected = expectedMap.get(key);

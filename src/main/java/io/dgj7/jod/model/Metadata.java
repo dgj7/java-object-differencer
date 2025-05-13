@@ -1,7 +1,7 @@
 package io.dgj7.jod.model;
 
-import io.dgj7.jod.core.components.reflect.IReflection;
-import io.dgj7.jod.model.config.DiffConfig;
+import io.dgj7.jod.core.reflect.IReflection;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 import lombok.Getter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -78,7 +78,7 @@ public class Metadata {
     /**
      * Factory.
      */
-    public static <P> Metadata from(final DiffConfig config, final Field pField, final P pParent) {
+    public static <P> Metadata from(final DifferencerConfiguration config, final Field pField, final P pParent) {
         final Field field = Objects.requireNonNull(pField, "Field is null");
         final P parent = Objects.requireNonNull(pParent, "Parent(P) is null");
         final IReflection reflect = config.getReflection();

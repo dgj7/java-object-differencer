@@ -3,7 +3,7 @@ plugins {
     id "io.freefair.lombok" version "8.13.1"
 }
 
-version = '0.3.2'
+version = '0.3.3'
 
 apply from: 'gradle/dependencies.gradle'
 

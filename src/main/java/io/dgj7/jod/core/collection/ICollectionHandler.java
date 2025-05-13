@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.components.collection;
+package io.dgj7.jod.core.collection;
 
 import java.util.List;
 

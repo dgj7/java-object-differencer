@@ -1,13 +1,13 @@
 package io.dgj7.jod.model.config;
 
-import io.dgj7.jod.core.components.collection.ICollectionHandler;
-import io.dgj7.jod.core.components.collection.IMapHandler;
-import io.dgj7.jod.core.components.collection.impl.DefaultCollectionHandler;
-import io.dgj7.jod.core.components.collection.impl.DefaultMapHandler;
-import io.dgj7.jod.core.components.equals.EqualsTester;
-import io.dgj7.jod.core.components.recurse.ShouldRecursePredicate;
-import io.dgj7.jod.core.components.reflect.IReflection;
-import io.dgj7.jod.core.components.reflect.impl.DefaultReflectionImpl;
+import io.dgj7.jod.core.collection.ICollectionHandler;
+import io.dgj7.jod.core.collection.IMapHandler;
+import io.dgj7.jod.core.collection.impl.DefaultCollectionHandler;
+import io.dgj7.jod.core.collection.impl.DefaultMapHandler;
+import io.dgj7.jod.core.equals.EqualsTester;
+import io.dgj7.jod.core.recurse.ShouldRecursePredicate;
+import io.dgj7.jod.core.reflect.IReflection;
+import io.dgj7.jod.core.reflect.impl.DefaultReflectionImpl;
 import io.dgj7.jod.pattern.builder.Builder;
 import lombok.Getter;
 
@@ -18,7 +18,7 @@ import java.util.function.BiPredicate;
  * Configuration of differencer.
  * </p>
  */
-public class DiffConfig {
+public class DifferencerConfiguration {
     @Getter
     private IReflection reflection;
     @Getter
@@ -33,7 +33,7 @@ public class DiffConfig {
     /**
      * Create a new instance.
      */
-    private DiffConfig() {
+    private DifferencerConfiguration() {
         // purposely empty
     }
 
@@ -47,7 +47,7 @@ public class DiffConfig {
     /**
      * Internal builder.
      */
-    public static class DiffConfigBuilder implements Builder<DiffConfig> {
+    public static class DiffConfigBuilder implements Builder<DifferencerConfiguration> {
         private static final IReflection DEFAULT_REFLECTION = new DefaultReflectionImpl();
         private static final BiPredicate<Object, Object> DEFAULT_RECURSE = new ShouldRecursePredicate();
         private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new EqualsTester();
@@ -103,8 +103,8 @@ public class DiffConfig {
         /**
          * {@inheritDoc}
          */
-        public DiffConfig build() {
-            final DiffConfig configuration = new DiffConfig();
+        public DifferencerConfiguration build() {
+            final DifferencerConfiguration configuration = new DifferencerConfiguration();
 
             configuration.reflection = theReflection == null ? DEFAULT_REFLECTION : theReflection;
             configuration.shouldRecurse = theShouldRecursePredicate == null ? DEFAULT_RECURSE : theShouldRecursePredicate;
