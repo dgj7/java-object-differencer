@@ -68,8 +68,14 @@ public class BNode<T extends Comparable<T>> {
             value = next;
             return true;
         } else if (next.compareTo(value) < 0) {
+            if (left == null) {
+                left = new BNode<>(comparator);
+            }
             return left.add(next);
         } else if (next.compareTo(value) > 0) {
+            if (right == null) {
+                right =  new BNode<>(comparator);
+            }
             return right.add(next);
         } else {
             return false;

@@ -3,7 +3,7 @@ package io.dgj7.jod.testonly.model.btree;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class BTree<T extends Comparable<T>> implements SortedSet<T> {
+public class BTree<T extends Comparable<T>> {
     private final Comparator<T> forward = Comparable::compareTo;
     private final Comparator<T> reversed = forward.reversed();
 
@@ -22,7 +22,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public int size() {
         return root.size();
     }
@@ -30,7 +29,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean isEmpty() {
         return root.isEmpty();
     }
@@ -38,7 +36,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean contains(final Object object) {
         return root.contains(object);
     }
@@ -46,7 +43,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             @Override
@@ -64,7 +60,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public Object[] toArray() {
         return toArray(new Object[size()]);
     }
@@ -72,7 +67,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public <T1> T1[] toArray(final T1[] a) {
         throw new UnsupportedOperationException("not yet implemented");
     }
@@ -80,7 +74,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean add(final T t) {
         return root.add(t);
     }
@@ -88,7 +81,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean remove(final Object object) {
         throw new UnsupportedOperationException("not yet implemented");
     }
@@ -96,7 +88,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean containsAll(final Collection<?> collection) {
         throw new UnsupportedOperationException("not yet implemented");
     }
@@ -104,7 +95,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean addAll(final Collection<? extends T> collection) {
         AtomicBoolean success = new AtomicBoolean(true);
         collection.forEach(elem -> {
@@ -117,7 +107,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean retainAll(final Collection<?> collection) {
         throw new UnsupportedOperationException("not yet implemented");
     }
@@ -125,7 +114,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public boolean removeAll(final Collection<?> collection) {
         throw new UnsupportedOperationException("not yet implemented");
     }
@@ -133,32 +121,26 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
-    @Override
     public void clear() {
         root.clear();
     }
 
-    @Override
     public Comparator<? super T> comparator() {
         return comparator;
     }
 
-    @Override
     public SortedSet<T> subSet(final T fromElement, final T toElement) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
-    @Override
     public SortedSet<T> headSet(final T toElement) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
-    @Override
     public SortedSet<T> tailSet(final T fromElement) {
         throw new UnsupportedOperationException("not yet implemented");
     }
 
-    @Override
     public T first() {
         BNode<T> leftMost = root;
         while (leftMost.getLeft() != null) {
@@ -167,7 +149,6 @@ public class BTree<T extends Comparable<T>> implements SortedSet<T> {
         return leftMost.getValue();
     }
 
-    @Override
     public T last() {
         BNode<T> rightMost = root;
         while (rightMost.getRight() != null) {
