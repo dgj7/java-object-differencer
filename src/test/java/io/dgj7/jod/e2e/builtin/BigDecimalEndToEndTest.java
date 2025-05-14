@@ -1,4 +1,4 @@
-package io.dgj7.jod.e2e.primitive;
+package io.dgj7.jod.e2e.builtin;
 
 import io.dgj7.jod.e2e.AbstractEndToEndTest;
 import io.dgj7.jod.model.delta.Delta;
