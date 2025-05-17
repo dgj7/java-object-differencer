@@ -30,13 +30,18 @@ public class BigIntegerEndToEndTest extends AbstractEndToEndTest {
 
     @Test
     public final void testNotEqual() {
-        // todo: add-opens on java.math
-        Assert.assertThrows("fail", InaccessibleObjectException.class, () -> difference(BigInteger.valueOf(9999), BigInteger.valueOf(1000000)));
+        final List<Delta> results = difference(BigInteger.valueOf(9999), BigInteger.valueOf(1000000));
+
+        Assert.assertNotNull(results);
+        Assert.assertEquals(1, results.size());
+        Assert.assertEquals("NOT_EQUAL: java.math.BigInteger (java.math.BigInteger): expected=[9999], actual=[1000000]", results.get(0).toString());
     }
 
     @Test
     public final void testEqual() {
-        // todo: add-opens on java.math
-        Assert.assertThrows("fail", InaccessibleObjectException.class, () -> difference(BigInteger.valueOf(9999), BigInteger.valueOf(9999)));
+        final List<Delta> results = difference(BigInteger.valueOf(9999), BigInteger.valueOf(9999));
+
+        Assert.assertNotNull(results);
+        Assert.assertEquals(0, results.size());
     }
 }
