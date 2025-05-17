@@ -1,4 +1,4 @@
-package io.dgj7.jod.testonly.model.btree;
+package io.dgj7.jod.testonly.model.btree.notset;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -74,7 +74,7 @@ public class BNode<T extends Comparable<T>> {
             return left.add(next);
         } else if (next.compareTo(value) > 0) {
             if (right == null) {
-                right =  new BNode<>(comparator);
+                right = new BNode<>(comparator);
             }
             return right.add(next);
         } else {

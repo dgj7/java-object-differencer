@@ -1,10 +1,10 @@
-package io.dgj7.jod.e2e.btree;
+package io.dgj7.jod.e2e.btree.notset;
 
 import io.dgj7.jod.e2e.AbstractEndToEndTest;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.testonly.model.ScenarioVersion;
-import io.dgj7.jod.testonly.model.btree.BTree;
-import io.dgj7.jod.testonly.model.btree.BTreeScenarioFactory;
+import io.dgj7.jod.testonly.model.btree.notset.BTree;
+import io.dgj7.jod.testonly.model.btree.notset.BTreeScenarioFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class BinaryTreeStringEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(result);
         Assert.assertEquals(1, result.size());
-        Assert.assertEquals("NOT_EQUAL: io.dgj7.jod.testonly.model.btree.BTree.root.right.right.value (java.lang.String): expected=[7], actual=[8]", result.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: io.dgj7.jod.testonly.model.btree.notset.BTree.root.right.right.value (java.lang.String): expected=[7], actual=[8]", result.get(0).toString());
     }
 
     @Test
