@@ -21,7 +21,7 @@ public class DefaultCollectionHandler implements ICollectionHandler {
         return Stream.of(expected, actual)
                 .filter(Objects::nonNull)
                 .map(Object::getClass)
-                .anyMatch(Collection.class::isAssignableFrom);
+                .allMatch(Collection.class::isAssignableFrom);
     }
 
     /**

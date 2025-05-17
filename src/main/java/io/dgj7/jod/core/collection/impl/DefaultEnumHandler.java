@@ -19,6 +19,6 @@ public class DefaultEnumHandler implements IEnumHandler {
         return Stream.of(expected, actual)
                 .filter(Objects::nonNull)
                 .map(Object::getClass)
-                .anyMatch(Enum.class::isAssignableFrom);
+                .allMatch(Enum.class::isAssignableFrom);
     }
 }

@@ -18,7 +18,7 @@ public class DefaultMapHandler implements IMapHandler {
         return Stream.of(expected, actual)
                 .filter(Objects::nonNull)
                 .map(Object::getClass)
-                .anyMatch(Map.class::isAssignableFrom);
+                .allMatch(Map.class::isAssignableFrom);
     }
 
     /**
