@@ -31,16 +31,12 @@ public class BigDecimalEndToEndTest extends AbstractEndToEndTest {
     @Test
     public final void testNotEqual() {
         // todo: add-opens on java.math
-        expectedException.expect(InaccessibleObjectException.class);
-
-        difference(BigDecimal.valueOf(0.75), BigDecimal.valueOf(0.5));
+        Assert.assertThrows("fail", InaccessibleObjectException.class, () -> difference(BigDecimal.valueOf(0.75), BigDecimal.valueOf(0.5)));
     }
 
     @Test
     public final void testEqual() {
         // todo: add-opens on java.math
-        expectedException.expect(InaccessibleObjectException.class);
-
-        difference(BigDecimal.valueOf(0.75), BigDecimal.valueOf(0.75));
+        Assert.assertThrows("fail", InaccessibleObjectException.class, () -> difference(BigDecimal.valueOf(0.75), BigDecimal.valueOf(0.75)));
     }
 }
