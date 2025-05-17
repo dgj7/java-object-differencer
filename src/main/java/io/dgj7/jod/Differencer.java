@@ -1,6 +1,7 @@
 package io.dgj7.jod;
 
 import io.dgj7.jod.core.collection.ICollectionHandler;
+import io.dgj7.jod.core.collection.IEnumHandler;
 import io.dgj7.jod.core.collection.IMapHandler;
 import io.dgj7.jod.model.Metadata;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
@@ -68,12 +69,17 @@ public class Differencer {
     protected <T> void diffObjects(final DifferencerConfiguration config, final List<Delta> deltas, final String path, final T expected, final T actual) {
         final ICollectionHandler ch = config.getCollectionHandler();
         final IMapHandler mh = config.getMapHandler();
+        final IEnumHandler eh = config.getEnumHandler();
 
         if (expected == null || actual == null) {
             handleNulls(path, deltas, expected, actual);
-        } else if (config.getCollectionHandler().isCollection(expected, actual)) {
+        } else if (eh.isEnum(expected, actual)) {
+            if (!config.getEqualsTester().test(expected, actual)) {
+                deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
+            }
+        } else if (ch.isCollection(expected, actual)) {
             diffLists(config, deltas, path, ch.findAllElements(expected), ch.findAllElements(actual));
-        } else if (config.getMapHandler().isMap(expected, actual)) {
+        } else if (mh.isMap(expected, actual)) {
             diffMaps(config, deltas, path, mh.findAllElements(expected), mh.findAllElements(actual));
         } else if (config.getShouldRecurse().test(expected, actual)) {
             diffRecurse(config, deltas, path, expected, actual);
@@ -91,7 +97,7 @@ public class Differencer {
                 final T expected = expectedList.get(c);
                 final T actual = actualList.get(c);
                 final String path = prefixPath + "[" + c + "]";
-                diffRecurse(config, deltas, path, expected, actual);
+                diffObjects(config, deltas, path, expected, actual);
             }
         } else {
             deltas.add(Delta.from(DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
@@ -107,7 +113,7 @@ public class Differencer {
                 final V expected = expectedMap.get(key);
                 final V actual = actualMap.get(key);
                 final String path = prefixPath + "[" + key + "]";
-                diffRecurse(config, deltas, path, expected, actual);
+                diffObjects(config, deltas, path, expected, actual);
             }
         } else {
             deltas.add(Delta.from(DeltaType.MAP_SIZES_NOT_EQUAL, prefixPath, expectedMap.size(), actualMap.size()));

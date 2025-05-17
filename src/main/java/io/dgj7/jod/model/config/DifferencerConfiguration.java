@@ -1,8 +1,10 @@
 package io.dgj7.jod.model.config;
 
 import io.dgj7.jod.core.collection.ICollectionHandler;
+import io.dgj7.jod.core.collection.IEnumHandler;
 import io.dgj7.jod.core.collection.IMapHandler;
 import io.dgj7.jod.core.collection.impl.DefaultCollectionHandler;
+import io.dgj7.jod.core.collection.impl.DefaultEnumHandler;
 import io.dgj7.jod.core.collection.impl.DefaultMapHandler;
 import io.dgj7.jod.core.equals.EqualsTester;
 import io.dgj7.jod.core.recurse.ShouldRecursePredicate;
@@ -29,6 +31,8 @@ public class DifferencerConfiguration {
     private ICollectionHandler collectionHandler;
     @Getter
     private IMapHandler mapHandler;
+    @Getter
+    private IEnumHandler enumHandler;
 
     /**
      * Create a new instance.
@@ -53,12 +57,14 @@ public class DifferencerConfiguration {
         private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new EqualsTester();
         private static final ICollectionHandler DEFAULT_COLLECTION_HANDLER = new DefaultCollectionHandler();
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
+        private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
 
         private IReflection theReflection;
         private BiPredicate<Object, Object> theShouldRecursePredicate;
         private BiPredicate<Object, Object> theEqualsTester;
         private ICollectionHandler theCollectionHandler;
         private IMapHandler theMapHandler;
+        private IEnumHandler theEnumHandler;
 
         /**
          * Feed the builder.
@@ -101,6 +107,14 @@ public class DifferencerConfiguration {
         }
 
         /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withEnumHandler(final IEnumHandler input) {
+            this.theEnumHandler = input;
+            return this;
+        }
+
+        /**
          * {@inheritDoc}
          */
         public DifferencerConfiguration build() {
@@ -111,6 +125,7 @@ public class DifferencerConfiguration {
             configuration.equalsTester = theEqualsTester == null ? DEFAULT_EQUALS_TESTER : theEqualsTester;
             configuration.collectionHandler = theCollectionHandler == null ? DEFAULT_COLLECTION_HANDLER : theCollectionHandler;
             configuration.mapHandler = theMapHandler == null ? DEFAULT_MAP_HANDLER : theMapHandler;
+            configuration.enumHandler = theEnumHandler == null ? DEFAULT_ENUM_HANDLER : theEnumHandler;
 
             return configuration;
         }

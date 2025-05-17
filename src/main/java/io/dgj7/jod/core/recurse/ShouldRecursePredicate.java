@@ -17,7 +17,9 @@ public class ShouldRecursePredicate implements BiPredicate<Object, Object> {
     protected static final List<String> DIRECTLY_EQUATABLE_PACKAGES = List.of(
             "java.lang",
             "java.util",
-            "java.math"
+            "java.math",
+            "java.time",
+            "java.sql"
     );
 
     /**
