@@ -13,6 +13,7 @@ import java.util.List;
  * out of order, the comparison will fail.
  * </p>
  */
+// todo: rename this to iterable handler; have it return an iterable
 public interface ICollectionHandler {
     /**
      * Determine if the given object is a collection.

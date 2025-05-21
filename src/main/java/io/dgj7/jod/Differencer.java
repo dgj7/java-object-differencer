@@ -22,6 +22,7 @@ import java.util.Map;
  * to extend this class and modify how those methods work, if needed.
  * </p>
  */
+// todo: move the non-public methods in this object into an interface
 public class Differencer {
     /**
      * {@inheritDoc}
@@ -91,6 +92,7 @@ public class Differencer {
     /**
      * Handle lists.
      */
+    // todo: move this to collection/iterable handler?
     protected <T> void diffLists(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final List<T> expectedList, final List<T> actualList) {
         if (expectedList.size() == actualList.size()) {
             for (int c = 0; c < expectedList.size(); c++) {
@@ -107,6 +109,7 @@ public class Differencer {
     /**
      * Handle maps.
      */
+    // todo: move this to map handler?
     protected <K, V> void diffMaps(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap) {
         if (expectedMap.size() == actualMap.size()) {
             for (K key : expectedMap.keySet()) {
@@ -136,6 +139,7 @@ public class Differencer {
     /**
      * Determine the initial path.
      */
+    // todo: move this to an interface
     protected String determineRootPath(final Object expected, final Object actual) {
         if (expected != null) {
             final Metadata md = Metadata.from(expected);
