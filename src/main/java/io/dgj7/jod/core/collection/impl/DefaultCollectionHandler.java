@@ -29,7 +29,7 @@ public class DefaultCollectionHandler implements ICollectionHandler {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<Object> findAllElements(final Object object) {
-        return (List<Object>) object;
+    public <I, O> Collection<O> findAllElements(final I object) {
+        return (Collection<O>) object;
     }
 }

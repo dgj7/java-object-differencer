@@ -9,9 +9,7 @@ import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 
 import java.lang.reflect.Field;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -93,12 +91,16 @@ public class Differencer {
      * Handle lists.
      */
     // todo: move this to collection/iterable handler?
-    protected <T> void diffLists(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final List<T> expectedList, final List<T> actualList) {
+    protected <T> void diffLists(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Collection<T> expectedList, final Collection<T> actualList) {
         if (expectedList.size() == actualList.size()) {
-            for (int c = 0; c < expectedList.size(); c++) {
-                final T expected = expectedList.get(c);
-                final T actual = actualList.get(c);
-                final String path = prefixPath + "[" + c + "]";
+            final Iterator<T> expectedIterator = expectedList.iterator();
+            final Iterator<T> actualIterator = actualList.iterator();
+            int c = 0;
+
+            while (expectedIterator.hasNext()) {
+                final T expected = expectedIterator.next();
+                final T actual = actualIterator.next();
+                final String path = prefixPath + "[" + c++ + "]";
                 diffObjects(config, deltas, path, expected, actual);
             }
         } else {
