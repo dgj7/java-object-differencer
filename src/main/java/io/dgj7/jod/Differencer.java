@@ -28,7 +28,7 @@ public class Differencer {
     public List<Delta> difference(final DifferencerConfiguration config, final Object expected, final Object actual) {
         /* storage */
         final List<Delta> deltas = new LinkedList<>();
-        final String path = determineRootPath(expected, actual);
+        final String path = config.getRootPathProvider().provideRootPath(expected, actual);
 
         /* diff root objects, starting with null and type equality check, before recurse */
         if (expected == null || actual == null) {
@@ -135,22 +135,6 @@ public class Differencer {
             deltas.add(Delta.from(DeltaType.NULLITY, path, expected, actual));
         } else {
             throw new IllegalStateException("handleNulls() called with no nulls supplied");
-        }
-    }
-
-    /**
-     * Determine the initial path.
-     */
-    // todo: move this to an interface
-    protected String determineRootPath(final Object expected, final Object actual) {
-        if (expected != null) {
-            final Metadata md = Metadata.from(expected);
-            return md.getPackageName() + "." + md.getClassName();
-        } else if (actual != null) {
-            final Metadata md = Metadata.from(actual);
-            return md.getPackageName() + "." + md.getClassName();
-        } else {
-            return "";
         }
     }
 }

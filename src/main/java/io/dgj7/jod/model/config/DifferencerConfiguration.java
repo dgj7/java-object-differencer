@@ -7,6 +7,8 @@ import io.dgj7.jod.core.collections.DefaultCollectionHandler;
 import io.dgj7.jod.core.enumerations.DefaultEnumHandler;
 import io.dgj7.jod.core.maps.DefaultMapHandler;
 import io.dgj7.jod.core.equals.EqualsTester;
+import io.dgj7.jod.core.path.root.DefaultRootPathProvider;
+import io.dgj7.jod.core.path.root.IRootPathProvider;
 import io.dgj7.jod.core.recurse.ShouldRecursePredicate;
 import io.dgj7.jod.core.reflect.IReflection;
 import io.dgj7.jod.core.reflect.impl.DefaultReflectionImpl;
@@ -33,6 +35,8 @@ public class DifferencerConfiguration {
     private IMapHandler mapHandler;
     @Getter
     private IEnumHandler enumHandler;
+    @Getter
+    private IRootPathProvider rootPathProvider;
 
     /**
      * Create a new instance.
@@ -58,6 +62,7 @@ public class DifferencerConfiguration {
         private static final ICollectionHandler DEFAULT_COLLECTION_HANDLER = new DefaultCollectionHandler();
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
         private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
+        private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
 
         private IReflection theReflection;
         private BiPredicate<Object, Object> theShouldRecursePredicate;
@@ -65,6 +70,7 @@ public class DifferencerConfiguration {
         private ICollectionHandler theCollectionHandler;
         private IMapHandler theMapHandler;
         private IEnumHandler theEnumHandler;
+        private IRootPathProvider theRootPathProvider;
 
         /**
          * Feed the builder.
@@ -115,6 +121,14 @@ public class DifferencerConfiguration {
         }
 
         /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withRootPathProvider(final IRootPathProvider input) {
+            this.theRootPathProvider = input;
+            return this;
+        }
+
+        /**
          * {@inheritDoc}
          */
         public DifferencerConfiguration build() {
@@ -126,6 +140,7 @@ public class DifferencerConfiguration {
             configuration.collectionHandler = theCollectionHandler == null ? DEFAULT_COLLECTION_HANDLER : theCollectionHandler;
             configuration.mapHandler = theMapHandler == null ? DEFAULT_MAP_HANDLER : theMapHandler;
             configuration.enumHandler = theEnumHandler == null ? DEFAULT_ENUM_HANDLER : theEnumHandler;
+            configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
 
             return configuration;
         }
