@@ -9,6 +9,8 @@ import io.dgj7.jod.core.collections.DefaultCollectionHandler;
 import io.dgj7.jod.core.enumerations.DefaultEnumHandler;
 import io.dgj7.jod.core.maps.DefaultMapHandler;
 import io.dgj7.jod.core.equals.EqualsTester;
+import io.dgj7.jod.core.nulls.DefaultNullHandler;
+import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.core.path.root.DefaultRootPathProvider;
 import io.dgj7.jod.core.path.root.IRootPathProvider;
 import io.dgj7.jod.core.recurse.ShouldRecursePredicate;
@@ -41,6 +43,8 @@ public class DifferencerConfiguration {
     private IRootPathProvider rootPathProvider;
     @Getter
     private IDifferencerInternals differencerInternals;
+    @Getter
+    private INullHandler nullHandler;
 
     /**
      * Create a new instance.
@@ -68,6 +72,7 @@ public class DifferencerConfiguration {
         private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
         private static final IDifferencerInternals DEFAULT_DIFFERENCER_INTERNALS = new DefaultDifferencerInternals();
+        private static final INullHandler DEFAULT_NULL_HANDLER = new DefaultNullHandler();
 
         private IReflection theReflection;
         private BiPredicate<Object, Object> theShouldRecursePredicate;
@@ -77,6 +82,7 @@ public class DifferencerConfiguration {
         private IEnumHandler theEnumHandler;
         private IRootPathProvider theRootPathProvider;
         private IDifferencerInternals theDifferencerInternals;
+        private INullHandler theNullHandler;
 
         /**
          * Feed the builder.
@@ -143,6 +149,14 @@ public class DifferencerConfiguration {
         }
 
         /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withNullHandler(final INullHandler input) {
+            this.theNullHandler = input;
+            return this;
+        }
+
+        /**
          * {@inheritDoc}
          */
         public DifferencerConfiguration build() {
@@ -156,6 +170,7 @@ public class DifferencerConfiguration {
             configuration.enumHandler = theEnumHandler == null ? DEFAULT_ENUM_HANDLER : theEnumHandler;
             configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
             configuration.differencerInternals = theDifferencerInternals == null ? DEFAULT_DIFFERENCER_INTERNALS : theDifferencerInternals;
+            configuration.nullHandler = theNullHandler == null ? DEFAULT_NULL_HANDLER : theNullHandler;
 
             return configuration;
         }

@@ -3,6 +3,7 @@ package io.dgj7.jod.core.diff;
 import io.dgj7.jod.core.collections.ICollectionHandler;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
 import io.dgj7.jod.core.maps.IMapHandler;
+import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
@@ -40,9 +41,10 @@ public class DefaultDifferencerInternals implements IDifferencerInternals {
         final ICollectionHandler ch = config.getCollectionHandler();
         final IMapHandler mh = config.getMapHandler();
         final IEnumHandler eh = config.getEnumHandler();
+        final INullHandler nh = config.getNullHandler();
 
         if (expected == null || actual == null) {
-            handleNulls(path, deltas, expected, actual);
+            nh.handleNulls(path, deltas, expected, actual);
         } else if (eh.isEnum(expected, actual)) {
             if (!config.getEqualsTester().test(expected, actual)) {
                 deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
@@ -55,20 +57,6 @@ public class DefaultDifferencerInternals implements IDifferencerInternals {
             diffRecurse(config, deltas, path, expected, actual);
         } else if (!config.getEqualsTester().test(expected, actual)) {
             deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <T> void handleNulls(final String path, final List<Delta> deltas, final T expected, final T actual) {
-        if (expected == null && actual == null) {
-            return;
-        } else if (expected == null || actual == null) {
-            deltas.add(Delta.from(DeltaType.NULLITY, path, expected, actual));
-        } else {
-            throw new IllegalStateException("handleNulls() called with no nulls supplied");
         }
     }
 }

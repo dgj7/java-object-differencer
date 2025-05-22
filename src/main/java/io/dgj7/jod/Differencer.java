@@ -1,6 +1,7 @@
 package io.dgj7.jod;
 
 import io.dgj7.jod.core.diff.IDifferencerInternals;
+import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.model.Metadata;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
@@ -26,6 +27,7 @@ public class Differencer {
     public List<Delta> difference(final DifferencerConfiguration config, final Object expected, final Object actual) {
         /* retrieve behaviors */
         final IDifferencerInternals internals = config.getDifferencerInternals();
+        final INullHandler nh = config.getNullHandler();
 
         /* storage */
         final List<Delta> deltas = new LinkedList<>();
@@ -33,7 +35,7 @@ public class Differencer {
 
         /* diff root objects, starting with null and type equality check, before recurse */
         if (expected == null || actual == null) {
-            internals.handleNulls(path, deltas, expected, actual);
+            nh.handleNulls(path, deltas, expected, actual);
         } else {
             final Metadata emd = Metadata.from(expected);
             final Metadata amd = Metadata.from(actual);
