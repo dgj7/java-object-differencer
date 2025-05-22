@@ -1,6 +1,4 @@
-package io.dgj7.jod.core.collection.impl;
-
-import io.dgj7.jod.core.collection.IMapHandler;
+package io.dgj7.jod.core.maps;
 
 import java.util.Map;
 import java.util.Objects;

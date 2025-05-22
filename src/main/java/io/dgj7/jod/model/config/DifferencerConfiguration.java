@@ -1,11 +1,11 @@
 package io.dgj7.jod.model.config;
 
-import io.dgj7.jod.core.collection.ICollectionHandler;
-import io.dgj7.jod.core.collection.IEnumHandler;
-import io.dgj7.jod.core.collection.IMapHandler;
-import io.dgj7.jod.core.collection.impl.DefaultCollectionHandler;
-import io.dgj7.jod.core.collection.impl.DefaultEnumHandler;
-import io.dgj7.jod.core.collection.impl.DefaultMapHandler;
+import io.dgj7.jod.core.collections.ICollectionHandler;
+import io.dgj7.jod.core.enumerations.IEnumHandler;
+import io.dgj7.jod.core.maps.IMapHandler;
+import io.dgj7.jod.core.collections.DefaultCollectionHandler;
+import io.dgj7.jod.core.enumerations.DefaultEnumHandler;
+import io.dgj7.jod.core.maps.DefaultMapHandler;
 import io.dgj7.jod.core.equals.EqualsTester;
 import io.dgj7.jod.core.recurse.ShouldRecursePredicate;
 import io.dgj7.jod.core.reflect.IReflection;

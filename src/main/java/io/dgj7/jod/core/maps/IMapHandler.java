@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.collection;
+package io.dgj7.jod.core.maps;
 
 import java.util.Map;
 

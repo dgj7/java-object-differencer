@@ -1,6 +1,4 @@
-package io.dgj7.jod.core.collection.impl;
-
-import io.dgj7.jod.core.collection.IEnumHandler;
+package io.dgj7.jod.core.enumerations;
 
 import java.util.Objects;
 import java.util.stream.Stream;

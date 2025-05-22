@@ -1,8 +1,8 @@
 package io.dgj7.jod;
 
-import io.dgj7.jod.core.collection.ICollectionHandler;
-import io.dgj7.jod.core.collection.IEnumHandler;
-import io.dgj7.jod.core.collection.IMapHandler;
+import io.dgj7.jod.core.collections.ICollectionHandler;
+import io.dgj7.jod.core.enumerations.IEnumHandler;
+import io.dgj7.jod.core.maps.IMapHandler;
 import io.dgj7.jod.model.Metadata;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
