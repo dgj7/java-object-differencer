@@ -16,8 +16,9 @@ public class DefaultCollectionHandler implements ICollectionHandler {
     /**
      * {@inheritDoc}
      */
+
     @Override
-    public boolean isCollection(final Object expected, final Object actual) {
+    public <I> boolean isCollection(final I expected, final I actual) {
         return Stream.of(expected, actual)
                 .filter(Objects::nonNull)
                 .map(Object::getClass)

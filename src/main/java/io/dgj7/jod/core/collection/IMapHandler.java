@@ -11,7 +11,7 @@ public interface IMapHandler {
     /**
      * Determine if the given object is a map.
      */
-    boolean isMap(final Object expected, final Object actual);
+    <I> boolean isMap(final I expected, final I actual);
 
     /**
      * Get elements in the map.

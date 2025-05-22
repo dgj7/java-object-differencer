@@ -14,7 +14,7 @@ public class DefaultMapHandler implements IMapHandler {
      * {@inheritDoc}
      */
     @Override
-    public boolean isMap(final Object expected, final Object actual) {
+    public <I> boolean isMap(final I expected, final I actual) {
         return Stream.of(expected, actual)
                 .filter(Objects::nonNull)
                 .map(Object::getClass)
