@@ -1,14 +1,14 @@
 package io.dgj7.jod.model.config;
 
+import io.dgj7.jod.core.collections.DefaultCollectionHandler;
 import io.dgj7.jod.core.collections.ICollectionHandler;
 import io.dgj7.jod.core.diff.DefaultDifferencerInternals;
 import io.dgj7.jod.core.diff.IDifferencerInternals;
-import io.dgj7.jod.core.enumerations.IEnumHandler;
-import io.dgj7.jod.core.maps.IMapHandler;
-import io.dgj7.jod.core.collections.DefaultCollectionHandler;
 import io.dgj7.jod.core.enumerations.DefaultEnumHandler;
-import io.dgj7.jod.core.maps.DefaultMapHandler;
+import io.dgj7.jod.core.enumerations.IEnumHandler;
 import io.dgj7.jod.core.equals.EqualsTester;
+import io.dgj7.jod.core.maps.DefaultMapHandler;
+import io.dgj7.jod.core.maps.IMapHandler;
 import io.dgj7.jod.core.nulls.DefaultNullHandler;
 import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.core.path.root.DefaultRootPathProvider;

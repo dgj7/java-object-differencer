@@ -9,7 +9,6 @@ import io.dgj7.jod.model.delta.DeltaType;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
