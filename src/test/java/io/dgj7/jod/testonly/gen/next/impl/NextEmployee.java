@@ -28,7 +28,7 @@ public class NextEmployee extends AbstractNextPerson<Employee> {
     public Employee next() {
         final Employee employee = new Employee();
 
-        employee.setEmployeeId("E" + StringUtils.leftPad("" + employeeNum, 8, '0'));
+        employee.setEmployeeId("E" + StringUtils.leftPad("" + employeeNum++, 8, '0'));
         populate(employee);
 
         return employee;

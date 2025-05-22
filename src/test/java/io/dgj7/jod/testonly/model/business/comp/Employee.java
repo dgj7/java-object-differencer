@@ -11,4 +11,9 @@ public class Employee extends Person {
     @Getter
     @Setter
     private Title title;
+
+    @Override
+    public String toString() {
+        return "Employee[" + title + ": " + employeeId + "]";
+    }
 }
