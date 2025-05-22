@@ -1,14 +1,11 @@
 package io.dgj7.jod.e2e.btree.set;
 
 import io.dgj7.jod.e2e.AbstractEndToEndTest;
-import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.testonly.model.ScenarioVersion;
 import io.dgj7.jod.testonly.model.btree.set.BTreeSortedSet;
 import io.dgj7.jod.testonly.model.btree.set.BTreeSortedSetScenarioFactory;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.List;
 
 public class BTreeSortedSetIntegerEndToEndTest extends AbstractEndToEndTest {
     @Test

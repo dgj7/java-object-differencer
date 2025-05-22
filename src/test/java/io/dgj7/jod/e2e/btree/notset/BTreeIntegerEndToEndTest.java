@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class BTreeIntegerEndToEndTest extends AbstractEndToEndTest {
+
     @Test
     public final void testNotEqual() {
         final BTree<Integer> expected = BTreeScenarioFactory.integerScenario(ScenarioVersion.EXPECTED);
@@ -20,7 +21,7 @@ public class BTreeIntegerEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(result);
         Assert.assertEquals(1, result.size());
-        Assert.assertEquals("NOT_EQUAL: io.dgj7.jod.testonly.model.btree.notset.BTree.root.left.left.value (java.lang.Integer): expected=[7], actual=[8]", result.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: io.dgj7.jod.testonly.model.btree.notset.BTree.root (io.dgj7.jod.testonly.model.btree.notset.BNode): expected=[BNode[7,15,23,31,38,47,52]], actual=[BNode[8,15,23,31,38,47,52]]", result.get(0).toString());
     }
 
     @Test

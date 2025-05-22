@@ -1,14 +1,13 @@
 package io.dgj7.jod.testonly.gen.next;
 
 import io.dgj7.jod.testonly.gen.next.impl.*;
-import io.dgj7.jod.testonly.model.business.comp.*;
-import org.apache.commons.lang3.StringUtils;
+import io.dgj7.jod.testonly.model.business.comp.Address;
+import io.dgj7.jod.testonly.model.business.comp.Customer;
+import io.dgj7.jod.testonly.model.business.comp.Employee;
+import io.dgj7.jod.testonly.model.business.comp.Widget;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
 /**
  * <p>

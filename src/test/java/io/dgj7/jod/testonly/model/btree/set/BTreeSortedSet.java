@@ -1,10 +1,9 @@
 package io.dgj7.jod.testonly.model.btree.set;
 
+import io.dgj7.jod.testonly.model.btree.notset.BNode;
 import io.dgj7.jod.testonly.model.btree.notset.BTree;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.SortedSet;
+import java.util.*;
 
 /**
  * {@link BTree} that also implements {@link SortedSet}.
@@ -15,17 +14,45 @@ public class BTreeSortedSet<T extends Comparable<T>> extends BTree<T> implements
      */
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            @Override
-            public boolean hasNext() {
-                throw new UnsupportedOperationException("not yet implemented");
-            }
+        return new BTreeInOrderIterator<>(this.root);
+    }
 
-            @Override
-            public T next() {
-                throw new UnsupportedOperationException("not yet implemented");
+    /**
+     * <p>
+     * {@link Iterator} of {@link BTree}, and descendants.
+     * </p>
+     * <p>
+     * Performs in-order traversal.
+     * </p>
+     */
+    private class BTreeInOrderIterator<T1 extends Comparable<T1>> implements Iterator<T1> {
+        private final Iterator<T1> iterator;
+
+        public BTreeInOrderIterator(final BNode<T1> pRoot) {
+            final List<T1> cheater = new LinkedList<>();
+            recurse(pRoot, cheater);
+            iterator = cheater.iterator();
+        }
+
+        private void recurse(final BNode<T1> node, final List<T1> list) {
+            if (node != null) {
+                recurse(node.getLeft(), list);
+                if (node.getValue() != null) {
+                    list.add(node.getValue());
+                }
+                recurse(node.getRight(), list);
             }
-        };
+        }
+
+        @Override
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        @Override
+        public T1 next() {
+            return iterator.next();
+        }
     }
 
     /**
@@ -98,5 +125,18 @@ public class BTreeSortedSet<T extends Comparable<T>> extends BTree<T> implements
     @Override
     public SortedSet<T> tailSet(final T fromElement) {
         throw new UnsupportedOperationException("not yet implemented");
+    }
+
+    @Override
+    public String toString() {
+        final Iterator<T> iter = iterator();
+        final StringBuilder sb = new StringBuilder();
+        while (iter.hasNext()) {
+            if (!sb.isEmpty()) {
+                sb.append(",");
+            }
+            sb.append(iter.next());
+        }
+        return "BTreeSortedSet[" + sb.toString() + "]";
     }
 }

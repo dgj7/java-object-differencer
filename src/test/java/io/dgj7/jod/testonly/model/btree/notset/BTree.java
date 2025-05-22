@@ -9,7 +9,7 @@ public class BTree<T extends Comparable<T>> {
     private final Comparator<T> forward = Comparable::compareTo;
     private final Comparator<T> reversed = forward.reversed();
 
-    private final BNode<T> root;
+    protected final BNode<T> root;
     private final Comparator<T> comparator;
 
     public BTree() {

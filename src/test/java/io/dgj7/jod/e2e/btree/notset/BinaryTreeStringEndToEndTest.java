@@ -20,7 +20,7 @@ public class BinaryTreeStringEndToEndTest extends AbstractEndToEndTest {
 
         Assert.assertNotNull(result);
         Assert.assertEquals(1, result.size());
-        Assert.assertEquals("NOT_EQUAL: io.dgj7.jod.testonly.model.btree.notset.BTree.root.right.right.value (java.lang.String): expected=[7], actual=[8]", result.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: io.dgj7.jod.testonly.model.btree.notset.BTree.root (io.dgj7.jod.testonly.model.btree.notset.BNode): expected=[BNode[15,23,31,38,47,52,7]], actual=[BNode[15,23,31,38,47,52,8]]", result.get(0).toString());
     }
 
     @Test

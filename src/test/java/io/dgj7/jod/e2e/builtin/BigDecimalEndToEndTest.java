@@ -5,7 +5,6 @@ import io.dgj7.jod.model.delta.Delta;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.lang.reflect.InaccessibleObjectException;
 import java.math.BigDecimal;
 import java.util.List;
 

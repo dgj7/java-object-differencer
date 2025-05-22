@@ -14,13 +14,19 @@ import java.util.function.Predicate;
  * </p>
  */
 public class ShouldRecursePredicate implements BiPredicate<Object, Object> {
-    protected static final List<String> DIRECTLY_EQUATABLE_PACKAGES = List.of(
-            "java.lang",
-            "java.util",
-            "java.math",
-            "java.time",
-            "java.sql"
-    );
+    protected List<String> provideDirectlyEquatablePackages() {
+        return List.of(
+                "java.lang",
+                "java.util",
+                "java.math",
+                "java.time",
+                "java.sql"
+        );
+    }
+
+    protected List<Class<?>> provideDirectlyEquatableClasses() {
+        return List.of();
+    }
 
     /**
      * {@inheritDoc}
@@ -30,8 +36,12 @@ public class ShouldRecursePredicate implements BiPredicate<Object, Object> {
         final Object object = Optional.ofNullable(expected).orElse(actual);
         final Metadata md = Metadata.from(object);
 
-        final boolean notDirectlyEquatable = !DIRECTLY_EQUATABLE_PACKAGES.contains(md.getPackageName());
+        final boolean notDirectlyEquatablePackage = !provideDirectlyEquatablePackages().contains(md.getPackageName());
+        final boolean notDirectlyEquatableClass = provideDirectlyEquatableClasses()
+                .stream()
+                .map(Metadata::from)
+                .noneMatch(md::equals);
 
-        return notDirectlyEquatable;
+        return notDirectlyEquatablePackage && notDirectlyEquatableClass;
     }
 }

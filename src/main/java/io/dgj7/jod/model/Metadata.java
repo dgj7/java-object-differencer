@@ -65,6 +65,19 @@ public class Metadata {
     /**
      * Factory.
      */
+    public static <T> Metadata from(final Class<T> pClazz) {
+        final Class<T> clazz = Objects.requireNonNull(pClazz, "Class<T> is null");
+
+        final String packageName = clazz.getPackageName();
+        final String className = clazz.getSimpleName();
+        final String fieldName = "";
+
+        return new Metadata(packageName, className, fieldName);
+    }
+
+    /**
+     * Factory.
+     */
     public static <T> Metadata from(final T pInput) {
         final T input = Objects.requireNonNull(pInput, "T is null");
 

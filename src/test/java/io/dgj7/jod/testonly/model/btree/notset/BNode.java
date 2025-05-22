@@ -2,6 +2,8 @@ package io.dgj7.jod.testonly.model.btree.notset;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import java.util.Comparator;
 import java.util.Objects;
@@ -12,6 +14,7 @@ import java.util.Objects;
  * </p>
  */
 public class BNode<T extends Comparable<T>> {
+    /* data storage */
     @Getter
     @Setter
     private T value;
@@ -22,6 +25,11 @@ public class BNode<T extends Comparable<T>> {
     @Setter
     private BNode<T> right;
 
+    /* traversal */
+    @Getter
+    private BNode<T> parent;
+
+    /* ordering */
     private final Comparator<T> comparator;
 
     protected BNode(final Comparator<T> pComparator) {
@@ -35,7 +43,9 @@ public class BNode<T extends Comparable<T>> {
     }
 
     public boolean isEmpty() {
-        return left.isEmpty() && right.isEmpty() && value == null;
+        return (left == null || left.isEmpty())
+                && (right == null || right.isEmpty())
+                && value == null;
     }
 
     public boolean contains(final Object object) {
@@ -55,6 +65,7 @@ public class BNode<T extends Comparable<T>> {
         }
         right = null;
 
+        parent = null;
         value = null;
     }
 
@@ -70,15 +81,46 @@ public class BNode<T extends Comparable<T>> {
         } else if (next.compareTo(value) < 0) {
             if (left == null) {
                 left = new BNode<>(comparator);
+                left.parent = this;
             }
             return left.add(next);
         } else if (next.compareTo(value) > 0) {
             if (right == null) {
                 right = new BNode<>(comparator);
+                right.parent = this;
             }
             return right.add(next);
         } else {
             return false;
+        }
+    }
+
+    @Override
+    public boolean equals(final Object object) {
+        if (object instanceof BNode<?> other) {
+            return new EqualsBuilder()
+                    .append(value, other.value)
+                    .append(left, other.left)
+                    .append(right, other.right)
+                    .isEquals();
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "BNode[" + recurseString(this) + "]";
+    }
+
+    private String recurseString(final BNode<?> node) {
+        if (node == null) {
+            return "";
+        } else {
+            final String leftStr = recurseString(node.left);
+            final String rightStr = recurseString(node.right);
+            return (StringUtils.isBlank(leftStr) ? "" : leftStr + ",")
+                    + node.value
+                    + (StringUtils.isBlank(rightStr) ? "" : "," + rightStr);
         }
     }
 }
