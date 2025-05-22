@@ -1,6 +1,8 @@
 package io.dgj7.jod.model.config;
 
 import io.dgj7.jod.core.collections.ICollectionHandler;
+import io.dgj7.jod.core.diff.DefaultDifferencerInternals;
+import io.dgj7.jod.core.diff.IDifferencerInternals;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
 import io.dgj7.jod.core.maps.IMapHandler;
 import io.dgj7.jod.core.collections.DefaultCollectionHandler;
@@ -37,6 +39,8 @@ public class DifferencerConfiguration {
     private IEnumHandler enumHandler;
     @Getter
     private IRootPathProvider rootPathProvider;
+    @Getter
+    private IDifferencerInternals differencerInternals;
 
     /**
      * Create a new instance.
@@ -63,6 +67,7 @@ public class DifferencerConfiguration {
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
         private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
+        private static final IDifferencerInternals DEFAULT_DIFFERENCER_INTERNALS = new DefaultDifferencerInternals();
 
         private IReflection theReflection;
         private BiPredicate<Object, Object> theShouldRecursePredicate;
@@ -71,6 +76,7 @@ public class DifferencerConfiguration {
         private IMapHandler theMapHandler;
         private IEnumHandler theEnumHandler;
         private IRootPathProvider theRootPathProvider;
+        private IDifferencerInternals theDifferencerInternals;
 
         /**
          * Feed the builder.
@@ -129,6 +135,14 @@ public class DifferencerConfiguration {
         }
 
         /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withDifferencerInternals(final IDifferencerInternals input) {
+            this.theDifferencerInternals = input;
+            return this;
+        }
+
+        /**
          * {@inheritDoc}
          */
         public DifferencerConfiguration build() {
@@ -141,6 +155,7 @@ public class DifferencerConfiguration {
             configuration.mapHandler = theMapHandler == null ? DEFAULT_MAP_HANDLER : theMapHandler;
             configuration.enumHandler = theEnumHandler == null ? DEFAULT_ENUM_HANDLER : theEnumHandler;
             configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
+            configuration.differencerInternals = theDifferencerInternals == null ? DEFAULT_DIFFERENCER_INTERNALS : theDifferencerInternals;
 
             return configuration;
         }

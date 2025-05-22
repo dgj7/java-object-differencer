@@ -1,15 +1,14 @@
 package io.dgj7.jod;
 
-import io.dgj7.jod.core.collections.ICollectionHandler;
-import io.dgj7.jod.core.enumerations.IEnumHandler;
-import io.dgj7.jod.core.maps.IMapHandler;
+import io.dgj7.jod.core.diff.IDifferencerInternals;
 import io.dgj7.jod.model.Metadata;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 
-import java.lang.reflect.Field;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -20,24 +19,26 @@ import java.util.*;
  * to extend this class and modify how those methods work, if needed.
  * </p>
  */
-// todo: move the non-public methods in this object into an interface
 public class Differencer {
     /**
      * {@inheritDoc}
      */
     public List<Delta> difference(final DifferencerConfiguration config, final Object expected, final Object actual) {
+        /* retrieve behaviors */
+        final IDifferencerInternals internals = config.getDifferencerInternals();
+
         /* storage */
         final List<Delta> deltas = new LinkedList<>();
         final String path = config.getRootPathProvider().provideRootPath(expected, actual);
 
         /* diff root objects, starting with null and type equality check, before recurse */
         if (expected == null || actual == null) {
-            handleNulls(path, deltas, expected, actual);
+            internals.handleNulls(path, deltas, expected, actual);
         } else {
             final Metadata emd = Metadata.from(expected);
             final Metadata amd = Metadata.from(actual);
             if (emd.equals(amd)) {
-                diffObjects(config, deltas, path, expected, actual);
+                internals.diffObjects(config, deltas, path, expected, actual);
             } else {
                 deltas.add(Delta.from(DeltaType.DIFFERENT_TYPES, path, expected, actual));
             }
@@ -45,96 +46,5 @@ public class Differencer {
 
         /* done */
         return deltas;
-    }
-
-    /**
-     * Recursively iterate over object trees.
-     */
-    protected <T> void diffRecurse(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final T expected, final T actual) {
-        /* loop over fields */
-        for (Field field : config.getReflection().fields(expected)) {
-            final String path = prefixPath + "." + field.getName();
-
-            final Object expectedFieldValue = config.getReflection().fieldTo(field, expected);
-            final Object actualFieldValue = config.getReflection().fieldTo(field, actual);
-
-            diffObjects(config, deltas, path, expectedFieldValue, actualFieldValue);
-        }
-    }
-
-    /**
-     * Diff two objects.
-     */
-    protected <T> void diffObjects(final DifferencerConfiguration config, final List<Delta> deltas, final String path, final T expected, final T actual) {
-        final ICollectionHandler ch = config.getCollectionHandler();
-        final IMapHandler mh = config.getMapHandler();
-        final IEnumHandler eh = config.getEnumHandler();
-
-        if (expected == null || actual == null) {
-            handleNulls(path, deltas, expected, actual);
-        } else if (eh.isEnum(expected, actual)) {
-            if (!config.getEqualsTester().test(expected, actual)) {
-                deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
-            }
-        } else if (ch.isCollection(expected, actual)) {
-            diffLists(config, deltas, path, ch.findAllElements(expected), ch.findAllElements(actual));
-        } else if (mh.isMap(expected, actual)) {
-            diffMaps(config, deltas, path, mh.findAllElements(expected), mh.findAllElements(actual));
-        } else if (config.getShouldRecurse().test(expected, actual)) {
-            diffRecurse(config, deltas, path, expected, actual);
-        } else if (!config.getEqualsTester().test(expected, actual)) {
-            deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
-        }
-    }
-
-    /**
-     * Handle lists.
-     */
-    // todo: move this to collection/iterable handler?
-    protected <T> void diffLists(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Collection<T> expectedList, final Collection<T> actualList) {
-        if (expectedList.size() == actualList.size()) {
-            final Iterator<T> expectedIterator = expectedList.iterator();
-            final Iterator<T> actualIterator = actualList.iterator();
-            int c = 0;
-
-            while (expectedIterator.hasNext()) {
-                final T expected = expectedIterator.next();
-                final T actual = actualIterator.next();
-                final String path = prefixPath + "[" + c++ + "]";
-                diffObjects(config, deltas, path, expected, actual);
-            }
-        } else {
-            deltas.add(Delta.from(DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
-        }
-    }
-
-    /**
-     * Handle maps.
-     */
-    // todo: move this to map handler?
-    protected <K, V> void diffMaps(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap) {
-        if (expectedMap.size() == actualMap.size()) {
-            for (K key : expectedMap.keySet()) {
-                final V expected = expectedMap.get(key);
-                final V actual = actualMap.get(key);
-                final String path = prefixPath + "[" + key + "]";
-                diffObjects(config, deltas, path, expected, actual);
-            }
-        } else {
-            deltas.add(Delta.from(DeltaType.MAP_SIZES_NOT_EQUAL, prefixPath, expectedMap.size(), actualMap.size()));
-        }
-    }
-
-    /**
-     * Handle nulls.
-     */
-    protected <T> void handleNulls(final String path, final List<Delta> deltas, final T expected, final T actual) {
-        if (expected == null && actual == null) {
-            return;
-        } else if (expected == null || actual == null) {
-            deltas.add(Delta.from(DeltaType.NULLITY, path, expected, actual));
-        } else {
-            throw new IllegalStateException("handleNulls() called with no nulls supplied");
-        }
     }
 }

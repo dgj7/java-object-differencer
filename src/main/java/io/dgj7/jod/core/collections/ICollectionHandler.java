@@ -1,6 +1,10 @@
 package io.dgj7.jod.core.collections;
 
+import io.dgj7.jod.model.config.DifferencerConfiguration;
+import io.dgj7.jod.model.delta.Delta;
+
 import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +20,10 @@ public interface ICollectionHandler {
     /**
      * Get elements in the collection.
      */
-    <I, O> Collection<O> findAllElements(final I object);
+    <I, O> Collection<O> findCollection(final I object);
+
+    /**
+     * Diff two collections.
+     */
+    <T> void diffCollections(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Collection<T> expectedList, final Collection<T> actualList);
 }
