@@ -9,11 +9,15 @@ import io.dgj7.jod.core.enumerations.IEnumHandler;
 import io.dgj7.jod.core.equals.EqualsTester;
 import io.dgj7.jod.core.maps.DefaultMapHandler;
 import io.dgj7.jod.core.maps.IMapHandler;
+import io.dgj7.jod.core.md.AbstractMetaData;
+import io.dgj7.jod.core.md.DefaultMetaDataFactory;
+import io.dgj7.jod.core.md.IMetaDataFactory;
 import io.dgj7.jod.core.nulls.DefaultNullHandler;
 import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.core.path.root.DefaultRootPathProvider;
 import io.dgj7.jod.core.path.root.IRootPathProvider;
-import io.dgj7.jod.core.recurse.ShouldRecursePredicate;
+import io.dgj7.jod.core.recurse.DefaultShouldRecursePredicate;
+import io.dgj7.jod.core.recurse.IShouldRecursePredicate;
 import io.dgj7.jod.core.reflect.IReflection;
 import io.dgj7.jod.core.reflect.impl.DefaultReflectionImpl;
 import io.dgj7.jod.pattern.builder.Builder;
@@ -30,7 +34,7 @@ public class DifferencerConfiguration {
     @Getter
     private IReflection reflection;
     @Getter
-    private BiPredicate<Object, Object> shouldRecurse;
+    private IShouldRecursePredicate shouldRecurse;
     @Getter
     private BiPredicate<Object, Object> equalsTester;
     @Getter
@@ -45,6 +49,8 @@ public class DifferencerConfiguration {
     private IDifferencerInternals differencerInternals;
     @Getter
     private INullHandler nullHandler;
+    @Getter
+    private IMetaDataFactory<? extends AbstractMetaData> metaDataFactory;
 
     /**
      * Create a new instance.
@@ -65,7 +71,7 @@ public class DifferencerConfiguration {
      */
     public static class DiffConfigBuilder implements Builder<DifferencerConfiguration> {
         private static final IReflection DEFAULT_REFLECTION = new DefaultReflectionImpl();
-        private static final BiPredicate<Object, Object> DEFAULT_RECURSE = new ShouldRecursePredicate();
+        private static final IShouldRecursePredicate DEFAULT_RECURSE = new DefaultShouldRecursePredicate();
         private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new EqualsTester();
         private static final ICollectionHandler DEFAULT_COLLECTION_HANDLER = new DefaultCollectionHandler();
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
@@ -73,9 +79,10 @@ public class DifferencerConfiguration {
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
         private static final IDifferencerInternals DEFAULT_DIFFERENCER_INTERNALS = new DefaultDifferencerInternals();
         private static final INullHandler DEFAULT_NULL_HANDLER = new DefaultNullHandler();
+        private static final IMetaDataFactory<? extends AbstractMetaData> DEFAULT_META_DATA_FACTORY = new DefaultMetaDataFactory();
 
         private IReflection theReflection;
-        private BiPredicate<Object, Object> theShouldRecursePredicate;
+        private IShouldRecursePredicate theShouldRecursePredicate;
         private BiPredicate<Object, Object> theEqualsTester;
         private ICollectionHandler theCollectionHandler;
         private IMapHandler theMapHandler;
@@ -83,6 +90,7 @@ public class DifferencerConfiguration {
         private IRootPathProvider theRootPathProvider;
         private IDifferencerInternals theDifferencerInternals;
         private INullHandler theNullHandler;
+        private IMetaDataFactory<? extends AbstractMetaData> theMetaDataFactory;
 
         /**
          * Feed the builder.
@@ -95,7 +103,7 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withShouldRecursePredicate(final BiPredicate<Object, Object> input) {
+        public DiffConfigBuilder withShouldRecursePredicate(final IShouldRecursePredicate input) {
             this.theShouldRecursePredicate = input;
             return this;
         }
@@ -157,6 +165,14 @@ public class DifferencerConfiguration {
         }
 
         /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withMetaDataFactory(final IMetaDataFactory<? extends AbstractMetaData> input) {
+            this.theMetaDataFactory = input;
+            return this;
+        }
+
+        /**
          * {@inheritDoc}
          */
         public DifferencerConfiguration build() {
@@ -171,6 +187,7 @@ public class DifferencerConfiguration {
             configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
             configuration.differencerInternals = theDifferencerInternals == null ? DEFAULT_DIFFERENCER_INTERNALS : theDifferencerInternals;
             configuration.nullHandler = theNullHandler == null ? DEFAULT_NULL_HANDLER : theNullHandler;
+            configuration.metaDataFactory = theMetaDataFactory == null ? DEFAULT_META_DATA_FACTORY : theMetaDataFactory;
 
             return configuration;
         }

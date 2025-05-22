@@ -49,7 +49,7 @@ public class DefaultMapHandler implements IMapHandler {
                 internals.diffObjects(config, deltas, path, expected, actual);
             }
         } else {
-            deltas.add(Delta.from(DeltaType.MAP_SIZES_NOT_EQUAL, prefixPath, expectedMap.size(), actualMap.size()));
+            deltas.add(Delta.from(config, DeltaType.MAP_SIZES_NOT_EQUAL, prefixPath, expectedMap.size(), actualMap.size()));
         }
     }
 }

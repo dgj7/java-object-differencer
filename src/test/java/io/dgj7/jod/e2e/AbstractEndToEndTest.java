@@ -2,7 +2,7 @@ package io.dgj7.jod.e2e;
 
 import io.dgj7.jod.Differencer;
 import io.dgj7.jod.TestBase;
-import io.dgj7.jod.core.recurse.ShouldRecursePredicate;
+import io.dgj7.jod.core.recurse.DefaultShouldRecursePredicate;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.testonly.model.btree.notset.BNode;
@@ -25,7 +25,7 @@ public class AbstractEndToEndTest extends TestBase {
         return objectUnderTest.difference(provideConfigBuilder().build(), expected, actual);
     }
 
-    protected class TestOnlyShouldRecursePredicate extends ShouldRecursePredicate {
+    protected class TestOnlyShouldRecursePredicate extends DefaultShouldRecursePredicate {
         @Override
         public List<Class<?>> provideDirectlyEquatableClasses() {
             final List<Class<?>> original = new LinkedList<>(super.provideDirectlyEquatableClasses());

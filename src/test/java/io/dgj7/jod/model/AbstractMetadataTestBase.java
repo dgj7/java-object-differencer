@@ -7,7 +7,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * Base of tests for {@link Metadata}.
+ * Base of tests for {@link DefaultMetaData}.
  * </p>
  */
 abstract class AbstractMetadataTestBase extends TestBase {

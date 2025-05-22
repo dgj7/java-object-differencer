@@ -1,6 +1,8 @@
 package io.dgj7.jod.model.delta;
 
-import io.dgj7.jod.model.Metadata;
+import io.dgj7.jod.core.md.AbstractMetaData;
+import io.dgj7.jod.core.md.IMetaDataFactory;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,8 +46,10 @@ public class Delta {
     /**
      * Factory.
      */
-    public static <T, U> Delta from(final DeltaType deltaType, final String path, final T expected, final U actual) {
-        final String dataType = determineDataType(expected, actual);
+    public static <T, U> Delta from(final DifferencerConfiguration config, final DeltaType deltaType, final String path, final T expected, final U actual) {
+        final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
+
+        final String dataType = mdf.describeTypeName(expected, actual);
 
         final Delta delta = new Delta(deltaType, path, dataType);
 
@@ -53,26 +57,5 @@ public class Delta {
         delta.actualValue = actual == null ? "null" : actual.toString();
 
         return delta;
-    }
-
-    private static <T, U> String determineDataType(final T expected, final U actual) {
-        if (expected != null && actual != null) {
-            final Metadata emd = Metadata.from(expected);
-            final Metadata amd = Metadata.from(actual);
-
-            if (emd.getPackageName().equals(amd.getPackageName()) && emd.getClassName().equals(amd.getClassName())) {
-                return emd.getPackageName() + "." + emd.getClassName();
-            } else {
-                return emd.getPackageName() + "." + emd.getClassName() + "/" + amd.getPackageName() + "." + amd.getClassName();
-            }
-        } else if (expected != null) {
-            final Metadata md = Metadata.from(expected);
-            return md.getPackageName() + "." + md.getClassName();
-        } else if (actual != null) {
-            final Metadata md = Metadata.from(actual);
-            return md.getPackageName() + "." + md.getClassName();
-        } else {
-            return "";
-        }
     }
 }

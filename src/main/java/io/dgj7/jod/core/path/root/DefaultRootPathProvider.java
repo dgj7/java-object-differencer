@@ -1,6 +1,8 @@
 package io.dgj7.jod.core.path.root;
 
-import io.dgj7.jod.model.Metadata;
+import io.dgj7.jod.core.md.AbstractMetaData;
+import io.dgj7.jod.core.md.IMetaDataFactory;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 /**
  * Default {@link IRootPathProvider}.
@@ -10,13 +12,13 @@ public class DefaultRootPathProvider implements IRootPathProvider {
      * {@inheritDoc}
      */
     @Override
-    public <T> String provideRootPath(final T expected, final T actual) {
+    public <T> String provideRootPath(final DifferencerConfiguration config, final T expected, final T actual) {
+        final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
+
         if (expected != null) {
-            final Metadata md = Metadata.from(expected);
-            return md.getPackageName() + "." + md.getClassName();
+            return mdf.describeTypeName(expected);
         } else if (actual != null) {
-            final Metadata md = Metadata.from(actual);
-            return md.getPackageName() + "." + md.getClassName();
+            return mdf.describeTypeName(actual);
         } else {
             return "";
         }

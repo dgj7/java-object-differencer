@@ -57,7 +57,7 @@ public class DefaultCollectionHandler implements ICollectionHandler {
                 internals.diffObjects(config, deltas, path, expected, actual);
             }
         } else {
-            deltas.add(Delta.from(DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
+            deltas.add(Delta.from(config, DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
         }
     }
 }

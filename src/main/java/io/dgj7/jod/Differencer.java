@@ -1,8 +1,10 @@
 package io.dgj7.jod;
 
 import io.dgj7.jod.core.diff.IDifferencerInternals;
+import io.dgj7.jod.core.md.AbstractMetaData;
+import io.dgj7.jod.core.md.IMetaDataFactory;
 import io.dgj7.jod.core.nulls.INullHandler;
-import io.dgj7.jod.model.Metadata;
+import io.dgj7.jod.core.path.root.IRootPathProvider;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
@@ -27,21 +29,23 @@ public class Differencer {
         /* retrieve behaviors */
         final IDifferencerInternals internals = config.getDifferencerInternals();
         final INullHandler nh = config.getNullHandler();
+        final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
+        final IRootPathProvider rpp = config.getRootPathProvider();
 
         /* storage */
         final List<Delta> deltas = new LinkedList<>();
-        final String path = config.getRootPathProvider().provideRootPath(expected, actual);
+        final String path = rpp.provideRootPath(config, expected, actual);
 
         /* diff root objects, starting with null and type equality check, before recurse */
         if (expected == null || actual == null) {
-            nh.handleNulls(path, deltas, expected, actual);
+            nh.handleNulls(config, path, deltas, expected, actual);
         } else {
-            final Metadata emd = Metadata.from(expected);
-            final Metadata amd = Metadata.from(actual);
+            final AbstractMetaData emd = mdf.from(expected);
+            final AbstractMetaData amd = mdf.from(actual);
             if (emd.equals(amd)) {
                 internals.diffObjects(config, deltas, path, expected, actual);
             } else {
-                deltas.add(Delta.from(DeltaType.DIFFERENT_TYPES, path, expected, actual));
+                deltas.add(Delta.from(config, DeltaType.DIFFERENT_TYPES, path, expected, actual));
             }
         }
 

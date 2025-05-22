@@ -1,10 +1,11 @@
 package io.dgj7.jod.core.recurse;
 
-import io.dgj7.jod.model.Metadata;
+import io.dgj7.jod.core.md.AbstractMetaData;
+import io.dgj7.jod.core.md.IMetaDataFactory;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /**
@@ -13,7 +14,7 @@ import java.util.function.Predicate;
  * into the object graph, or not (and thus compare the values).
  * </p>
  */
-public class ShouldRecursePredicate implements BiPredicate<Object, Object> {
+public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
     protected List<String> provideDirectlyEquatablePackages() {
         return List.of(
                 "java.lang",
@@ -32,14 +33,17 @@ public class ShouldRecursePredicate implements BiPredicate<Object, Object> {
      * {@inheritDoc}
      */
     @Override
-    public boolean test(final Object expected, final Object actual) {
+    public boolean test(final DifferencerConfiguration config, final Object expected, final Object actual) {
         final Object object = Optional.ofNullable(expected).orElse(actual);
-        final Metadata md = Metadata.from(object);
 
-        final boolean notDirectlyEquatablePackage = !provideDirectlyEquatablePackages().contains(md.getPackageName());
+        final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
+
+        final AbstractMetaData md = mdf.from(object);
+
+        final boolean notDirectlyEquatablePackage = !provideDirectlyEquatablePackages().contains(md.providePackageName());
         final boolean notDirectlyEquatableClass = provideDirectlyEquatableClasses()
                 .stream()
-                .map(Metadata::from)
+                .map(mdf::from)
                 .noneMatch(md::equals);
 
         return notDirectlyEquatablePackage && notDirectlyEquatableClass;

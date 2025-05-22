@@ -44,19 +44,19 @@ public class DefaultDifferencerInternals implements IDifferencerInternals {
         final INullHandler nh = config.getNullHandler();
 
         if (expected == null || actual == null) {
-            nh.handleNulls(path, deltas, expected, actual);
+            nh.handleNulls(config, path, deltas, expected, actual);
         } else if (eh.isEnum(expected, actual)) {
             if (!config.getEqualsTester().test(expected, actual)) {
-                deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
+                deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
             }
         } else if (ch.isCollection(expected, actual)) {
             ch.diffCollections(config, deltas, path, ch.findCollection(expected), ch.findCollection(actual));
         } else if (mh.isMap(expected, actual)) {
             mh.diffMaps(config, deltas, path, mh.findAllElements(expected), mh.findAllElements(actual));
-        } else if (config.getShouldRecurse().test(expected, actual)) {
+        } else if (config.getShouldRecurse().test(config, expected, actual)) {
             diffRecurse(config, deltas, path, expected, actual);
         } else if (!config.getEqualsTester().test(expected, actual)) {
-            deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
+            deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
         }
     }
 }
