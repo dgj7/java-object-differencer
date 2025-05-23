@@ -4,9 +4,7 @@ plugins {
     id "com.gradleup.shadow" version "8.3.0"
 }
 
-version = '0.4.12'
-
-apply from: 'gradle/dependencies.gradle'
+version = '0.4.13'
 
 java {
     toolchain {
@@ -21,4 +19,14 @@ gradle.projectsEvaluated {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
         }
     }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.apache.commons:commons-lang3:3.17.0"
+
+    testImplementation 'junit:junit:4.13.2'
 }
