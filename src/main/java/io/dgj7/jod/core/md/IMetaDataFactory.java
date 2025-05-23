@@ -26,7 +26,7 @@ public interface IMetaDataFactory<M extends AbstractMetaData> {
     <P> M from(final DifferencerConfiguration config, final Field pField, final P pParent);
 
     /**
-     * Determine type name.
+     * Determine the type name.
      */
     <T, U> String describeTypeName(final T expected, final U actual);
 

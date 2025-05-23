@@ -14,5 +14,8 @@ import java.util.List;
  * </p>
  */
 public interface INullHandler {
+    /**
+     * Handle when one of two values is null.
+     */
     <T> void handleNulls(final DifferencerConfiguration config, final String path, final List<Delta> deltas, final T expected, final T actual);
 }

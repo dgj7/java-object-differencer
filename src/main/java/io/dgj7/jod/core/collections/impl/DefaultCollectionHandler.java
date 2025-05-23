@@ -21,7 +21,6 @@ public class DefaultCollectionHandler implements ICollectionHandler {
     /**
      * {@inheritDoc}
      */
-
     @Override
     public <I> boolean isCollection(final I expected, final I actual) {
         return Stream.of(expected, actual)

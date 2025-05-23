@@ -7,12 +7,12 @@ import java.util.stream.Stream;
 
 /**
  * <p>
- * Handle enumerations.
+ * Default {@link IEnumHandler}.
  * </p>
  */
 public class DefaultEnumHandler implements IEnumHandler {
     /**
-     * Determine if enumeration.
+     * {@inheritDoc}
      */
     @Override
     public boolean isEnum(final Object expected, final Object actual) {

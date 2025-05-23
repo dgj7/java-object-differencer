@@ -16,6 +16,18 @@ import java.util.function.Predicate;
  * </p>
  */
 public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
+    /**
+     * <p>
+     * Provide a list of packages, within which, all objects are directly equatable.
+     * </p>
+     * <p>
+     * "Directly equatable" means that an object:
+     * <ul>
+     *     <li>does not need to have it's object graph recursed into further, and</li>
+     *     <li>it's equals() method can be called to determine if it's equal to another object of the same type</li>
+     * </ul>
+     * </p>
+     */
     protected List<String> provideDirectlyEquatablePackages() {
         return List.of(
                 "java.lang",
@@ -26,6 +38,18 @@ public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
         );
     }
 
+    /**
+     * <p>
+     * Provide a list of classes that are directly equatable.
+     * </p>
+     * <p>
+     * "Directly equatable" means that an object:
+     * <ul>
+     *     <li>does not need to have it's object graph recursed into further, and</li>
+     *     <li>it's equals() method can be called to determine if it's equal to another object of the same type</li>
+     * </ul>
+     * </p>
+     */
     protected List<Class<?>> provideDirectlyEquatableClasses() {
         return List.of();
     }

@@ -8,5 +8,8 @@ import io.dgj7.jod.model.config.DifferencerConfiguration;
  * </p>
  */
 public interface IRootPathProvider {
+    /**
+     * Provide the root path.
+     */
     <T> String provideRootPath(final DifferencerConfiguration config, final T expected, final T actual);
 }

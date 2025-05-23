@@ -23,7 +23,22 @@ import java.util.List;
  */
 public class Differencer {
     /**
-     * {@inheritDoc}
+     * <p>
+     * Find and return a list of differences between the two given objects.
+     * </p>
+     * <p>
+     * This method uses the default configuration.
+     * </p>
+     */
+    public List<Delta> difference(final Object expected, final Object actual) {
+        final DifferencerConfiguration config = DifferencerConfiguration.builder().build();
+        return difference(config, expected, actual);
+    }
+
+    /**
+     * <p>
+     * Find and return a list of differences between the two given objects, using the given configuration.
+     * </p>
      */
     public List<Delta> difference(final DifferencerConfiguration config, final Object expected, final Object actual) {
         /* retrieve behaviors */
@@ -34,6 +49,8 @@ public class Differencer {
 
         /* storage */
         final List<Delta> deltas = new LinkedList<>();
+
+        /* determine the root path */
         final String path = rpp.provideRootPath(config, expected, actual);
 
         /* diff root objects, starting with null and type equality check, before recurse */
@@ -42,6 +59,8 @@ public class Differencer {
         } else {
             final AbstractMetaData emd = mdf.from(expected);
             final AbstractMetaData amd = mdf.from(actual);
+
+            /* if objects are same type, we can begin to actually diff them; otherwise, add delta and exit */
             if (emd.equals(amd)) {
                 od.diffObjects(config, deltas, path, expected, actual);
             } else {

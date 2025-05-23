@@ -8,7 +8,9 @@ import io.dgj7.jod.model.delta.DeltaType;
 import java.util.List;
 
 /**
+ * <p>
  * Default {@link INullHandler}.
+ * </p>
  */
 public class DefaultNullHandler implements INullHandler {
     /**
