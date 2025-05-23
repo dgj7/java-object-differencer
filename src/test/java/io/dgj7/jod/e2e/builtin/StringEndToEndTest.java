@@ -1,16 +1,18 @@
 package io.dgj7.jod.e2e.builtin;
 
-import io.dgj7.jod.e2e.AbstractEndToEndTest;
+import io.dgj7.jod.Differencer;
 import io.dgj7.jod.model.delta.Delta;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
 
-public class StringEndToEndTest extends AbstractEndToEndTest {
+public class StringEndToEndTest {
+    private final Differencer differencer = new Differencer();
+
     @Test
     public final void testExpectedNull() {
-        final List<Delta> results = difference(null, "test");
+        final List<Delta> results = differencer.difference(null, "test");
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
@@ -19,7 +21,7 @@ public class StringEndToEndTest extends AbstractEndToEndTest {
 
     @Test
     public final void testActualNull() {
-        final List<Delta> results = difference("test", null);
+        final List<Delta> results = differencer.difference("test", null);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
@@ -28,7 +30,7 @@ public class StringEndToEndTest extends AbstractEndToEndTest {
 
     @Test
     public final void testNotEqual() {
-        final List<Delta> results = difference("test", "f");
+        final List<Delta> results = differencer.difference("test", "f");
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
@@ -37,7 +39,7 @@ public class StringEndToEndTest extends AbstractEndToEndTest {
 
     @Test
     public final void testEqual() {
-        final List<Delta> results = difference("test", "test");
+        final List<Delta> results = differencer.difference("test", "test");
 
         Assert.assertNotNull(results);
         Assert.assertEquals(0, results.size());

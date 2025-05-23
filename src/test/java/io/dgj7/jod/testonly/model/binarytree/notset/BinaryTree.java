@@ -1,24 +1,24 @@
-package io.dgj7.jod.testonly.model.btree.notset;
+package io.dgj7.jod.testonly.model.binarytree.notset;
 
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class BTree<T extends Comparable<T>> {
+public class BinaryTree<T extends Comparable<T>> {
     private final Comparator<T> forward = Comparable::compareTo;
     private final Comparator<T> reversed = forward.reversed();
 
-    protected final BNode<T> root;
+    protected final BinaryNode<T> root;
     private final Comparator<T> comparator;
 
-    public BTree() {
+    public BinaryTree() {
         this(Comparable::compareTo);
     }
 
-    public BTree(final Comparator<T> pComparator) {
+    public BinaryTree(final Comparator<T> pComparator) {
         this.comparator = Objects.requireNonNull(pComparator, "Comparator<T> is null");
-        root = new BNode<>(comparator);
+        root = new BinaryNode<>(comparator);
     }
 
     public int size() {
@@ -55,7 +55,7 @@ public class BTree<T extends Comparable<T>> {
     }
 
     public T first() {
-        BNode<T> leftMost = root;
+        BinaryNode<T> leftMost = root;
         while (leftMost.getLeft() != null) {
             leftMost = leftMost.getLeft();
         }
@@ -63,7 +63,7 @@ public class BTree<T extends Comparable<T>> {
     }
 
     public T last() {
-        BNode<T> rightMost = root;
+        BinaryNode<T> rightMost = root;
         while (rightMost.getRight() != null) {
             rightMost = rightMost.getRight();
         }

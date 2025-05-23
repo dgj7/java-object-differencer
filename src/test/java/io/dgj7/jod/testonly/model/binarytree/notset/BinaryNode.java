@@ -1,4 +1,4 @@
-package io.dgj7.jod.testonly.model.btree.notset;
+package io.dgj7.jod.testonly.model.binarytree.notset;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,26 +13,26 @@ import java.util.Objects;
  * Simple binary tree node implementation.
  * </p>
  */
-public class BNode<T extends Comparable<T>> {
+public class BinaryNode<T extends Comparable<T>> {
     /* data storage */
     @Getter
     @Setter
     private T value;
     @Getter
     @Setter
-    private BNode<T> left;
+    private BinaryNode<T> left;
     @Getter
     @Setter
-    private BNode<T> right;
+    private BinaryNode<T> right;
 
     /* traversal */
     @Getter
-    private BNode<T> parent;
+    private BinaryNode<T> parent;
 
     /* ordering */
     private final Comparator<T> comparator;
 
-    protected BNode(final Comparator<T> pComparator) {
+    protected BinaryNode(final Comparator<T> pComparator) {
         this.comparator = Objects.requireNonNull(pComparator, "Comparator<T> is null");
     }
 
@@ -80,13 +80,13 @@ public class BNode<T extends Comparable<T>> {
             return true;
         } else if (next.compareTo(value) < 0) {
             if (left == null) {
-                left = new BNode<>(comparator);
+                left = new BinaryNode<>(comparator);
                 left.parent = this;
             }
             return left.add(next);
         } else if (next.compareTo(value) > 0) {
             if (right == null) {
-                right = new BNode<>(comparator);
+                right = new BinaryNode<>(comparator);
                 right.parent = this;
             }
             return right.add(next);
@@ -97,7 +97,7 @@ public class BNode<T extends Comparable<T>> {
 
     @Override
     public boolean equals(final Object object) {
-        if (object instanceof BNode<?> other) {
+        if (object instanceof BinaryNode<?> other) {
             return new EqualsBuilder()
                     .append(value, other.value)
                     .append(left, other.left)
@@ -112,7 +112,7 @@ public class BNode<T extends Comparable<T>> {
         return "BNode[" + recurseString(this) + "]";
     }
 
-    private String recurseString(final BNode<?> node) {
+    private String recurseString(final BinaryNode<?> node) {
         if (node == null) {
             return "";
         } else {

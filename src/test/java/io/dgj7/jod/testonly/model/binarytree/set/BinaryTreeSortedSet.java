@@ -1,14 +1,14 @@
-package io.dgj7.jod.testonly.model.btree.set;
+package io.dgj7.jod.testonly.model.binarytree.set;
 
-import io.dgj7.jod.testonly.model.btree.notset.BNode;
-import io.dgj7.jod.testonly.model.btree.notset.BTree;
+import io.dgj7.jod.testonly.model.binarytree.notset.BinaryNode;
+import io.dgj7.jod.testonly.model.binarytree.notset.BinaryTree;
 
 import java.util.*;
 
 /**
- * {@link BTree} that also implements {@link SortedSet}.
+ * {@link BinaryTree} that also implements {@link SortedSet}.
  */
-public class BTreeSortedSet<T extends Comparable<T>> extends BTree<T> implements SortedSet<T> {
+public class BinaryTreeSortedSet<T extends Comparable<T>> extends BinaryTree<T> implements SortedSet<T> {
     /**
      * {@inheritDoc}
      */
@@ -19,7 +19,7 @@ public class BTreeSortedSet<T extends Comparable<T>> extends BTree<T> implements
 
     /**
      * <p>
-     * {@link Iterator} of {@link BTree}, and descendants.
+     * {@link Iterator} of {@link BinaryTree}, and descendants.
      * </p>
      * <p>
      * Performs in-order traversal.
@@ -28,13 +28,13 @@ public class BTreeSortedSet<T extends Comparable<T>> extends BTree<T> implements
     private class BTreeInOrderIterator<T1 extends Comparable<T1>> implements Iterator<T1> {
         private final Iterator<T1> iterator;
 
-        public BTreeInOrderIterator(final BNode<T1> pRoot) {
+        public BTreeInOrderIterator(final BinaryNode<T1> pRoot) {
             final List<T1> cheater = new LinkedList<>();
             recurse(pRoot, cheater);
             iterator = cheater.iterator();
         }
 
-        private void recurse(final BNode<T1> node, final List<T1> list) {
+        private void recurse(final BinaryNode<T1> node, final List<T1> list) {
             if (node != null) {
                 recurse(node.getLeft(), list);
                 if (node.getValue() != null) {

@@ -1,6 +1,6 @@
 package io.dgj7.jod.e2e.custom;
 
-import io.dgj7.jod.e2e.AbstractEndToEndTest;
+import io.dgj7.jod.Differencer;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.testonly.model.ScenarioVersion;
 import io.dgj7.jod.testonly.model.business.Business;
@@ -10,13 +10,15 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class BusinessEndToEndTest extends AbstractEndToEndTest {
+public class BusinessEndToEndTest {
+    private final Differencer differencer = new Differencer();
+
     @Test
     public final void testExpectedNull() {
         final Business expected = null;
         final Business actual = BusinessScenarioFactory.create(ScenarioVersion.EXPECTED);
 
-        final List<Delta> results = difference(expected, actual);
+        final List<Delta> results = differencer.difference(expected, actual);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
@@ -28,7 +30,7 @@ public class BusinessEndToEndTest extends AbstractEndToEndTest {
         final Business expected = null;
         final Business actual = BusinessScenarioFactory.create(ScenarioVersion.EXPECTED);
 
-        final List<Delta> results = difference(expected, actual);
+        final List<Delta> results = differencer.difference(expected, actual);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
@@ -40,7 +42,7 @@ public class BusinessEndToEndTest extends AbstractEndToEndTest {
         final Business expected = BusinessScenarioFactory.create(ScenarioVersion.EXPECTED);
         final Business actual = BusinessScenarioFactory.create(ScenarioVersion.ACTUAL);
 
-        final List<Delta> results = difference(expected, actual);
+        final List<Delta> results = differencer.difference(expected, actual);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
@@ -53,7 +55,7 @@ public class BusinessEndToEndTest extends AbstractEndToEndTest {
         final Business expected = BusinessScenarioFactory.create(ScenarioVersion.EXPECTED);
         final Business actual = BusinessScenarioFactory.create(ScenarioVersion.EXPECTED);
 
-        final List<Delta> results = difference(expected, actual);
+        final List<Delta> results = differencer.difference(expected, actual);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(0, results.size());

@@ -1,4 +1,4 @@
-package io.dgj7.jod.testonly.model.btree.set;
+package io.dgj7.jod.testonly.model.binarytree.set;
 
 import io.dgj7.jod.testonly.model.ScenarioVersion;
 import org.junit.Assert;
@@ -7,10 +7,10 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class BTreeSortedSetIteratorTest {
+public class BinaryTreeSortedSetIteratorTest {
     @Test
     public final void testEmpty() {
-        final BTreeSortedSet<Integer> bt = new BTreeSortedSet<>();
+        final BinaryTreeSortedSet<Integer> bt = new BinaryTreeSortedSet<>();
         final Iterator<Integer> iter = bt.iterator();
 
         Assert.assertNotNull(iter);
@@ -21,7 +21,7 @@ public class BTreeSortedSetIteratorTest {
 
     @Test
     public final void testValid1() {
-        final BTreeSortedSet<Integer> bt = BTreeSortedSetScenarioFactory.integerScenario(ScenarioVersion.EXPECTED);
+        final BinaryTreeSortedSet<Integer> bt = BinaryTreeSortedSetScenarioFactory.integerScenario(ScenarioVersion.EXPECTED);
         final Iterator<Integer> iter = bt.iterator();
 
         Assert.assertNotNull(iter);

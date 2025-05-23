@@ -1,10 +1,10 @@
-package io.dgj7.jod.testonly.model.btree.set;
+package io.dgj7.jod.testonly.model.binarytree.set;
 
 import io.dgj7.jod.testonly.model.ScenarioVersion;
 
-public class BTreeSortedSetScenarioFactory {
-    public static BTreeSortedSet<Integer> integerScenario(final ScenarioVersion version) {
-        final BTreeSortedSet<Integer> scenario = new BTreeSortedSet<>();
+public class BinaryTreeSortedSetScenarioFactory {
+    public static BinaryTreeSortedSet<Integer> integerScenario(final ScenarioVersion version) {
+        final BinaryTreeSortedSet<Integer> scenario = new BinaryTreeSortedSet<>();
         scenario.add(31);
         scenario.add(15);
         scenario.add(47);
@@ -19,8 +19,8 @@ public class BTreeSortedSetScenarioFactory {
         return scenario;
     }
 
-    public static BTreeSortedSet<String> stringScenario(final ScenarioVersion version) {
-        final BTreeSortedSet<String> scenario = new BTreeSortedSet<>();
+    public static BinaryTreeSortedSet<String> stringScenario(final ScenarioVersion version) {
+        final BinaryTreeSortedSet<String> scenario = new BinaryTreeSortedSet<>();
         scenario.add("31");
         scenario.add("15");
         scenario.add("47");

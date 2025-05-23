@@ -1,6 +1,5 @@
 package io.dgj7.jod.model;
 
-import io.dgj7.jod.TestBase;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import lombok.Setter;
  * Base of tests for {@link DefaultMetaData}.
  * </p>
  */
-abstract class AbstractMetadataTestBase extends TestBase {
+abstract class AbstractMetadataTestBase {
     protected final DifferencerConfiguration config = DifferencerConfiguration.builder()
             .build();
 

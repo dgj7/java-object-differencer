@@ -1,10 +1,10 @@
-package io.dgj7.jod.testonly.model.btree.notset;
+package io.dgj7.jod.testonly.model.binarytree.notset;
 
 import io.dgj7.jod.testonly.model.ScenarioVersion;
 
-public class BTreeScenarioFactory {
-    public static BTree<Integer> integerScenario(final ScenarioVersion version) {
-        final BTree<Integer> scenario = new BTree<>();
+public class BinaryTreeScenarioFactory {
+    public static BinaryTree<Integer> integerScenario(final ScenarioVersion version) {
+        final BinaryTree<Integer> scenario = new BinaryTree<>();
         scenario.add(31);
         scenario.add(15);
         scenario.add(47);
@@ -19,8 +19,8 @@ public class BTreeScenarioFactory {
         return scenario;
     }
 
-    public static BTree<String> stringScenario(final ScenarioVersion version) {
-        final BTree<String> scenario = new BTree<>();
+    public static BinaryTree<String> stringScenario(final ScenarioVersion version) {
+        final BinaryTree<String> scenario = new BinaryTree<>();
         scenario.add("31");
         scenario.add("15");
         scenario.add("47");
