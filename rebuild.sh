@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./gradlew clean build --console=plain
+./gradlew clean build shadowJar --console=plain
