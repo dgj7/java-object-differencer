@@ -2,8 +2,10 @@ package io.dgj7.jod.model.config;
 
 import io.dgj7.jod.core.collections.DefaultCollectionHandler;
 import io.dgj7.jod.core.collections.ICollectionHandler;
-import io.dgj7.jod.core.diff.DefaultDifferencerInternals;
 import io.dgj7.jod.core.diff.IDifferencerInternals;
+import io.dgj7.jod.core.diff.IObjectGraphRecursor;
+import io.dgj7.jod.core.diff.impl.DefaultDifferencerInternals;
+import io.dgj7.jod.core.diff.impl.DefaultObjectGraphRecursor;
 import io.dgj7.jod.core.enumerations.DefaultEnumHandler;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
 import io.dgj7.jod.core.equals.DefaultEqualsTester;
@@ -51,6 +53,8 @@ public class DifferencerConfiguration {
     private INullHandler nullHandler;
     @Getter
     private IMetaDataFactory<? extends AbstractMetaData> metaDataFactory;
+    @Getter
+    private IObjectGraphRecursor recursor;
 
     /**
      * Create a new instance.
@@ -80,6 +84,7 @@ public class DifferencerConfiguration {
         private static final IDifferencerInternals DEFAULT_DIFFERENCER_INTERNALS = new DefaultDifferencerInternals();
         private static final INullHandler DEFAULT_NULL_HANDLER = new DefaultNullHandler();
         private static final IMetaDataFactory<? extends AbstractMetaData> DEFAULT_META_DATA_FACTORY = new DefaultMetaDataFactory();
+        private static final IObjectGraphRecursor DEFAULT_RECURSOR = new DefaultObjectGraphRecursor();
 
         private IReflection theReflection;
         private IShouldRecursePredicate theShouldRecursePredicate;
@@ -91,6 +96,7 @@ public class DifferencerConfiguration {
         private IDifferencerInternals theDifferencerInternals;
         private INullHandler theNullHandler;
         private IMetaDataFactory<? extends AbstractMetaData> theMetaDataFactory;
+        private IObjectGraphRecursor theRecursor;
 
         /**
          * Feed the builder.
@@ -173,6 +179,14 @@ public class DifferencerConfiguration {
         }
 
         /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withObjectGraphRecursor(final IObjectGraphRecursor input) {
+            this.theRecursor = input;
+            return this;
+        }
+
+        /**
          * {@inheritDoc}
          */
         public DifferencerConfiguration build() {
@@ -188,6 +202,7 @@ public class DifferencerConfiguration {
             configuration.differencerInternals = theDifferencerInternals == null ? DEFAULT_DIFFERENCER_INTERNALS : theDifferencerInternals;
             configuration.nullHandler = theNullHandler == null ? DEFAULT_NULL_HANDLER : theNullHandler;
             configuration.metaDataFactory = theMetaDataFactory == null ? DEFAULT_META_DATA_FACTORY : theMetaDataFactory;
+            configuration.recursor = theRecursor == null ? DEFAULT_RECURSOR : theRecursor;
 
             return configuration;
         }
