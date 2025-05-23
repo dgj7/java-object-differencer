@@ -1,0 +1,213 @@
+build.dependsOn jacocoTestReport
+build.dependsOn test
+check.dependsOn jacocoTestCoverageVerification
+
+test {
+    finalizedBy jacocoTestReport
+}
+
+def covReq = '0.9'
+def includesArray = [
+        'io.dgj7.jod.*'
+]
+def excludesArray = [
+        'io/dgj7/jod/Differencer.class',
+
+        'io/dgj7/jod/model/config/DifferencerConfiguration.class',
+        'io/dgj7/jod/model/config/DifferencerConfiguration$DiffConfigBuilder.class',
+        'io/dgj7/jod/model/exc/ReflectionException.class',
+        'io/dgj7/jod/model/delta/Delta.class',
+
+        'io/dgj7/jod/core/reflect/impl/DefaultReflectionImpl.class',
+        'io/dgj7/jod/core/diff/impl/DefaultObjectDifferencer.class',
+        'io/dgj7/jod/core/maps/impl/DefaultMapHandler.class',
+        'io/dgj7/jod/core/collections/impl/DefaultCollectionHandler.class',
+        'io/dgj7/jod/core/md/impl/DefaultMetaDataFactory.class',
+        'io/dgj7/jod/core/md/impl/DefaultMetaDataFactory$DefaultMetaData.class',
+        'io/dgj7/jod/core/nulls/impl/DefaultNullHandler.class',
+        'io/dgj7/jod/core/path/impl/DefaultRootPathProvider.class',
+]
+
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+jacocoTestReport {
+    //dependsOn test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.required = true
+    }
+}
+
+jacocoTestCoverageVerification {
+    enabled = true
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: excludesArray)
+        }))
+    }
+
+    violationRules {
+        enabled = true
+
+        rule {
+            enabled = true
+            includes = includesArray
+            excludes = excludesArray
+            limit {
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+        }
+
+        rule {
+            enabled = true
+            element = 'CLASS'
+            includes = includesArray
+            excludes = excludesArray
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'COMPLEXITY'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'INSTRUCTION'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+        }
+
+        rule {
+            enabled = true
+            element = 'METHOD'
+            includes = includesArray
+            excludes = excludesArray
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'COMPLEXITY'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'INSTRUCTION'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+        }
+
+        rule {
+            enabled = true
+            element = 'PACKAGE'
+            includes = includesArray
+            excludes = excludesArray
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'COMPLEXITY'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'INSTRUCTION'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+        }
+
+        rule {
+            enabled = true
+            element = 'SOURCEFILE'
+            includes = includesArray
+            excludes = excludesArray
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'COMPLEXITY'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'INSTRUCTION'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+            limit {
+                counter = 'METHOD'
+                value = 'COVEREDRATIO'
+                minimum = BigDecimal.valueOf(Double.valueOf("${covReq}"))
+            }
+        }
+    }
+}

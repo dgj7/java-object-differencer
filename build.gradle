@@ -2,9 +2,12 @@ plugins {
     id 'java-library'
     id "io.freefair.lombok" version "8.13.1"
     id "com.gradleup.shadow" version "8.3.0"
+    id "jacoco"
 }
 
-version = '0.4.13'
+version = '0.4.14'
+
+apply from: 'gradle/testing.gradle'
 
 java {
     toolchain {
