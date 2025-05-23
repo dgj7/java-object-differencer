@@ -1,7 +1,8 @@
-package io.dgj7.jod.core.path.root;
+package io.dgj7.jod.core.path.impl;
 
 import io.dgj7.jod.core.md.AbstractMetaData;
 import io.dgj7.jod.core.md.IMetaDataFactory;
+import io.dgj7.jod.core.path.IRootPathProvider;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 /**

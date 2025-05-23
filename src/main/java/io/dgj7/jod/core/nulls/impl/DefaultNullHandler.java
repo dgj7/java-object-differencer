@@ -1,5 +1,6 @@
-package io.dgj7.jod.core.nulls;
+package io.dgj7.jod.core.nulls.impl;
 
+import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;

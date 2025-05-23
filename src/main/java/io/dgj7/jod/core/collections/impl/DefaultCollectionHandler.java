@@ -1,5 +1,6 @@
-package io.dgj7.jod.core.collections;
+package io.dgj7.jod.core.collections.impl;
 
+import io.dgj7.jod.core.collections.ICollectionHandler;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;

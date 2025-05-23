@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.path.root;
+package io.dgj7.jod.core.path;
 
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 

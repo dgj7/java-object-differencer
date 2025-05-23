@@ -1,6 +1,7 @@
-package io.dgj7.jod.core.maps;
+package io.dgj7.jod.core.maps.impl;
 
 import io.dgj7.jod.core.diff.IObjectDifferencer;
+import io.dgj7.jod.core.maps.IMapHandler;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;

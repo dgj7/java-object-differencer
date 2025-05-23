@@ -1,8 +1,8 @@
 package io.dgj7.jod.model;
 
 import io.dgj7.jod.core.md.AbstractMetaData;
-import io.dgj7.jod.core.md.DefaultMetaDataFactory;
 import io.dgj7.jod.core.md.IMetaDataFactory;
+import io.dgj7.jod.core.md.impl.DefaultMetaDataFactory;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
