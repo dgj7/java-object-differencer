@@ -9,7 +9,7 @@ import java.util.function.BiPredicate;
  * {@link BiPredicate} to determine if two objects are equal.
  * </p>
  */
-public class EqualsTester implements BiPredicate<Object, Object> {
+public class DefaultEqualsTester implements BiPredicate<Object, Object> {
     /**
      * {@inheritDoc}
      */

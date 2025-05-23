@@ -6,7 +6,7 @@ import io.dgj7.jod.core.diff.DefaultDifferencerInternals;
 import io.dgj7.jod.core.diff.IDifferencerInternals;
 import io.dgj7.jod.core.enumerations.DefaultEnumHandler;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
-import io.dgj7.jod.core.equals.EqualsTester;
+import io.dgj7.jod.core.equals.DefaultEqualsTester;
 import io.dgj7.jod.core.maps.DefaultMapHandler;
 import io.dgj7.jod.core.maps.IMapHandler;
 import io.dgj7.jod.core.md.AbstractMetaData;
@@ -72,7 +72,7 @@ public class DifferencerConfiguration {
     public static class DiffConfigBuilder implements Builder<DifferencerConfiguration> {
         private static final IReflection DEFAULT_REFLECTION = new DefaultReflectionImpl();
         private static final IShouldRecursePredicate DEFAULT_RECURSE = new DefaultShouldRecursePredicate();
-        private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new EqualsTester();
+        private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new DefaultEqualsTester();
         private static final ICollectionHandler DEFAULT_COLLECTION_HANDLER = new DefaultCollectionHandler();
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
         private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
