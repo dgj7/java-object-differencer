@@ -11,6 +11,7 @@ def includesArray = [
         'io.dgj7.jod.*'
 ]
 def excludesArray = [
+        // todo: eliminate these
         'io/dgj7/jod/Differencer.class',
 
         'io/dgj7/jod/model/config/DifferencerConfiguration.class',
