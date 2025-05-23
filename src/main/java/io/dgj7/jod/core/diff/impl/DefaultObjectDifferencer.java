@@ -1,7 +1,7 @@
 package io.dgj7.jod.core.diff.impl;
 
 import io.dgj7.jod.core.collections.ICollectionHandler;
-import io.dgj7.jod.core.diff.IDifferencerInternals;
+import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.diff.IObjectGraphRecursor;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
 import io.dgj7.jod.core.maps.IMapHandler;
@@ -16,11 +16,10 @@ import java.util.function.BiPredicate;
 
 /**
  * <p>
- * Default {@link IDifferencerInternals}.
+ * Default {@link IObjectDifferencer}.
  * </p>
  */
-// todo: rename this
-public class DefaultDifferencerInternals implements IDifferencerInternals {
+public class DefaultObjectDifferencer implements IObjectDifferencer {
     /**
      * {@inheritDoc}
      */

@@ -2,9 +2,9 @@ package io.dgj7.jod.model.config;
 
 import io.dgj7.jod.core.collections.DefaultCollectionHandler;
 import io.dgj7.jod.core.collections.ICollectionHandler;
-import io.dgj7.jod.core.diff.IDifferencerInternals;
+import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.diff.IObjectGraphRecursor;
-import io.dgj7.jod.core.diff.impl.DefaultDifferencerInternals;
+import io.dgj7.jod.core.diff.impl.DefaultObjectDifferencer;
 import io.dgj7.jod.core.diff.impl.DefaultObjectGraphRecursor;
 import io.dgj7.jod.core.enumerations.DefaultEnumHandler;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
@@ -48,7 +48,7 @@ public class DifferencerConfiguration {
     @Getter
     private IRootPathProvider rootPathProvider;
     @Getter
-    private IDifferencerInternals differencerInternals;
+    private IObjectDifferencer objectDifferencer;
     @Getter
     private INullHandler nullHandler;
     @Getter
@@ -81,7 +81,7 @@ public class DifferencerConfiguration {
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
         private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
-        private static final IDifferencerInternals DEFAULT_DIFFERENCER_INTERNALS = new DefaultDifferencerInternals();
+        private static final IObjectDifferencer DEFAULT_OBJECT_DIFFERENCER = new DefaultObjectDifferencer();
         private static final INullHandler DEFAULT_NULL_HANDLER = new DefaultNullHandler();
         private static final IMetaDataFactory<? extends AbstractMetaData> DEFAULT_META_DATA_FACTORY = new DefaultMetaDataFactory();
         private static final IObjectGraphRecursor DEFAULT_RECURSOR = new DefaultObjectGraphRecursor();
@@ -93,7 +93,7 @@ public class DifferencerConfiguration {
         private IMapHandler theMapHandler;
         private IEnumHandler theEnumHandler;
         private IRootPathProvider theRootPathProvider;
-        private IDifferencerInternals theDifferencerInternals;
+        private IObjectDifferencer theObjectDifferencer;
         private INullHandler theNullHandler;
         private IMetaDataFactory<? extends AbstractMetaData> theMetaDataFactory;
         private IObjectGraphRecursor theRecursor;
@@ -157,8 +157,8 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withDifferencerInternals(final IDifferencerInternals input) {
-            this.theDifferencerInternals = input;
+        public DiffConfigBuilder withObjectDifferencer(final IObjectDifferencer input) {
+            this.theObjectDifferencer = input;
             return this;
         }
 
@@ -199,7 +199,7 @@ public class DifferencerConfiguration {
             configuration.mapHandler = theMapHandler == null ? DEFAULT_MAP_HANDLER : theMapHandler;
             configuration.enumHandler = theEnumHandler == null ? DEFAULT_ENUM_HANDLER : theEnumHandler;
             configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
-            configuration.differencerInternals = theDifferencerInternals == null ? DEFAULT_DIFFERENCER_INTERNALS : theDifferencerInternals;
+            configuration.objectDifferencer = theObjectDifferencer == null ? DEFAULT_OBJECT_DIFFERENCER : theObjectDifferencer;
             configuration.nullHandler = theNullHandler == null ? DEFAULT_NULL_HANDLER : theNullHandler;
             configuration.metaDataFactory = theMetaDataFactory == null ? DEFAULT_META_DATA_FACTORY : theMetaDataFactory;
             configuration.recursor = theRecursor == null ? DEFAULT_RECURSOR : theRecursor;

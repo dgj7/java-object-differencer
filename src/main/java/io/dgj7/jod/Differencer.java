@@ -1,6 +1,6 @@
 package io.dgj7.jod;
 
-import io.dgj7.jod.core.diff.IDifferencerInternals;
+import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.md.AbstractMetaData;
 import io.dgj7.jod.core.md.IMetaDataFactory;
 import io.dgj7.jod.core.nulls.INullHandler;
@@ -27,7 +27,7 @@ public class Differencer {
      */
     public List<Delta> difference(final DifferencerConfiguration config, final Object expected, final Object actual) {
         /* retrieve behaviors */
-        final IDifferencerInternals internals = config.getDifferencerInternals();
+        final IObjectDifferencer od = config.getObjectDifferencer();
         final INullHandler nh = config.getNullHandler();
         final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
         final IRootPathProvider rpp = config.getRootPathProvider();
@@ -43,7 +43,7 @@ public class Differencer {
             final AbstractMetaData emd = mdf.from(expected);
             final AbstractMetaData amd = mdf.from(actual);
             if (emd.equals(amd)) {
-                internals.diffObjects(config, deltas, path, expected, actual);
+                od.diffObjects(config, deltas, path, expected, actual);
             } else {
                 deltas.add(Delta.from(config, DeltaType.DIFFERENT_TYPES, path, expected, actual));
             }
