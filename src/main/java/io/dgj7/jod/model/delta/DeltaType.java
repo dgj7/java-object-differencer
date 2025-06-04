@@ -11,5 +11,6 @@ public enum DeltaType {
     NOT_EQUAL,
     COLLECTION_SIZES_NOT_EQUAL,
     MAP_SIZES_NOT_EQUAL,
+    NO_MATCHING_ELEMENT,
     ;
 }

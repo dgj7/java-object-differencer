@@ -40,7 +40,11 @@ public class Delta {
     @Override
     public String toString() {
         final String theDataType = StringUtils.isBlank(dataType) ? "" : " (" + dataType + ")";
-        return deltaType + ": " + path + theDataType + ": expected=[" + expectedValue + "], actual=[" + actualValue + "]";
+        if (DeltaType.NO_MATCHING_ELEMENT.equals(deltaType)) {
+            return deltaType + ": " + path + theDataType + ": no matching element for [" + expectedValue + "]";
+        } else {
+            return deltaType + ": " + path + theDataType + ": expected=[" + expectedValue + "], actual=[" + actualValue + "]";
+        }
     }
 
     /**
@@ -55,6 +59,22 @@ public class Delta {
 
         delta.expectedValue = expected == null ? "null" : expected.toString();
         delta.actualValue = actual == null ? "null" : actual.toString();
+
+        return delta;
+    }
+
+    /**
+     * Factory.
+     */
+    public static <T> Delta noMatchingElement(final DifferencerConfiguration config, final String path, final T expected) {
+        final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
+
+        final String dataType = mdf.describeTypeName(expected, null);
+
+        final Delta delta = new Delta(DeltaType.NO_MATCHING_ELEMENT, path, dataType);
+
+        delta.expectedValue = expected == null ? "null" : expected.toString();
+        delta.actualValue = "null";
 
         return delta;
     }
