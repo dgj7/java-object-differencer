@@ -1,5 +1,7 @@
 package io.dgj7.jod.core.reflect;
 
+import io.dgj7.jod.model.config.DifferencerConfiguration;
+
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
@@ -17,12 +19,12 @@ public interface IReflection {
     /**
      * List all {@link Field}s.
      */
-    <I> List<Field> fields(final I input);
+    <I> List<Field> fields(final DifferencerConfiguration config, final I input);
 
     /**
      * Find field with the given name.
      */
-    <I> Optional<Field> findField(final I input, final String name);
+    <I> Optional<Field> findField(final DifferencerConfiguration config, final I input, final String name);
 
     /**
      * Map field on input I to Object.

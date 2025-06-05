@@ -12,4 +12,9 @@ public interface IShouldRecursePredicate {
      * Determine if the application should recurse into the given object(s).
      */
     boolean test(final DifferencerConfiguration config, final Object expected, final Object actual);
+
+    /**
+     * Determine if fields from the supertype should be gathered.
+     */
+    <T> boolean checkSuperTypeFields(final DifferencerConfiguration config, final Class<T> clazz);
 }

@@ -23,6 +23,7 @@ def excludesArray = [
         'io/dgj7/jod/core/diff/impl/DefaultObjectDifferencer.class',
         'io/dgj7/jod/core/maps/impl/DefaultMapHandler.class',
         'io/dgj7/jod/core/collections/impl/DefaultCollectionHandler.class',
+        'io/dgj7/jod/core/collections/impl/MixedTypeCollectionHandler.class',
         'io/dgj7/jod/core/md/impl/DefaultMetaDataFactory.class',
         'io/dgj7/jod/core/md/impl/DefaultMetaDataFactory$DefaultMetaData.class',
         'io/dgj7/jod/core/nulls/impl/DefaultNullHandler.class',

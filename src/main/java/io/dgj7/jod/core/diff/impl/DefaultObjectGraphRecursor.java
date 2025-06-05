@@ -23,7 +23,7 @@ public class DefaultObjectGraphRecursor implements IObjectGraphRecursor {
         final IReflection refl = config.getReflection();
         final IObjectDifferencer od = config.getObjectDifferencer();
 
-        for (Field field : refl.fields(expected)) {
+        for (Field field : refl.fields(config, expected)) {
             final String path = prefixPath + "." + field.getName();
 
             final Object expectedFieldValue = refl.fieldTo(field, expected);

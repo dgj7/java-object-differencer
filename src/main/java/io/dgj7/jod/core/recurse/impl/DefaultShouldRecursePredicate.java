@@ -73,4 +73,12 @@ public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
 
         return notDirectlyEquatablePackage && notDirectlyEquatableClass;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <T> boolean checkSuperTypeFields(final DifferencerConfiguration config, final Class<T> clazz) {
+        return !provideDirectlyEquatablePackages().contains(clazz.getPackageName());
+    }
 }
