@@ -1,9 +1,9 @@
 package io.dgj7.jod.model.config;
 
-import io.dgj7.jod.core.collections.ICollectionHandler;
+import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.collections.id.ICollectionIdentifier;
 import io.dgj7.jod.core.collections.id.impl.DefaultCollectionIdentifier;
-import io.dgj7.jod.core.collections.impl.DefaultCollectionHandler;
+import io.dgj7.jod.core.collections.diff.impl.DefaultCollectionDifferencer;
 import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.collections.transform.impl.DefaultCollectionTransformer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
@@ -48,7 +48,7 @@ public class DifferencerConfiguration {
     @Getter
     private ICollectionTransformer collectionTransformer;
     @Getter
-    private ICollectionHandler collectionHandler;
+    private ICollectionDifferencer collectionHandler;
     @Getter
     private IMapHandler mapHandler;
     @Getter
@@ -87,7 +87,7 @@ public class DifferencerConfiguration {
         private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new DefaultEqualsTester();
         private static final ICollectionIdentifier DEFAULT_COLLECTION_IDENTIFIER = new DefaultCollectionIdentifier();
         private static final ICollectionTransformer DEFAULT_COLLECTION_TRANSFORMER = new DefaultCollectionTransformer();
-        private static final ICollectionHandler DEFAULT_COLLECTION_HANDLER = new DefaultCollectionHandler();
+        private static final ICollectionDifferencer DEFAULT_COLLECTION_HANDLER = new DefaultCollectionDifferencer();
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
         private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
@@ -101,7 +101,7 @@ public class DifferencerConfiguration {
         private BiPredicate<Object, Object> theEqualsTester;
         private ICollectionIdentifier theCollectionIdentifier;
         private ICollectionTransformer theCollectionTransformer;
-        private ICollectionHandler theCollectionHandler;
+        private ICollectionDifferencer theCollectionHandler;
         private IMapHandler theMapHandler;
         private IEnumHandler theEnumHandler;
         private IRootPathProvider theRootPathProvider;
@@ -153,7 +153,7 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withCollectionHandler(final ICollectionHandler input) {
+        public DiffConfigBuilder withCollectionHandler(final ICollectionDifferencer input) {
             this.theCollectionHandler = input;
             return this;
         }

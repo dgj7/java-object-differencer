@@ -1,6 +1,6 @@
-package io.dgj7.jod.core.collections.impl;
+package io.dgj7.jod.core.collections.diff.impl;
 
-import io.dgj7.jod.core.collections.ICollectionHandler;
+import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
@@ -12,10 +12,10 @@ import java.util.List;
 
 /**
  * <p>
- * Default {@link ICollectionHandler}.
+ * Default {@link ICollectionDifferencer}.
  * </p>
  */
-public class DefaultCollectionHandler implements ICollectionHandler {
+public class DefaultCollectionDifferencer implements ICollectionDifferencer {
     /**
      * {@inheritDoc}
      */

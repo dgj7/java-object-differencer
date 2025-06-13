@@ -1,6 +1,6 @@
-package io.dgj7.jod.core.collections.impl;
+package io.dgj7.jod.core.collections.diff.impl;
 
-import io.dgj7.jod.core.collections.ICollectionHandler;
+import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
@@ -10,19 +10,19 @@ import java.util.function.BiPredicate;
 
 /**
  * <p>
- * {@link ICollectionHandler} that overrides {@link ICollectionHandler#diffCollections(DifferencerConfiguration, List, String, Collection, Collection)}
- * on {@link DefaultCollectionHandler} to allow for lists that contain mixed types, or mixed
+ * {@link ICollectionDifferencer} that overrides {@link ICollectionDifferencer#diffCollections(DifferencerConfiguration, List, String, Collection, Collection)}
+ * on {@link DefaultCollectionDifferencer} to allow for lists that contain mixed types, or mixed
  * list indices.
  * </p>
  */
-public class MixedTypeCollectionHandler extends DefaultCollectionHandler {
+public class MixedTypeCollectionDifferencer extends DefaultCollectionDifferencer {
     private final Map<Class<?>, BiPredicate<?, ?>> equalityStrategies;
     private final BiPredicate<?, ?> defaultEqualityStrategy;
 
     /**
      * Create a new instance.
      */
-    public MixedTypeCollectionHandler(final Map<Class<?>, BiPredicate<?, ?>> pEqualityStrategies, final BiPredicate<?, ?> pDefaultEqualityStrategy) {
+    public MixedTypeCollectionDifferencer(final Map<Class<?>, BiPredicate<?, ?>> pEqualityStrategies, final BiPredicate<?, ?> pDefaultEqualityStrategy) {
         this.equalityStrategies = Objects.requireNonNull(pEqualityStrategies, "Map<Class<?>, BiPredicate<?, ?>> is null");
         this.defaultEqualityStrategy = Objects.requireNonNull(pDefaultEqualityStrategy, "BiPredicate<?, ?> is null");
     }

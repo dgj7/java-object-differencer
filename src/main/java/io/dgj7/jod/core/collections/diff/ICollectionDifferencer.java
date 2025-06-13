@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.collections;
+package io.dgj7.jod.core.collections.diff;
 
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
@@ -11,7 +11,7 @@ import java.util.List;
  * Handle collections.
  * </p>
  */
-public interface ICollectionHandler {
+public interface ICollectionDifferencer {
     /**
      * Diff two collections.
      */
