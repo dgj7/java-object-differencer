@@ -53,9 +53,8 @@ public class Delta {
     public static <T, U> Delta from(final DifferencerConfiguration config, final DeltaType deltaType, final String path, final T expected, final U actual) {
         final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
 
-        final String dataType = mdf.from(expected, actual)
-                .map(AbstractMetaData::describeTypeName)
-                .orElse("");
+        final AbstractMetaData md = mdf.from(expected, actual);
+        final String dataType = md.describeTypeName();
 
         final Delta delta = new Delta(deltaType, path, dataType);
 
@@ -71,10 +70,8 @@ public class Delta {
     public static <T> Delta noMatchingElement(final DifferencerConfiguration config, final String path, final T expected) {
         final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
 
-        // todo: should change this to use the single-input version, after that version is changed to return optional
-        final String dataType = mdf.from(expected, null)
-                .map(AbstractMetaData::describeTypeName)
-                .orElse("");
+        final AbstractMetaData md = mdf.from(expected, null);
+        final String dataType = md.describeTypeName();
 
         final Delta delta = new Delta(DeltaType.NO_MATCHING_ELEMENT, path, dataType);
 

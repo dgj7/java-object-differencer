@@ -136,10 +136,9 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
      * {@inheritDoc}
      */
     @Override
-    public <T> Optional<DefaultMetaData> from(final T expected, final T actual) {
-        return Optional.ofNullable(expected)
-                .or(() -> Optional.ofNullable(actual))
-                .map(this::from);
+    public <T> DefaultMetaData from(final T expected, final T actual) {
+        final T object = Optional.ofNullable(expected).orElse(actual);
+        return from(object);
     }
 
     /**
