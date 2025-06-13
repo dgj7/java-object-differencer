@@ -26,12 +26,12 @@ public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
         final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
         final EquatableThings et = config.getEquatableThings();
 
-        final AbstractMetaData md = mdf.from(object);
+        final AbstractMetaData md = mdf.from(config, object);
 
         final boolean notDirectlyEquatablePackage = !et.getDirectlyEquatablePackages().contains(md.providePackageName());
         final boolean notDirectlyEquatableClass = et.getDirectlyEquatableClasses()
                 .stream()
-                .map(mdf::from)
+                .map(cl -> mdf.from(config, cl))
                 .noneMatch(md::equals);
 
         return notDirectlyEquatablePackage && notDirectlyEquatableClass;

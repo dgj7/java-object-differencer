@@ -1,5 +1,7 @@
 package io.dgj7.jod.core.behavior.reflect.transform;
 
+import io.dgj7.jod.model.config.DifferencerConfiguration;
+
 import java.lang.reflect.Field;
 
 /**
@@ -15,6 +17,5 @@ public interface IFieldTransformer {
     /**
      * Map field on input I to Object.
      */
-    // todo: add differencer configuration parameter
-    <I> Object fieldToObject(final Field field, final I input);
+    <I> Object fieldToObject(final DifferencerConfiguration config, final Field field, final I input);
 }

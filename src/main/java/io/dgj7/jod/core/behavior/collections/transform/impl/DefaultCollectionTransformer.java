@@ -1,6 +1,7 @@
 package io.dgj7.jod.core.behavior.collections.transform.impl;
 
 import io.dgj7.jod.core.behavior.collections.transform.ICollectionTransformer;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 import java.util.Collection;
 
@@ -15,7 +16,7 @@ public class DefaultCollectionTransformer implements ICollectionTransformer {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <I, O> Collection<O> objectToCollection(final I object) {
+    public <I, O> Collection<O> objectToCollection(final DifferencerConfiguration config, final I object) {
         return (Collection<O>) object;
     }
 }

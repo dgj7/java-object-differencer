@@ -1,5 +1,7 @@
 package io.dgj7.jod.core.behavior.maps.transform;
 
+import io.dgj7.jod.model.config.DifferencerConfiguration;
+
 import java.util.Map;
 
 /**
@@ -11,6 +13,5 @@ public interface IMapTransformer {
     /**
      * Get elements in the map.
      */
-    // todo: add differencer configuration parameter
-    <K, V> Map<K, V> objectToMap(final Object object);
+    <K, V> Map<K, V> objectToMap(final DifferencerConfiguration config, final Object object);
 }

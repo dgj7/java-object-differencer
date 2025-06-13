@@ -1,6 +1,7 @@
 package io.dgj7.jod.core.behavior.reflect.transform.impl;
 
 import io.dgj7.jod.core.behavior.reflect.transform.IFieldTransformer;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.exc.ReflectionException;
 
 import java.lang.reflect.Field;
@@ -16,7 +17,7 @@ public class DefaultFieldTransformer implements IFieldTransformer {
      * {@inheritDoc}
      */
     @Override
-    public <I> Object fieldToObject(final Field pField, final I input) {
+    public <I> Object fieldToObject(final DifferencerConfiguration config, final Field pField, final I input) {
         /* null check */
         if (input == null) {
             return null;

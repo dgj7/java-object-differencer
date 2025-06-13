@@ -1,5 +1,7 @@
 package io.dgj7.jod.core.behavior.enumerations;
 
+import io.dgj7.jod.model.config.DifferencerConfiguration;
+
 /**
  * <p>
  * Detect enumerations.
@@ -9,6 +11,5 @@ public interface IEnumDetector {
     /**
      * Determine if enumeration.
      */
-    // todo: add differencer configuration parameter
-    boolean isEnum(final Object expected, final Object actual);
+    boolean isEnum(final DifferencerConfiguration config, final Object expected, final Object actual);
 }

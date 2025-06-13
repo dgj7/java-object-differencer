@@ -14,20 +14,17 @@ public interface IMetaDataFactory<M extends AbstractMetaData> {
     /**
      * Simple factory.
      */
-    // todo: add differencer configuration parameter
-    <T> M from(final Class<T> pClazz);
+    <T> M from(final DifferencerConfiguration config, final Class<T> pClazz);
 
     /**
      * Simple factory.
      */
-    // todo: add differencer configuration parameter
-    <T> M from(final T pInput);
+    <T> M from(final DifferencerConfiguration config, final T pInput);
 
     /**
      * Simple factory.
      */
-    // todo: add differencer configuration parameter
-    <T> M from(final T expected, final T actual);
+    <T> M from(final DifferencerConfiguration config, final T expected, final T actual);
 
     /**
      * Simple factory.

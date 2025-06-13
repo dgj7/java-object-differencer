@@ -53,7 +53,7 @@ public class Delta {
     public static <T, U> Delta from(final DifferencerConfiguration config, final DeltaType deltaType, final String path, final T expected, final U actual) {
         final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
 
-        final AbstractMetaData md = mdf.from(expected, actual);
+        final AbstractMetaData md = mdf.from(config, expected, actual);
         final String dataType = md.describeTypeName();
 
         final Delta delta = new Delta(deltaType, path, dataType);
@@ -70,7 +70,7 @@ public class Delta {
     public static <T> Delta noMatchingElement(final DifferencerConfiguration config, final String path, final T expected) {
         final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
 
-        final AbstractMetaData md = mdf.from(expected, null);
+        final AbstractMetaData md = mdf.from(config, expected, null);
         final String dataType = md.describeTypeName();
 
         final Delta delta = new Delta(DeltaType.NO_MATCHING_ELEMENT, path, dataType);

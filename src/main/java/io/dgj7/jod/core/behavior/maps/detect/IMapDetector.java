@@ -1,5 +1,7 @@
 package io.dgj7.jod.core.behavior.maps.detect;
 
+import io.dgj7.jod.model.config.DifferencerConfiguration;
+
 import java.util.Map;
 
 /**
@@ -11,6 +13,5 @@ public interface IMapDetector {
     /**
      * Determine if the given object is a map.
      */
-    // todo: add differencer configuration parameter
-    <I> boolean isMap(final I expected, final I actual);
+    <I> boolean isMap(final DifferencerConfiguration config, final I expected, final I actual);
 }

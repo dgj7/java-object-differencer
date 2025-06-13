@@ -3,11 +3,12 @@ package io.dgj7.jod.model;
 import io.dgj7.jod.core.md.AbstractMetaData;
 import io.dgj7.jod.core.md.IMetaDataFactory;
 import io.dgj7.jod.core.md.impl.DefaultMetaDataFactory;
+import io.dgj7.jod.model.config.DifferencerConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Test {@link DefaultMetaDataFactory#from(Object)}.
+ * Test {@link DefaultMetaDataFactory#from(DifferencerConfiguration,Object)}.
  */
 public class DefaultMetaDataFactoryFromRootTest extends AbstractMetadataTestBase {
     final IMetaDataFactory<DefaultMetaDataFactory.DefaultMetaData> objectUnderTest = new DefaultMetaDataFactory();
@@ -16,7 +17,7 @@ public class DefaultMetaDataFactoryFromRootTest extends AbstractMetadataTestBase
     public final void testHappyPath() {
         final GenericHost<String, Integer, Boolean> root = new GenericHost<>("hello", 3, false, "generic host", 7);
 
-        final AbstractMetaData output = objectUnderTest.from(root);
+        final AbstractMetaData output = objectUnderTest.from(config, root);
 
         Assert.assertNotNull(output);
         Assert.assertEquals("io.dgj7.jod.model", output.providePackageName());

@@ -57,8 +57,8 @@ public class Differencer {
         if (expected == null || actual == null) {
             nh.handleNulls(config, path, deltas, expected, actual);
         } else {
-            final AbstractMetaData emd = mdf.from(expected);
-            final AbstractMetaData amd = mdf.from(actual);
+            final AbstractMetaData emd = mdf.from(config, expected);
+            final AbstractMetaData amd = mdf.from(config, actual);
 
             /* if objects are same type, we can begin to actually diff them; otherwise, add delta and exit */
             if (emd.equals(amd)) {

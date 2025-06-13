@@ -1,5 +1,7 @@
 package io.dgj7.jod.core.behavior.collections.detect;
 
+import io.dgj7.jod.model.config.DifferencerConfiguration;
+
 /**
  * <p>
  * Determine if an object is a {@link java.util.Collection}.
@@ -14,6 +16,5 @@ public interface ICollectionDetector {
     /**
      * Determine if the given object is a collection.
      */
-    // todo: add differencer configuration parameter
-    <I> boolean isCollection(final I expected, final I actual);
+    <I> boolean isCollection(final DifferencerConfiguration config, final I expected, final I actual);
 }

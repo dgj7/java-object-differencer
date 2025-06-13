@@ -1,5 +1,7 @@
 package io.dgj7.jod.core.behavior.collections.transform;
 
+import io.dgj7.jod.model.config.DifferencerConfiguration;
+
 import java.util.Collection;
 
 /**
@@ -11,6 +13,5 @@ public interface ICollectionTransformer {
     /**
      * Get elements in the collection.
      */
-    // todo: add differencer configuration parameter
-    <I, O> Collection<O> objectToCollection(final I object);
+    <I, O> Collection<O> objectToCollection(final DifferencerConfiguration config, final I object);
 }

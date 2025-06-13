@@ -28,8 +28,8 @@ public class DefaultObjectGraphRecursor implements IObjectGraphRecursor {
         for (Field field : fe.fields(config, expected)) {
             final String path = prefixPath + "." + field.getName();
 
-            final Object expectedFieldValue = ft.fieldToObject(field, expected);
-            final Object actualFieldValue = ft.fieldToObject(field, actual);
+            final Object expectedFieldValue = ft.fieldToObject(config, field, expected);
+            final Object actualFieldValue = ft.fieldToObject(config, field, actual);
 
             od.diffObjects(config, deltas, path, expectedFieldValue, actualFieldValue);
         }

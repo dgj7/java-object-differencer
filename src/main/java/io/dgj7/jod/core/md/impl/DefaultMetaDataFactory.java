@@ -108,7 +108,7 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
      * {@inheritDoc}
      */
     @Override
-    public <T> DefaultMetaData from(final Class<T> pClazz) {
+    public <T> DefaultMetaData from(final DifferencerConfiguration config, final Class<T> pClazz) {
         final Class<T> clazz = Objects.requireNonNull(pClazz, "Class<T> is null");
 
         final String packageName = clazz.getPackageName();
@@ -122,7 +122,7 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
      * {@inheritDoc}
      */
     @Override
-    public <T> DefaultMetaData from(final T pInput) {
+    public <T> DefaultMetaData from(final DifferencerConfiguration config, final T pInput) {
         final T input = Objects.requireNonNull(pInput, "T is null");
 
         final String packageName = input.getClass().getPackageName();
@@ -136,9 +136,9 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
      * {@inheritDoc}
      */
     @Override
-    public <T> DefaultMetaData from(final T expected, final T actual) {
+    public <T> DefaultMetaData from(final DifferencerConfiguration config, final T expected, final T actual) {
         final T object = Optional.ofNullable(expected).orElse(actual);
-        return from(object);
+        return from(config, object);
     }
 
     /**
@@ -149,7 +149,7 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
         final P parent = Objects.requireNonNull(pParent, "Parent(P) is null");
         final IFieldTransformer ft = config.getFieldTransformer();
 
-        final Object value = ft.fieldToObject(field, parent);
+        final Object value = ft.fieldToObject(config, field, parent);
 
         final String packageName = value == null ? "" : value.getClass().getPackageName();
         final String className = value == null ? "" : value.getClass().getSimpleName();

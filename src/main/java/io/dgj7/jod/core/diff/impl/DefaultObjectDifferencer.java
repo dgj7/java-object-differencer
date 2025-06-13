@@ -45,17 +45,17 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
 
         if (expected == null || actual == null) {
             nh.handleNulls(config, path, deltas, expected, actual);
-        } else if (ed.isEnum(expected, actual)) {
+        } else if (ed.isEnum(config, expected, actual)) {
             if (!et.test(expected, actual)) {
                 deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
             }
-        } else if (cd.isCollection(expected, actual)) {
-            final Collection<Object> expectedCollection = ct.objectToCollection(expected);
-            final Collection<Object> actualCollection = ct.objectToCollection(actual);
+        } else if (cd.isCollection(config, expected, actual)) {
+            final Collection<Object> expectedCollection = ct.objectToCollection(config, expected);
+            final Collection<Object> actualCollection = ct.objectToCollection(config, actual);
             cdf.diffCollections(config, deltas, path, expectedCollection, actualCollection);
-        } else if (md.isMap(expected, actual)) {
-            final Map<Object, Object> expectedMap = mt.objectToMap(expected);
-            final Map<Object, Object> actualMap = mt.objectToMap(actual);
+        } else if (md.isMap(config, expected, actual)) {
+            final Map<Object, Object> expectedMap = mt.objectToMap(config, expected);
+            final Map<Object, Object> actualMap = mt.objectToMap(config, actual);
             mdf.diffMaps(config, deltas, path, expectedMap, actualMap);
         } else if (srp.test(config, expected, actual)) {
             ogr.diffRecurse(config, deltas, path, expected, actual);
