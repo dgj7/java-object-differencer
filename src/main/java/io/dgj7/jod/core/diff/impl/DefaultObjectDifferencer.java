@@ -3,6 +3,7 @@ package io.dgj7.jod.core.diff.impl;
 import io.dgj7.jod.core.behavior.collections.detect.ICollectionDetector;
 import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.transform.ICollectionTransformer;
+import io.dgj7.jod.core.behavior.equals.IEqualityChecker;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.behavior.enumerations.IEnumDetector;
 import io.dgj7.jod.core.behavior.maps.detect.IMapDetector;
@@ -39,14 +40,14 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         final IMapDifferencer mdf = config.getMapDifferencer();
         final IEnumDetector ed = config.getEnumDetector();
         final INullHandler nh = config.getNullHandler();
-        final BiPredicate<Object, Object> et = config.getEqualsTester();
+        final IEqualityChecker ec = config.getEqualityChecker();
         final IShouldRecursePredicate srp = config.getShouldRecursePredicate();
         final IObjectGraphRecursor ogr = config.getObjectGraphRecursor();
 
         if (expected == null || actual == null) {
             nh.handleNulls(config, path, deltas, expected, actual);
         } else if (ed.isEnum(config, expected, actual)) {
-            if (!et.test(expected, actual)) {
+            if (!ec.check(config, expected, actual)) {
                 deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
             }
         } else if (cd.isCollection(config, expected, actual)) {
@@ -59,7 +60,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
             mdf.diffMaps(config, deltas, path, expectedMap, actualMap);
         } else if (srp.test(config, expected, actual)) {
             ogr.diffRecurse(config, deltas, path, expected, actual);
-        } else if (!et.test(expected, actual)) {
+        } else if (!ec.check(config, expected, actual)) {
             deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
         }
     }

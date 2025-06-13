@@ -6,11 +6,12 @@ import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.diff.impl.DefaultCollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.behavior.collections.transform.impl.DefaultCollectionTransformer;
+import io.dgj7.jod.core.behavior.equals.IEqualityChecker;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.diff.impl.DefaultObjectDifferencer;
 import io.dgj7.jod.core.behavior.enumerations.IEnumDetector;
 import io.dgj7.jod.core.behavior.enumerations.impl.DefaultEnumDetector;
-import io.dgj7.jod.core.behavior.equals.DefaultEqualsTester;
+import io.dgj7.jod.core.behavior.equals.DefaultEqualityChecker;
 import io.dgj7.jod.core.behavior.maps.detect.IMapDetector;
 import io.dgj7.jod.core.behavior.maps.detect.impl.DefaultMapDetector;
 import io.dgj7.jod.core.behavior.maps.diff.IMapDifferencer;
@@ -54,7 +55,7 @@ public class DifferencerConfiguration {
     @Getter
     private IShouldRecursePredicate shouldRecursePredicate;
     @Getter
-    private BiPredicate<Object, Object> equalsTester;
+    private IEqualityChecker equalityChecker;
     @Getter
     private ICollectionDetector collectionDetector;
     @Getter
@@ -106,7 +107,7 @@ public class DifferencerConfiguration {
         private static final IFieldFinder DEFAULT_FIELD_FINDER = new DefaultFieldFinder();
         private static final IFieldTransformer DEFAULT_FIELD_TRANSFORMER = new DefaultFieldTransformer();
         private static final IShouldRecursePredicate DEFAULT_SHOULD_RECURSE_PREDICATE = new DefaultShouldRecursePredicate();
-        private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new DefaultEqualsTester();
+        private static final IEqualityChecker DEFAULT_EQUALITY_CHECKER = new DefaultEqualityChecker();
         private static final ICollectionDetector DEFAULT_COLLECTION_DETECTOR = new DefaultCollectionDetector();
         private static final ICollectionTransformer DEFAULT_COLLECTION_TRANSFORMER = new DefaultCollectionTransformer();
         private static final ICollectionDifferencer DEFAULT_COLLECTION_HANDLER = new DefaultCollectionDifferencer();
@@ -127,7 +128,7 @@ public class DifferencerConfiguration {
         private IFieldFinder theFieldFinder;
         private IFieldTransformer theFieldTransformer;
         private IShouldRecursePredicate theShouldRecursePredicate;
-        private BiPredicate<Object, Object> theEqualsTester;
+        private IEqualityChecker theEqualityChecker;
         private ICollectionDetector theCollectionDetector;
         private ICollectionTransformer theCollectionTransformer;
         private ICollectionDifferencer theCollectionHandler;
@@ -179,8 +180,8 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withEqualsTester(final BiPredicate<Object, Object> input) {
-            this.theEqualsTester = input;
+        public DiffConfigBuilder withEqualityChecker(final IEqualityChecker input) {
+            this.theEqualityChecker = input;
             return this;
         }
 
@@ -298,7 +299,7 @@ public class DifferencerConfiguration {
             configuration.fieldFinder = theFieldFinder == null ? DEFAULT_FIELD_FINDER : theFieldFinder;
             configuration.fieldTransformer = theFieldTransformer == null ? DEFAULT_FIELD_TRANSFORMER : theFieldTransformer;
             configuration.shouldRecursePredicate = theShouldRecursePredicate == null ? DEFAULT_SHOULD_RECURSE_PREDICATE : theShouldRecursePredicate;
-            configuration.equalsTester = theEqualsTester == null ? DEFAULT_EQUALS_TESTER : theEqualsTester;
+            configuration.equalityChecker = theEqualityChecker == null ? DEFAULT_EQUALITY_CHECKER : theEqualityChecker;
             configuration.collectionDetector = theCollectionDetector == null ? DEFAULT_COLLECTION_DETECTOR : theCollectionDetector;
             configuration.collectionTransformer = theCollectionTransformer == null ? DEFAULT_COLLECTION_TRANSFORMER : theCollectionTransformer;
             configuration.collectionDifferencer = theCollectionHandler == null ? DEFAULT_COLLECTION_HANDLER : theCollectionHandler;
