@@ -4,6 +4,7 @@ import io.dgj7.jod.core.collections.detect.ICollectionDetector;
 import io.dgj7.jod.DifferencerConfiguration;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -18,9 +19,11 @@ public class DefaultCollectionDetector implements ICollectionDetector {
      */
     @Override
     public <I> boolean isCollection(final DifferencerConfiguration config, final I expected, final I actual) {
-        return Stream.of(expected, actual)
+        final List<? extends Class<?>> matches = Stream.of(expected, actual)
                 .filter(Objects::nonNull)
                 .map(Object::getClass)
-                .allMatch(Collection.class::isAssignableFrom);
+                .filter(Collection.class::isAssignableFrom)
+                .toList();
+        return !matches.isEmpty();
     }
 }

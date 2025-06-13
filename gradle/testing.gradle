@@ -17,18 +17,22 @@ def excludesArray = [
         'io/dgj7/jod/DifferencerConfiguration$DiffConfigBuilder.class',
 
         // todo: eliminate these
-        'io/dgj7/jod/Differencer.class',
+        'io/dgj7/jod/core/collections/diff/impl/DefaultCollectionDifferencer.class',
+        'io/dgj7/jod/core/collections/diff/impl/MixedTypeCollectionDifferencer.class',
+
+        'io/dgj7/jod/core/diff/impl/DefaultObjectDifferencer.class',
+
+        'io/dgj7/jod/core/maps/diff/impl/DefaultMapDifferencer.class',
+
+        'io/dgj7/jod/core/nulls/impl/DefaultNullHandler.class',
+
+        'io/dgj7/jod/core/reflect/fields/impl/DefaultFieldsEnumerator.class',
+        'io/dgj7/jod/core/reflect/transform/impl/DefaultFieldTransformer.class',
 
         'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory.class',
         'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory$DefaultMetaData.class',
 
-        'io/dgj7/jod/core/reflect/fields/impl/DefaultFieldsEnumerator.class',
-        'io/dgj7/jod/core/reflect/transform/impl/DefaultFieldTransformer.class',
-        'io/dgj7/jod/core/maps/diff/impl/DefaultMapDifferencer.class',
-        'io/dgj7/jod/core/nulls/impl/DefaultNullHandler.class',
-        'io/dgj7/jod/core/collections/diff/impl/DefaultCollectionDifferencer.class',
-        'io/dgj7/jod/core/collections/diff/impl/MixedTypeCollectionDifferencer.class',
-        'io/dgj7/jod/core/diff/impl/DefaultObjectDifferencer.class',
+        'io/dgj7/jod/Differencer.class',
 ]
 
 jacoco {
