@@ -1,7 +1,7 @@
-package io.dgj7.jod.core.diff.impl;
+package io.dgj7.jod.core.recurse.action.impl;
 
 import io.dgj7.jod.core.diff.IObjectDifferencer;
-import io.dgj7.jod.core.diff.IObjectGraphRecursor;
+import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.reflect.IReflection;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;

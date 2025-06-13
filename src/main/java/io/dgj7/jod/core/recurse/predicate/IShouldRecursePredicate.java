@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.recurse;
+package io.dgj7.jod.core.recurse.predicate;
 
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 

@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.diff;
+package io.dgj7.jod.core.recurse.action;
 
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;

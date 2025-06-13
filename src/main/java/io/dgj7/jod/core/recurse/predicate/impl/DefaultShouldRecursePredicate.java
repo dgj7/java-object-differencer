@@ -1,8 +1,8 @@
-package io.dgj7.jod.core.recurse.impl;
+package io.dgj7.jod.core.recurse.predicate.impl;
 
 import io.dgj7.jod.core.md.AbstractMetaData;
 import io.dgj7.jod.core.md.IMetaDataFactory;
-import io.dgj7.jod.core.recurse.IShouldRecursePredicate;
+import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 import java.util.List;
