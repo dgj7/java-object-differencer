@@ -1,8 +1,8 @@
 package io.dgj7.jod.core.md.impl;
 
+import io.dgj7.jod.core.behavior.reflect.transform.IFieldTransformer;
 import io.dgj7.jod.core.md.AbstractMetaData;
 import io.dgj7.jod.core.md.IMetaDataFactory;
-import io.dgj7.jod.core.behavior.reflect.transform.IFieldTransformer;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import lombok.Getter;
 import org.apache.commons.lang3.builder.EqualsBuilder;

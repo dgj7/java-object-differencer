@@ -62,15 +62,15 @@ public class MixedEndToEndTest {
     @Test
     public final void testEqualDifferentOrderCustomCollectionHandler() {
         final Map<Class<?>, BiPredicate<?, ?>> map = new HashMap<>();
-        map.put(DerivedDoubleType.class, (DerivedDoubleType x,DerivedDoubleType y) -> new EqualsBuilder()
+        map.put(DerivedDoubleType.class, (DerivedDoubleType x, DerivedDoubleType y) -> new EqualsBuilder()
                 .append(x.getBaseTypeValue(), y.getBaseTypeValue())
                 .append(x.getDerivedDoubleValue(), y.getDerivedDoubleValue())
                 .isEquals());
-        map.put(DerivedIntegerType.class, (DerivedIntegerType x,DerivedIntegerType y) -> new EqualsBuilder()
+        map.put(DerivedIntegerType.class, (DerivedIntegerType x, DerivedIntegerType y) -> new EqualsBuilder()
                 .append(x.getBaseTypeValue(), y.getBaseTypeValue())
                 .append(x.getDerivedIntegerValue(), y.getDerivedIntegerValue())
                 .isEquals());
-        map.put(DerivedStringType.class, (DerivedStringType x,DerivedStringType y) -> new EqualsBuilder()
+        map.put(DerivedStringType.class, (DerivedStringType x, DerivedStringType y) -> new EqualsBuilder()
                 .append(x.getBaseTypeValue(), y.getBaseTypeValue())
                 .append(x.getDerivedStringValue(), y.getDerivedStringValue())
                 .isEquals());

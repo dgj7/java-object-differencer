@@ -1,39 +1,39 @@
 package io.dgj7.jod.model.config;
 
-import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.detect.ICollectionDetector;
 import io.dgj7.jod.core.behavior.collections.detect.impl.DefaultCollectionDetector;
+import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.diff.impl.DefaultCollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.behavior.collections.transform.impl.DefaultCollectionTransformer;
 import io.dgj7.jod.core.behavior.diff.IObjectDifferencer;
-import io.dgj7.jod.core.behavior.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.behavior.diff.impl.DefaultObjectDifferencer;
-import io.dgj7.jod.core.behavior.recurse.action.impl.DefaultObjectGraphRecursor;
 import io.dgj7.jod.core.behavior.enumerations.IEnumDetector;
 import io.dgj7.jod.core.behavior.enumerations.impl.DefaultEnumDetector;
 import io.dgj7.jod.core.behavior.equals.DefaultEqualsTester;
-import io.dgj7.jod.core.behavior.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.behavior.maps.detect.IMapDetector;
 import io.dgj7.jod.core.behavior.maps.detect.impl.DefaultMapDetector;
+import io.dgj7.jod.core.behavior.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.behavior.maps.diff.impl.DefaultMapDifferencer;
 import io.dgj7.jod.core.behavior.maps.transform.IMapTransformer;
 import io.dgj7.jod.core.behavior.maps.transform.impl.DefaultMapTransformer;
-import io.dgj7.jod.core.md.AbstractMetaData;
-import io.dgj7.jod.core.md.IMetaDataFactory;
-import io.dgj7.jod.core.md.impl.DefaultMetaDataFactory;
 import io.dgj7.jod.core.behavior.nulls.INullHandler;
 import io.dgj7.jod.core.behavior.nulls.impl.DefaultNullHandler;
 import io.dgj7.jod.core.behavior.path.IRootPathProvider;
 import io.dgj7.jod.core.behavior.path.impl.DefaultRootPathProvider;
+import io.dgj7.jod.core.behavior.recurse.action.IObjectGraphRecursor;
+import io.dgj7.jod.core.behavior.recurse.action.impl.DefaultObjectGraphRecursor;
 import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.core.behavior.recurse.predicate.impl.DefaultShouldRecursePredicate;
-import io.dgj7.jod.core.behavior.reflect.transform.IFieldTransformer;
 import io.dgj7.jod.core.behavior.reflect.field.IFieldFinder;
 import io.dgj7.jod.core.behavior.reflect.field.impl.DefaultFieldFinder;
 import io.dgj7.jod.core.behavior.reflect.fields.IFieldsEnumerator;
 import io.dgj7.jod.core.behavior.reflect.fields.impl.DefaultFieldsEnumerator;
+import io.dgj7.jod.core.behavior.reflect.transform.IFieldTransformer;
 import io.dgj7.jod.core.behavior.reflect.transform.impl.DefaultFieldTransformer;
+import io.dgj7.jod.core.md.AbstractMetaData;
+import io.dgj7.jod.core.md.IMetaDataFactory;
+import io.dgj7.jod.core.md.impl.DefaultMetaDataFactory;
 import io.dgj7.jod.pattern.builder.Builder;
 import lombok.Getter;
 
@@ -79,6 +79,8 @@ public class DifferencerConfiguration {
     private IMetaDataFactory<? extends AbstractMetaData> metaDataFactory;
     @Getter
     private IObjectGraphRecursor recursor;
+    @Getter
+    private EquatableThings equatableThings;
 
     /**
      * Create a new instance.
@@ -115,6 +117,7 @@ public class DifferencerConfiguration {
         private static final INullHandler DEFAULT_NULL_HANDLER = new DefaultNullHandler();
         private static final IMetaDataFactory<? extends AbstractMetaData> DEFAULT_META_DATA_FACTORY = new DefaultMetaDataFactory();
         private static final IObjectGraphRecursor DEFAULT_RECURSOR = new DefaultObjectGraphRecursor();
+        private static final EquatableThings DEFAULT_EQUATABLE_THINGS = EquatableThings.createDefault();
 
         private IFieldsEnumerator theFieldsEnumerator;
         private IFieldFinder theFieldFinder;
@@ -133,6 +136,7 @@ public class DifferencerConfiguration {
         private INullHandler theNullHandler;
         private IMetaDataFactory<? extends AbstractMetaData> theMetaDataFactory;
         private IObjectGraphRecursor theRecursor;
+        private EquatableThings theEquatableThings;
 
         /**
          * Feed the builder.
@@ -271,6 +275,14 @@ public class DifferencerConfiguration {
         }
 
         /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withEquatableThings(final EquatableThings input) {
+            this.theEquatableThings = input;
+            return this;
+        }
+
+        /**
          * {@inheritDoc}
          */
         public DifferencerConfiguration build() {
@@ -293,6 +305,7 @@ public class DifferencerConfiguration {
             configuration.nullHandler = theNullHandler == null ? DEFAULT_NULL_HANDLER : theNullHandler;
             configuration.metaDataFactory = theMetaDataFactory == null ? DEFAULT_META_DATA_FACTORY : theMetaDataFactory;
             configuration.recursor = theRecursor == null ? DEFAULT_RECURSOR : theRecursor;
+            configuration.equatableThings = theEquatableThings == null ? DEFAULT_EQUATABLE_THINGS : theEquatableThings;
 
             return configuration;
         }

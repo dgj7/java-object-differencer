@@ -1,11 +1,11 @@
 package io.dgj7.jod.core.behavior.recurse.predicate.impl;
 
+import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.core.md.AbstractMetaData;
 import io.dgj7.jod.core.md.IMetaDataFactory;
-import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
+import io.dgj7.jod.model.config.EquatableThings;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -17,44 +17,6 @@ import java.util.function.Predicate;
  */
 public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
     /**
-     * <p>
-     * Provide a list of packages, within which, all objects are directly equatable.
-     * </p>
-     * <p>
-     * "Directly equatable" means that an object:
-     * <ul>
-     *     <li>does not need to have it's object graph recursed into further, and</li>
-     *     <li>it's equals() method can be called to determine if it's equal to another object of the same type</li>
-     * </ul>
-     * </p>
-     */
-    protected List<String> provideDirectlyEquatablePackages() {
-        return List.of(
-                "java.lang",
-                "java.util",
-                "java.math",
-                "java.time",
-                "java.sql"
-        );
-    }
-
-    /**
-     * <p>
-     * Provide a list of classes that are directly equatable.
-     * </p>
-     * <p>
-     * "Directly equatable" means that an object:
-     * <ul>
-     *     <li>does not need to have it's object graph recursed into further, and</li>
-     *     <li>it's equals() method can be called to determine if it's equal to another object of the same type</li>
-     * </ul>
-     * </p>
-     */
-    protected List<Class<?>> provideDirectlyEquatableClasses() {
-        return List.of();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -62,11 +24,12 @@ public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
         final Object object = Optional.ofNullable(expected).orElse(actual);
 
         final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
+        final EquatableThings et = config.getEquatableThings();
 
         final AbstractMetaData md = mdf.from(object);
 
-        final boolean notDirectlyEquatablePackage = !provideDirectlyEquatablePackages().contains(md.providePackageName());
-        final boolean notDirectlyEquatableClass = provideDirectlyEquatableClasses()
+        final boolean notDirectlyEquatablePackage = !et.getDirectlyEquatablePackages().contains(md.providePackageName());
+        final boolean notDirectlyEquatableClass = et.getDirectlyEquatableClasses()
                 .stream()
                 .map(mdf::from)
                 .noneMatch(md::equals);
@@ -77,9 +40,9 @@ public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
     /**
      * {@inheritDoc}
      */
-    // todo: extract this; probably need to extract the list of classes and packages into a bean of some kind
     @Override
     public <T> boolean checkSuperTypeFields(final DifferencerConfiguration config, final Class<T> clazz) {
-        return !provideDirectlyEquatablePackages().contains(clazz.getPackageName());
+        final EquatableThings et = config.getEquatableThings();
+        return !et.getDirectlyEquatablePackages().contains(clazz.getPackageName());
     }
 }

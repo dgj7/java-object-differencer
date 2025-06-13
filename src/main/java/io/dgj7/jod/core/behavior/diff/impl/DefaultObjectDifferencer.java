@@ -1,15 +1,15 @@
 package io.dgj7.jod.core.behavior.diff.impl;
 
-import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.detect.ICollectionDetector;
+import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.behavior.diff.IObjectDifferencer;
-import io.dgj7.jod.core.behavior.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.behavior.enumerations.IEnumDetector;
-import io.dgj7.jod.core.behavior.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.behavior.maps.detect.IMapDetector;
+import io.dgj7.jod.core.behavior.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.behavior.maps.transform.IMapTransformer;
 import io.dgj7.jod.core.behavior.nulls.INullHandler;
+import io.dgj7.jod.core.behavior.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
