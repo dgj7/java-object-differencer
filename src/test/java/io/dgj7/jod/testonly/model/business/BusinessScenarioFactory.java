@@ -25,7 +25,7 @@ public class BusinessScenarioFactory {
 
         /* now, modify if it's the 'actual' scenario */
         if (ScenarioVersion.ACTUAL.equals(version)) {
-            // todo
+            business.getAddress().setPostalCode("10101");
         }
 
         /* done */
