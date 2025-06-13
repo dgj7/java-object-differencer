@@ -1,6 +1,6 @@
-package io.dgj7.jod.core.reflect.impl;
+package io.dgj7.jod.core.behavior.reflect.transform.impl;
 
-import io.dgj7.jod.core.reflect.IFieldTransformer;
+import io.dgj7.jod.core.behavior.reflect.transform.IFieldTransformer;
 import io.dgj7.jod.model.exc.ReflectionException;
 
 import java.lang.reflect.Field;

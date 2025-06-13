@@ -1,7 +1,7 @@
-package io.dgj7.jod.core.reflect.fields.impl;
+package io.dgj7.jod.core.behavior.reflect.fields.impl;
 
 import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
-import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
+import io.dgj7.jod.core.behavior.reflect.fields.IFieldsEnumerator;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 import java.lang.reflect.Field;

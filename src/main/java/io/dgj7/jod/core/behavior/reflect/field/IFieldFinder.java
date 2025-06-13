@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.reflect.field;
+package io.dgj7.jod.core.behavior.reflect.field;
 
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 

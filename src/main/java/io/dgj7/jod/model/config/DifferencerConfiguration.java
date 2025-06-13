@@ -28,12 +28,12 @@ import io.dgj7.jod.core.behavior.path.IRootPathProvider;
 import io.dgj7.jod.core.behavior.path.impl.DefaultRootPathProvider;
 import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.core.behavior.recurse.predicate.impl.DefaultShouldRecursePredicate;
-import io.dgj7.jod.core.reflect.IFieldTransformer;
-import io.dgj7.jod.core.reflect.field.IFieldFinder;
-import io.dgj7.jod.core.reflect.field.impl.DefaultFieldFinder;
-import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
-import io.dgj7.jod.core.reflect.fields.impl.DefaultFieldsEnumerator;
-import io.dgj7.jod.core.reflect.impl.DefaultFieldTransformer;
+import io.dgj7.jod.core.behavior.reflect.transform.IFieldTransformer;
+import io.dgj7.jod.core.behavior.reflect.field.IFieldFinder;
+import io.dgj7.jod.core.behavior.reflect.field.impl.DefaultFieldFinder;
+import io.dgj7.jod.core.behavior.reflect.fields.IFieldsEnumerator;
+import io.dgj7.jod.core.behavior.reflect.fields.impl.DefaultFieldsEnumerator;
+import io.dgj7.jod.core.behavior.reflect.transform.impl.DefaultFieldTransformer;
 import io.dgj7.jod.pattern.builder.Builder;
 import lombok.Getter;
 

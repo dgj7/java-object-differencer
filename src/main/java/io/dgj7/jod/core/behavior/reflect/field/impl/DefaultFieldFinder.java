@@ -1,7 +1,7 @@
-package io.dgj7.jod.core.reflect.field.impl;
+package io.dgj7.jod.core.behavior.reflect.field.impl;
 
-import io.dgj7.jod.core.reflect.field.IFieldFinder;
-import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
+import io.dgj7.jod.core.behavior.reflect.field.IFieldFinder;
+import io.dgj7.jod.core.behavior.reflect.fields.IFieldsEnumerator;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 import java.lang.reflect.Field;
