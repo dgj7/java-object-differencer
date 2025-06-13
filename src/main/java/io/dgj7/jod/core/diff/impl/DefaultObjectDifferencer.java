@@ -5,7 +5,7 @@ import io.dgj7.jod.core.collections.id.ICollectionIdentifier;
 import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
-import io.dgj7.jod.core.enumerations.IEnumHandler;
+import io.dgj7.jod.core.enumerations.IEnumDetector;
 import io.dgj7.jod.core.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.maps.id.IMapIdentifier;
 import io.dgj7.jod.core.maps.transform.IMapTransformer;
@@ -37,7 +37,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         final IMapIdentifier mi = config.getMapIdentifier();
         final IMapTransformer mt = config.getMapTransformer();
         final IMapDifferencer md = config.getMapDifferencer();
-        final IEnumHandler eh = config.getEnumHandler();
+        final IEnumDetector ed = config.getEnumDetector();
         final INullHandler nh = config.getNullHandler();
         final BiPredicate<Object, Object> et = config.getEqualsTester();
         final IShouldRecursePredicate srp = config.getShouldRecurse();
@@ -45,7 +45,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
 
         if (expected == null || actual == null) {
             nh.handleNulls(config, path, deltas, expected, actual);
-        } else if (eh.isEnum(expected, actual)) {
+        } else if (ed.isEnum(expected, actual)) {
             if (!et.test(expected, actual)) {
                 deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
             }

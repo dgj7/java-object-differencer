@@ -2,10 +2,10 @@ package io.dgj7.jod.core.enumerations;
 
 /**
  * <p>
- * Handle enumerations.
+ * Detect enumerations.
  * </p>
  */
-public interface IEnumHandler {
+public interface IEnumDetector {
     /**
      * Determine if enumeration.
      */

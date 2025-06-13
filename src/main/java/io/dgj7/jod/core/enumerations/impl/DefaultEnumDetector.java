@@ -1,16 +1,16 @@
 package io.dgj7.jod.core.enumerations.impl;
 
-import io.dgj7.jod.core.enumerations.IEnumHandler;
+import io.dgj7.jod.core.enumerations.IEnumDetector;
 
 import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
  * <p>
- * Default {@link IEnumHandler}.
+ * Default {@link IEnumDetector}.
  * </p>
  */
-public class DefaultEnumHandler implements IEnumHandler {
+public class DefaultEnumDetector implements IEnumDetector {
     /**
      * {@inheritDoc}
      */

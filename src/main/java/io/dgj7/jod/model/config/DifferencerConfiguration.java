@@ -10,8 +10,8 @@ import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.diff.impl.DefaultObjectDifferencer;
 import io.dgj7.jod.core.recurse.action.impl.DefaultObjectGraphRecursor;
-import io.dgj7.jod.core.enumerations.IEnumHandler;
-import io.dgj7.jod.core.enumerations.impl.DefaultEnumHandler;
+import io.dgj7.jod.core.enumerations.IEnumDetector;
+import io.dgj7.jod.core.enumerations.impl.DefaultEnumDetector;
 import io.dgj7.jod.core.equals.DefaultEqualsTester;
 import io.dgj7.jod.core.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.maps.id.IMapIdentifier;
@@ -60,7 +60,7 @@ public class DifferencerConfiguration {
     @Getter
     private IMapDifferencer mapDifferencer;
     @Getter
-    private IEnumHandler enumHandler;
+    private IEnumDetector enumDetector;
     @Getter
     private IRootPathProvider rootPathProvider;
     @Getter
@@ -99,7 +99,7 @@ public class DifferencerConfiguration {
         private static final IMapIdentifier DEFAULT_MAP_IDENTIFIER = new DefaultMapIdentifier();
         private static final IMapTransformer DEFAULT_MAP_TRANSFORMER = new DefaultMapTransformer();
         private static final IMapDifferencer DEFAULT_MAP_HANDLER = new DefaultMapDifferencer();
-        private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
+        private static final IEnumDetector DEFAULT_ENUM_DETECTOR = new DefaultEnumDetector();
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
         private static final IObjectDifferencer DEFAULT_OBJECT_DIFFERENCER = new DefaultObjectDifferencer();
         private static final INullHandler DEFAULT_NULL_HANDLER = new DefaultNullHandler();
@@ -114,8 +114,8 @@ public class DifferencerConfiguration {
         private ICollectionDifferencer theCollectionHandler;
         private IMapIdentifier theMapIdentifier;
         private IMapTransformer theMapTransformer;
-        private IMapDifferencer theMapHandler;
-        private IEnumHandler theEnumHandler;
+        private IMapDifferencer theMapDifferencer;
+        private IEnumDetector theEnumDetector;
         private IRootPathProvider theRootPathProvider;
         private IObjectDifferencer theObjectDifferencer;
         private INullHandler theNullHandler;
@@ -190,15 +190,15 @@ public class DifferencerConfiguration {
          * Feed the builder.
          */
         public DiffConfigBuilder withMapDifferencer(final IMapDifferencer input) {
-            this.theMapHandler = input;
+            this.theMapDifferencer = input;
             return this;
         }
 
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withEnumHandler(final IEnumHandler input) {
-            this.theEnumHandler = input;
+        public DiffConfigBuilder withEnumDetector(final IEnumDetector input) {
+            this.theEnumDetector = input;
             return this;
         }
 
@@ -256,8 +256,8 @@ public class DifferencerConfiguration {
             configuration.collectionDifferencer = theCollectionHandler == null ? DEFAULT_COLLECTION_HANDLER : theCollectionHandler;
             configuration.mapIdentifier = theMapIdentifier == null ? DEFAULT_MAP_IDENTIFIER : theMapIdentifier;
             configuration.mapTransformer = theMapTransformer == null ? DEFAULT_MAP_TRANSFORMER : theMapTransformer;
-            configuration.mapDifferencer = theMapHandler == null ? DEFAULT_MAP_HANDLER : theMapHandler;
-            configuration.enumHandler = theEnumHandler == null ? DEFAULT_ENUM_HANDLER : theEnumHandler;
+            configuration.mapDifferencer = theMapDifferencer == null ? DEFAULT_MAP_HANDLER : theMapDifferencer;
+            configuration.enumDetector = theEnumDetector == null ? DEFAULT_ENUM_DETECTOR : theEnumDetector;
             configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
             configuration.objectDifferencer = theObjectDifferencer == null ? DEFAULT_OBJECT_DIFFERENCER : theObjectDifferencer;
             configuration.nullHandler = theNullHandler == null ? DEFAULT_NULL_HANDLER : theNullHandler;
