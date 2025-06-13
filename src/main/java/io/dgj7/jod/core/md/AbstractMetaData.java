@@ -4,6 +4,15 @@ package io.dgj7.jod.core.md;
  * Object metadata.
  */
 public abstract class AbstractMetaData {
+    /**
+     * {@inheritDoc}
+     */
+    public abstract boolean equals(final Object object);
+
+    /**
+     * {@inheritDoc}
+     */
+    public abstract int hashCode();
 
     /**
      * Provide the package name.
@@ -21,12 +30,7 @@ public abstract class AbstractMetaData {
     public abstract String provideFieldName();
 
     /**
-     * {@inheritDoc}
+     * Determine the type name.
      */
-    public abstract boolean equals(final Object object);
-
-    /**
-     * {@inheritDoc}
-     */
-    public abstract int hashCode();
+    public abstract String describeTypeName();
 }

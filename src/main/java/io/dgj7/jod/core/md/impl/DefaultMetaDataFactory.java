@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.lang.reflect.Field;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Default {@link IMetaDataFactory}.
@@ -69,6 +70,15 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
         /**
          * {@inheritDoc}
          */
+        @Override
+        public String describeTypeName() {
+            return getPackageName() + "." + getClassName();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
         public boolean equals(final Object object) {
             if (object instanceof DefaultMetaData) {
                 final DefaultMetaData other = (DefaultMetaData) object;
@@ -84,6 +94,7 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
         /**
          * {@inheritDoc}
          */
+        @Override
         public int hashCode() {
             return new HashCodeBuilder()
                     .append(packageName)
@@ -96,6 +107,7 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
     /**
      * {@inheritDoc}
      */
+    @Override
     public <T> DefaultMetaData from(final Class<T> pClazz) {
         final Class<T> clazz = Objects.requireNonNull(pClazz, "Class<T> is null");
 
@@ -109,6 +121,7 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
     /**
      * {@inheritDoc}
      */
+    @Override
     public <T> DefaultMetaData from(final T pInput) {
         final T input = Objects.requireNonNull(pInput, "T is null");
 
@@ -117,6 +130,16 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
         final String fieldName = "";
 
         return new DefaultMetaData(packageName, className, fieldName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <T> Optional<DefaultMetaData> from(final T expected, final T actual) {
+        return Optional.ofNullable(expected)
+                .or(() -> Optional.ofNullable(actual))
+                .map(this::from);
     }
 
     /**
@@ -134,40 +157,5 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
         final String fieldName = field.getName();
 
         return new DefaultMetaData(packageName, className, fieldName);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <T, U> String describeTypeName(final T expected, final U actual) {
-        if (expected != null && actual != null) {
-            final DefaultMetaData emd = from(expected);
-            final DefaultMetaData amd = from(actual);
-
-            if (emd.getPackageName().equals(amd.getPackageName()) && emd.getClassName().equals(amd.getClassName())) {
-                return emd.getPackageName() + "." + emd.getClassName();
-            } else {
-                return emd.getPackageName() + "." + emd.getClassName() + "/" + amd.getPackageName() + "." + amd.getClassName();
-            }
-        } else if (expected != null) {
-            final DefaultMetaData md = from(expected);
-            return md.getPackageName() + "." + md.getClassName();
-        } else if (actual != null) {
-            final DefaultMetaData md = from(actual);
-            return md.getPackageName() + "." + md.getClassName();
-        } else {
-            return "";
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public <T> String describeTypeName(final T input) {
-        if (input != null) {
-            final DefaultMetaData md = from(input);
-            return md.getPackageName() + "." + md.getClassName();
-        }
-        return "";
     }
 }

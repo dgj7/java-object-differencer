@@ -15,13 +15,8 @@ public class DefaultRootPathProvider implements IRootPathProvider {
     @Override
     public <T> String provideRootPath(final DifferencerConfiguration config, final T expected, final T actual) {
         final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
-
-        if (expected != null) {
-            return mdf.describeTypeName(expected);
-        } else if (actual != null) {
-            return mdf.describeTypeName(actual);
-        } else {
-            return "";
-        }
+        return mdf.from(expected, actual)
+                .map(AbstractMetaData::describeTypeName)
+                .orElse("");
     }
 }
