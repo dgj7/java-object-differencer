@@ -19,15 +19,6 @@ public class DefaultMapHandler implements IMapHandler {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public <K, V> Map<K, V> findAllElements(final Object object) {
-        return (Map<K, V>) object;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public <K, V> void diffMaps(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap) {
         final IObjectDifferencer od = config.getObjectDifferencer();
 

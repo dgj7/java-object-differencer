@@ -13,11 +13,6 @@ import java.util.Map;
  */
 public interface IMapHandler {
     /**
-     * Get elements in the map.
-     */
-    <K, V> Map<K, V> findAllElements(final Object object);
-
-    /**
      * Diff maps.
      */
     <K, V> void diffMaps(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Map<K, V> expectedMap, final Map<K, V> actualMap);

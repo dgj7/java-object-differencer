@@ -8,6 +8,7 @@ import io.dgj7.jod.core.diff.IObjectGraphRecursor;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
 import io.dgj7.jod.core.maps.IMapHandler;
 import io.dgj7.jod.core.maps.id.IMapIdentifier;
+import io.dgj7.jod.core.maps.transform.IMapTransformer;
 import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.core.recurse.IShouldRecursePredicate;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
@@ -34,7 +35,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         final ICollectionTransformer ct = config.getCollectionTransformer();
         final ICollectionDifferencer cd = config.getCollectionHandler();
         final IMapIdentifier mi = config.getMapIdentifier();
-
+        final IMapTransformer mt = config.getMapTransformer();
         final IMapHandler mh = config.getMapHandler();
         final IEnumHandler eh = config.getEnumHandler();
         final INullHandler nh = config.getNullHandler();
@@ -53,8 +54,8 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
             final Collection<Object> actualCollection = ct.objectToCollection(actual);
             cd.diffCollections(config, deltas, path, expectedCollection, actualCollection);
         } else if (mi.isMap(expected, actual)) {
-            final Map<Object, Object> expectedMap = mh.findAllElements(expected);
-            final Map<Object, Object> actualMap = mh.findAllElements(actual);
+            final Map<Object, Object> expectedMap = mt.objectToMap(expected);
+            final Map<Object, Object> actualMap = mt.objectToMap(actual);
             mh.diffMaps(config, deltas, path, expectedMap, actualMap);
         } else if (srp.test(config, expected, actual)) {
             ogr.diffRecurse(config, deltas, path, expected, actual);

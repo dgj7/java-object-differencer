@@ -17,6 +17,8 @@ import io.dgj7.jod.core.maps.IMapHandler;
 import io.dgj7.jod.core.maps.id.IMapIdentifier;
 import io.dgj7.jod.core.maps.id.impl.DefaultMapIdentifier;
 import io.dgj7.jod.core.maps.impl.DefaultMapHandler;
+import io.dgj7.jod.core.maps.transform.IMapTransformer;
+import io.dgj7.jod.core.maps.transform.impl.DefaultMapTransformer;
 import io.dgj7.jod.core.md.AbstractMetaData;
 import io.dgj7.jod.core.md.IMetaDataFactory;
 import io.dgj7.jod.core.md.impl.DefaultMetaDataFactory;
@@ -53,6 +55,8 @@ public class DifferencerConfiguration {
     private ICollectionDifferencer collectionHandler;
     @Getter
     private IMapIdentifier mapIdentifier;
+    @Getter
+    private IMapTransformer mapTransformer;
     @Getter
     private IMapHandler mapHandler;
     @Getter
@@ -93,6 +97,7 @@ public class DifferencerConfiguration {
         private static final ICollectionTransformer DEFAULT_COLLECTION_TRANSFORMER = new DefaultCollectionTransformer();
         private static final ICollectionDifferencer DEFAULT_COLLECTION_HANDLER = new DefaultCollectionDifferencer();
         private static final IMapIdentifier DEFAULT_MAP_IDENTIFIER = new DefaultMapIdentifier();
+        private static final IMapTransformer DEFAULT_MAP_TRANSFORMER = new DefaultMapTransformer();
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
         private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
@@ -108,6 +113,7 @@ public class DifferencerConfiguration {
         private ICollectionTransformer theCollectionTransformer;
         private ICollectionDifferencer theCollectionHandler;
         private IMapIdentifier theMapIdentifier;
+        private IMapTransformer theMapTransformer;
         private IMapHandler theMapHandler;
         private IEnumHandler theEnumHandler;
         private IRootPathProvider theRootPathProvider;
@@ -169,6 +175,14 @@ public class DifferencerConfiguration {
          */
         public DiffConfigBuilder withMapIdentifier(final IMapIdentifier input) {
             this.theMapIdentifier = input;
+            return this;
+        }
+
+        /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withMapTranformer(final IMapTransformer input) {
+            this.theMapTransformer = input;
             return this;
         }
 
@@ -241,7 +255,7 @@ public class DifferencerConfiguration {
             configuration.collectionTransformer = theCollectionTransformer == null ? DEFAULT_COLLECTION_TRANSFORMER : theCollectionTransformer;
             configuration.collectionHandler = theCollectionHandler == null ? DEFAULT_COLLECTION_HANDLER : theCollectionHandler;
             configuration.mapIdentifier = theMapIdentifier == null ? DEFAULT_MAP_IDENTIFIER : theMapIdentifier;
-
+            configuration.mapTransformer = theMapTransformer == null ? DEFAULT_MAP_TRANSFORMER : theMapTransformer;
             configuration.mapHandler = theMapHandler == null ? DEFAULT_MAP_HANDLER : theMapHandler;
             configuration.enumHandler = theEnumHandler == null ? DEFAULT_ENUM_HANDLER : theEnumHandler;
             configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
