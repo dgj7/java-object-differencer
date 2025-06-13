@@ -29,6 +29,8 @@ import io.dgj7.jod.core.behavior.path.impl.DefaultRootPathProvider;
 import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.core.behavior.recurse.predicate.impl.DefaultShouldRecursePredicate;
 import io.dgj7.jod.core.reflect.IReflection;
+import io.dgj7.jod.core.reflect.fields.IFieldsFinder;
+import io.dgj7.jod.core.reflect.fields.impl.DefaultFieldsFinder;
 import io.dgj7.jod.core.reflect.impl.DefaultReflectionImpl;
 import io.dgj7.jod.pattern.builder.Builder;
 import lombok.Getter;
@@ -41,6 +43,8 @@ import java.util.function.BiPredicate;
  * </p>
  */
 public class DifferencerConfiguration {
+    @Getter
+    private IFieldsFinder fieldsFinder;
     @Getter
     private IReflection reflection;
     @Getter
@@ -90,6 +94,7 @@ public class DifferencerConfiguration {
      * Internal builder.
      */
     public static class DiffConfigBuilder implements Builder<DifferencerConfiguration> {
+        private static final IFieldsFinder DEFAULT_FIELDS_FINDER = new DefaultFieldsFinder();
         private static final IReflection DEFAULT_REFLECTION = new DefaultReflectionImpl();
         private static final IShouldRecursePredicate DEFAULT_RECURSE = new DefaultShouldRecursePredicate();
         private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new DefaultEqualsTester();
@@ -106,6 +111,7 @@ public class DifferencerConfiguration {
         private static final IMetaDataFactory<? extends AbstractMetaData> DEFAULT_META_DATA_FACTORY = new DefaultMetaDataFactory();
         private static final IObjectGraphRecursor DEFAULT_RECURSOR = new DefaultObjectGraphRecursor();
 
+        private IFieldsFinder theFieldsFinder;
         private IReflection theReflection;
         private IShouldRecursePredicate theShouldRecursePredicate;
         private BiPredicate<Object, Object> theEqualsTester;
@@ -121,6 +127,14 @@ public class DifferencerConfiguration {
         private INullHandler theNullHandler;
         private IMetaDataFactory<? extends AbstractMetaData> theMetaDataFactory;
         private IObjectGraphRecursor theRecursor;
+
+        /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withFieldsFinder(final IFieldsFinder input) {
+            this.theFieldsFinder = input;
+            return this;
+        }
 
         /**
          * Feed the builder.
@@ -248,6 +262,7 @@ public class DifferencerConfiguration {
         public DifferencerConfiguration build() {
             final DifferencerConfiguration configuration = new DifferencerConfiguration();
 
+            configuration.fieldsFinder = theFieldsFinder == null ? DEFAULT_FIELDS_FINDER : theFieldsFinder;
             configuration.reflection = theReflection == null ? DEFAULT_REFLECTION : theReflection;
             configuration.shouldRecurse = theShouldRecursePredicate == null ? DEFAULT_RECURSE : theShouldRecursePredicate;
             configuration.equalsTester = theEqualsTester == null ? DEFAULT_EQUALS_TESTER : theEqualsTester;

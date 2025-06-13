@@ -17,11 +17,6 @@ import java.util.Optional;
  */
 public interface IReflection {
     /**
-     * List all {@link Field}s.
-     */
-    <I> List<Field> fields(final DifferencerConfiguration config, final I input);
-
-    /**
      * Find field with the given name.
      */
     <I> Optional<Field> findField(final DifferencerConfiguration config, final I input, final String name);
