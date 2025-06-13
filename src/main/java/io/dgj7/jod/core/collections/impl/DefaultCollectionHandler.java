@@ -20,15 +20,6 @@ public class DefaultCollectionHandler implements ICollectionHandler {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public <I, O> Collection<O> findCollection(final I object) {
-        return (Collection<O>) object;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public <T> void diffCollections(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Collection<T> expectedList, final Collection<T> actualList) {
         final IObjectDifferencer od = config.getObjectDifferencer();
 

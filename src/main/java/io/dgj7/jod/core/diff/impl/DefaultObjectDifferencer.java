@@ -2,6 +2,7 @@ package io.dgj7.jod.core.diff.impl;
 
 import io.dgj7.jod.core.collections.ICollectionHandler;
 import io.dgj7.jod.core.collections.id.ICollectionIdentifier;
+import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.diff.IObjectGraphRecursor;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
@@ -27,6 +28,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
     @Override
     public <T> void diffObjects(final DifferencerConfiguration config, final List<Delta> deltas, final String path, final T expected, final T actual) {
         final ICollectionIdentifier ci = config.getCollectionIdentifier();
+        final ICollectionTransformer ct = config.getCollectionTransformer();
         final ICollectionHandler ch = config.getCollectionHandler();
         final IMapHandler mh = config.getMapHandler();
         final IEnumHandler eh = config.getEnumHandler();
@@ -42,7 +44,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
                 deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
             }
         } else if (ci.isCollection(expected, actual)) {
-            ch.diffCollections(config, deltas, path, ch.findCollection(expected), ch.findCollection(actual));
+            ch.diffCollections(config, deltas, path, ct.objectToCollection(expected), ct.objectToCollection(actual));
         } else if (mh.isMap(expected, actual)) {
             mh.diffMaps(config, deltas, path, mh.findAllElements(expected), mh.findAllElements(actual));
         } else if (srp.test(config, expected, actual)) {

@@ -13,11 +13,6 @@ import java.util.List;
  */
 public interface ICollectionHandler {
     /**
-     * Get elements in the collection.
-     */
-    <I, O> Collection<O> findCollection(final I object);
-
-    /**
      * Diff two collections.
      */
     <T> void diffCollections(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Collection<T> expectedList, final Collection<T> actualList);
