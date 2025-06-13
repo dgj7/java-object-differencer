@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
  * Factory of {@link AbstractMetaData}.
  * </p>
  */
+// todo: split this into multiple interfaces
 public interface IMetaDataFactory<M extends AbstractMetaData> {
     /**
      * Simple factory.

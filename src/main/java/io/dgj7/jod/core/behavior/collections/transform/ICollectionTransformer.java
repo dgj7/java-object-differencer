@@ -11,5 +11,6 @@ public interface ICollectionTransformer {
     /**
      * Get elements in the collection.
      */
+    // todo: add differencer configuration parameter
     <I, O> Collection<O> objectToCollection(final I object);
 }

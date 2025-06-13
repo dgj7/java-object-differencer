@@ -14,5 +14,6 @@ public interface ICollectionDetector {
     /**
      * Determine if the given object is a collection.
      */
+    // todo: add differencer configuration parameter
     <I> boolean isCollection(final I expected, final I actual);
 }

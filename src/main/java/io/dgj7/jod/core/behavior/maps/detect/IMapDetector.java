@@ -11,5 +11,6 @@ public interface IMapDetector {
     /**
      * Determine if the given object is a map.
      */
+    // todo: add differencer configuration parameter
     <I> boolean isMap(final I expected, final I actual);
 }

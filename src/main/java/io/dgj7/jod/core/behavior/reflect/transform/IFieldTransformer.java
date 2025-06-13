@@ -15,5 +15,6 @@ public interface IFieldTransformer {
     /**
      * Map field on input I to Object.
      */
+    // todo: add differencer configuration parameter
     <I> Object fieldToObject(final Field field, final I input);
 }

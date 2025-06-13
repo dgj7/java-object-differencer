@@ -13,6 +13,7 @@ public class DefaultEqualsTester implements BiPredicate<Object, Object> {
     /**
      * {@inheritDoc}
      */
+    // todo: add differencer configuration parameter
     @Override
     public boolean test(final Object expected, final Object actual) {
         return new EqualsBuilder()

@@ -11,5 +11,6 @@ public interface IMapTransformer {
     /**
      * Get elements in the map.
      */
+    // todo: add differencer configuration parameter
     <K, V> Map<K, V> objectToMap(final Object object);
 }

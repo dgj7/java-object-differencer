@@ -77,6 +77,7 @@ public class DefaultShouldRecursePredicate implements IShouldRecursePredicate {
     /**
      * {@inheritDoc}
      */
+    // todo: extract this; probably need to extract the list of classes and packages into a bean of some kind
     @Override
     public <T> boolean checkSuperTypeFields(final DifferencerConfiguration config, final Class<T> clazz) {
         return !provideDirectlyEquatablePackages().contains(clazz.getPackageName());
