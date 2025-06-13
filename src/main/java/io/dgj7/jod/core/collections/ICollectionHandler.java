@@ -13,11 +13,6 @@ import java.util.List;
  */
 public interface ICollectionHandler {
     /**
-     * Determine if the given object is a collection.
-     */
-    <I> boolean isCollection(final I expected, final I actual);
-
-    /**
      * Get elements in the collection.
      */
     <I, O> Collection<O> findCollection(final I object);

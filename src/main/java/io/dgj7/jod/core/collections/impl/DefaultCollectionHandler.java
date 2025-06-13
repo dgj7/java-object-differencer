@@ -9,8 +9,6 @@ import io.dgj7.jod.model.delta.DeltaType;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
  * <p>
@@ -18,17 +16,6 @@ import java.util.stream.Stream;
  * </p>
  */
 public class DefaultCollectionHandler implements ICollectionHandler {
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <I> boolean isCollection(final I expected, final I actual) {
-        return Stream.of(expected, actual)
-                .filter(Objects::nonNull)
-                .map(Object::getClass)
-                .allMatch(Collection.class::isAssignableFrom);
-    }
-
     /**
      * {@inheritDoc}
      */

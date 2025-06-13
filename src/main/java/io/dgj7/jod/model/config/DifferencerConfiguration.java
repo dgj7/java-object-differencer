@@ -1,6 +1,8 @@
 package io.dgj7.jod.model.config;
 
 import io.dgj7.jod.core.collections.ICollectionHandler;
+import io.dgj7.jod.core.collections.id.ICollectionIdentifier;
+import io.dgj7.jod.core.collections.id.impl.DefaultCollectionIdentifier;
 import io.dgj7.jod.core.collections.impl.DefaultCollectionHandler;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.diff.IObjectGraphRecursor;
@@ -40,6 +42,8 @@ public class DifferencerConfiguration {
     @Getter
     private BiPredicate<Object, Object> equalsTester;
     @Getter
+    private ICollectionIdentifier collectionIdentifier;
+    @Getter
     private ICollectionHandler collectionHandler;
     @Getter
     private IMapHandler mapHandler;
@@ -77,6 +81,7 @@ public class DifferencerConfiguration {
         private static final IReflection DEFAULT_REFLECTION = new DefaultReflectionImpl();
         private static final IShouldRecursePredicate DEFAULT_RECURSE = new DefaultShouldRecursePredicate();
         private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new DefaultEqualsTester();
+        private static final ICollectionIdentifier DEFAULT_COLLECTION_IDENTIFIER = new DefaultCollectionIdentifier();
         private static final ICollectionHandler DEFAULT_COLLECTION_HANDLER = new DefaultCollectionHandler();
         private static final IMapHandler DEFAULT_MAP_HANDLER = new DefaultMapHandler();
         private static final IEnumHandler DEFAULT_ENUM_HANDLER = new DefaultEnumHandler();
@@ -89,6 +94,7 @@ public class DifferencerConfiguration {
         private IReflection theReflection;
         private IShouldRecursePredicate theShouldRecursePredicate;
         private BiPredicate<Object, Object> theEqualsTester;
+        private ICollectionIdentifier theCollectionIdentifier;
         private ICollectionHandler theCollectionHandler;
         private IMapHandler theMapHandler;
         private IEnumHandler theEnumHandler;
@@ -119,6 +125,14 @@ public class DifferencerConfiguration {
          */
         public DiffConfigBuilder withEqualsTester(final BiPredicate<Object, Object> input) {
             this.theEqualsTester = input;
+            return this;
+        }
+
+        /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withCollectionIdentifier(final ICollectionIdentifier input) {
+            this.theCollectionIdentifier = input;
             return this;
         }
 
@@ -195,6 +209,7 @@ public class DifferencerConfiguration {
             configuration.reflection = theReflection == null ? DEFAULT_REFLECTION : theReflection;
             configuration.shouldRecurse = theShouldRecursePredicate == null ? DEFAULT_RECURSE : theShouldRecursePredicate;
             configuration.equalsTester = theEqualsTester == null ? DEFAULT_EQUALS_TESTER : theEqualsTester;
+            configuration.collectionIdentifier = theCollectionIdentifier == null ? DEFAULT_COLLECTION_IDENTIFIER : theCollectionIdentifier;
             configuration.collectionHandler = theCollectionHandler == null ? DEFAULT_COLLECTION_HANDLER : theCollectionHandler;
             configuration.mapHandler = theMapHandler == null ? DEFAULT_MAP_HANDLER : theMapHandler;
             configuration.enumHandler = theEnumHandler == null ? DEFAULT_ENUM_HANDLER : theEnumHandler;
