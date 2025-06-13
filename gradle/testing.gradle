@@ -24,12 +24,13 @@ def excludesArray = [
 
         'io/dgj7/jod/core/behavior/collections/diff/impl/DefaultCollectionDifferencer.class',
         'io/dgj7/jod/core/behavior/collections/diff/impl/MixedTypeCollectionDifferencer.class',
-        'io/dgj7/jod/core/behavior/diff/impl/DefaultObjectDifferencer.class',
         'io/dgj7/jod/core/behavior/maps/diff/impl/DefaultMapDifferencer.class',
         'io/dgj7/jod/core/behavior/nulls/impl/DefaultNullHandler.class',
         'io/dgj7/jod/core/behavior/path/impl/DefaultRootPathProvider.class',
         'io/dgj7/jod/core/behavior/reflect/transform/impl/DefaultFieldTransformer.class',
         'io/dgj7/jod/core/behavior/reflect/fields/impl/DefaultFieldsEnumerator.class',
+
+        'io/dgj7/jod/core/diff/impl/DefaultObjectDifferencer.class',
 ]
 
 jacoco {

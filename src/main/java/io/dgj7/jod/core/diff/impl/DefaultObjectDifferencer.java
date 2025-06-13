@@ -1,9 +1,9 @@
-package io.dgj7.jod.core.behavior.diff.impl;
+package io.dgj7.jod.core.diff.impl;
 
 import io.dgj7.jod.core.behavior.collections.detect.ICollectionDetector;
 import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.transform.ICollectionTransformer;
-import io.dgj7.jod.core.behavior.diff.IObjectDifferencer;
+import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.behavior.enumerations.IEnumDetector;
 import io.dgj7.jod.core.behavior.maps.detect.IMapDetector;
 import io.dgj7.jod.core.behavior.maps.diff.IMapDifferencer;
@@ -40,8 +40,8 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         final IEnumDetector ed = config.getEnumDetector();
         final INullHandler nh = config.getNullHandler();
         final BiPredicate<Object, Object> et = config.getEqualsTester();
-        final IShouldRecursePredicate srp = config.getShouldRecurse();
-        final IObjectGraphRecursor ogr = config.getRecursor();
+        final IShouldRecursePredicate srp = config.getShouldRecursePredicate();
+        final IObjectGraphRecursor ogr = config.getObjectGraphRecursor();
 
         if (expected == null || actual == null) {
             nh.handleNulls(config, path, deltas, expected, actual);

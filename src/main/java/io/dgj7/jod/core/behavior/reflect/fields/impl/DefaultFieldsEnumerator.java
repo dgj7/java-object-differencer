@@ -24,7 +24,7 @@ public class DefaultFieldsEnumerator implements IFieldsEnumerator {
     public <I> List<Field> fields(final DifferencerConfiguration config, final I pInput) {
         final I input = Objects.requireNonNull(pInput, "Input(I) is null");
 
-        final IShouldRecursePredicate srp = config.getShouldRecurse();
+        final IShouldRecursePredicate srp = config.getShouldRecursePredicate();
         final EquatableThings et = config.getEquatableThings();
 
         final List<Field> fields = new LinkedList<>();

@@ -1,6 +1,6 @@
 package io.dgj7.jod.core.behavior.recurse.action.impl;
 
-import io.dgj7.jod.core.behavior.diff.IObjectDifferencer;
+import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.behavior.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.behavior.reflect.fields.IFieldsEnumerator;
 import io.dgj7.jod.core.behavior.reflect.transform.IFieldTransformer;

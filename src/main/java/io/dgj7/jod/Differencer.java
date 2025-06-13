@@ -1,6 +1,6 @@
 package io.dgj7.jod;
 
-import io.dgj7.jod.core.behavior.diff.IObjectDifferencer;
+import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.behavior.nulls.INullHandler;
 import io.dgj7.jod.core.behavior.path.IRootPathProvider;
 import io.dgj7.jod.core.md.AbstractMetaData;

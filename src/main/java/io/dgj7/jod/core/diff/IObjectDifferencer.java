@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.behavior.diff;
+package io.dgj7.jod.core.diff;
 
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
@@ -8,6 +8,9 @@ import java.util.List;
 /**
  * <p>
  * Diff two objects.
+ * </p>
+ * <p>
+ * This needs to be it's own object because it's called from multiple clients.
  * </p>
  */
 public interface IObjectDifferencer {

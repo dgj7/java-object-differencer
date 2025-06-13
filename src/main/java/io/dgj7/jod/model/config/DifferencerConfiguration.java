@@ -6,8 +6,8 @@ import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.diff.impl.DefaultCollectionDifferencer;
 import io.dgj7.jod.core.behavior.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.behavior.collections.transform.impl.DefaultCollectionTransformer;
-import io.dgj7.jod.core.behavior.diff.IObjectDifferencer;
-import io.dgj7.jod.core.behavior.diff.impl.DefaultObjectDifferencer;
+import io.dgj7.jod.core.diff.IObjectDifferencer;
+import io.dgj7.jod.core.diff.impl.DefaultObjectDifferencer;
 import io.dgj7.jod.core.behavior.enumerations.IEnumDetector;
 import io.dgj7.jod.core.behavior.enumerations.impl.DefaultEnumDetector;
 import io.dgj7.jod.core.behavior.equals.DefaultEqualsTester;
@@ -52,7 +52,7 @@ public class DifferencerConfiguration {
     @Getter
     private IFieldTransformer fieldTransformer;
     @Getter
-    private IShouldRecursePredicate shouldRecurse;
+    private IShouldRecursePredicate shouldRecursePredicate;
     @Getter
     private BiPredicate<Object, Object> equalsTester;
     @Getter
@@ -72,13 +72,15 @@ public class DifferencerConfiguration {
     @Getter
     private IRootPathProvider rootPathProvider;
     @Getter
-    private IObjectDifferencer objectDifferencer;
-    @Getter
     private INullHandler nullHandler;
     @Getter
     private IMetaDataFactory<? extends AbstractMetaData> metaDataFactory;
     @Getter
-    private IObjectGraphRecursor recursor;
+    private IObjectGraphRecursor objectGraphRecursor;
+
+    @Getter
+    private IObjectDifferencer objectDifferencer;
+
     @Getter
     private EquatableThings equatableThings;
 
@@ -103,7 +105,7 @@ public class DifferencerConfiguration {
         private static final IFieldsEnumerator DEFAULT_FIELDS_ENUMERATOR = new DefaultFieldsEnumerator();
         private static final IFieldFinder DEFAULT_FIELD_FINDER = new DefaultFieldFinder();
         private static final IFieldTransformer DEFAULT_FIELD_TRANSFORMER = new DefaultFieldTransformer();
-        private static final IShouldRecursePredicate DEFAULT_RECURSE = new DefaultShouldRecursePredicate();
+        private static final IShouldRecursePredicate DEFAULT_SHOULD_RECURSE_PREDICATE = new DefaultShouldRecursePredicate();
         private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new DefaultEqualsTester();
         private static final ICollectionDetector DEFAULT_COLLECTION_DETECTOR = new DefaultCollectionDetector();
         private static final ICollectionTransformer DEFAULT_COLLECTION_TRANSFORMER = new DefaultCollectionTransformer();
@@ -113,11 +115,13 @@ public class DifferencerConfiguration {
         private static final IMapDifferencer DEFAULT_MAP_HANDLER = new DefaultMapDifferencer();
         private static final IEnumDetector DEFAULT_ENUM_DETECTOR = new DefaultEnumDetector();
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
-        private static final IObjectDifferencer DEFAULT_OBJECT_DIFFERENCER = new DefaultObjectDifferencer();
         private static final INullHandler DEFAULT_NULL_HANDLER = new DefaultNullHandler();
         private static final IMetaDataFactory<? extends AbstractMetaData> DEFAULT_META_DATA_FACTORY = new DefaultMetaDataFactory();
-        private static final IObjectGraphRecursor DEFAULT_RECURSOR = new DefaultObjectGraphRecursor();
+        private static final IObjectGraphRecursor DEFAULT_OBJECT_GRAPH_RECURSOR = new DefaultObjectGraphRecursor();
+
         private static final EquatableThings DEFAULT_EQUATABLE_THINGS = EquatableThings.createDefault();
+
+        private static final IObjectDifferencer DEFAULT_OBJECT_DIFFERENCER = new DefaultObjectDifferencer();
 
         private IFieldsEnumerator theFieldsEnumerator;
         private IFieldFinder theFieldFinder;
@@ -132,11 +136,13 @@ public class DifferencerConfiguration {
         private IMapDifferencer theMapDifferencer;
         private IEnumDetector theEnumDetector;
         private IRootPathProvider theRootPathProvider;
-        private IObjectDifferencer theObjectDifferencer;
         private INullHandler theNullHandler;
         private IMetaDataFactory<? extends AbstractMetaData> theMetaDataFactory;
-        private IObjectGraphRecursor theRecursor;
+        private IObjectGraphRecursor theObjectGraphRecursor;
+
         private EquatableThings theEquatableThings;
+
+        private IObjectDifferencer theObjectDifferencer;
 
         /**
          * Feed the builder.
@@ -245,14 +251,6 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withObjectDifferencer(final IObjectDifferencer input) {
-            this.theObjectDifferencer = input;
-            return this;
-        }
-
-        /**
-         * Feed the builder.
-         */
         public DiffConfigBuilder withNullHandler(final INullHandler input) {
             this.theNullHandler = input;
             return this;
@@ -270,7 +268,15 @@ public class DifferencerConfiguration {
          * Feed the builder.
          */
         public DiffConfigBuilder withObjectGraphRecursor(final IObjectGraphRecursor input) {
-            this.theRecursor = input;
+            this.theObjectGraphRecursor = input;
+            return this;
+        }
+
+        /**
+         * Feed the builder.
+         */
+        public DiffConfigBuilder withObjectDifferencer(final IObjectDifferencer input) {
+            this.theObjectDifferencer = input;
             return this;
         }
 
@@ -291,7 +297,7 @@ public class DifferencerConfiguration {
             configuration.fieldsEnumerator = theFieldsEnumerator == null ? DEFAULT_FIELDS_ENUMERATOR : theFieldsEnumerator;
             configuration.fieldFinder = theFieldFinder == null ? DEFAULT_FIELD_FINDER : theFieldFinder;
             configuration.fieldTransformer = theFieldTransformer == null ? DEFAULT_FIELD_TRANSFORMER : theFieldTransformer;
-            configuration.shouldRecurse = theShouldRecursePredicate == null ? DEFAULT_RECURSE : theShouldRecursePredicate;
+            configuration.shouldRecursePredicate = theShouldRecursePredicate == null ? DEFAULT_SHOULD_RECURSE_PREDICATE : theShouldRecursePredicate;
             configuration.equalsTester = theEqualsTester == null ? DEFAULT_EQUALS_TESTER : theEqualsTester;
             configuration.collectionDetector = theCollectionDetector == null ? DEFAULT_COLLECTION_DETECTOR : theCollectionDetector;
             configuration.collectionTransformer = theCollectionTransformer == null ? DEFAULT_COLLECTION_TRANSFORMER : theCollectionTransformer;
@@ -301,10 +307,12 @@ public class DifferencerConfiguration {
             configuration.mapDifferencer = theMapDifferencer == null ? DEFAULT_MAP_HANDLER : theMapDifferencer;
             configuration.enumDetector = theEnumDetector == null ? DEFAULT_ENUM_DETECTOR : theEnumDetector;
             configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
-            configuration.objectDifferencer = theObjectDifferencer == null ? DEFAULT_OBJECT_DIFFERENCER : theObjectDifferencer;
             configuration.nullHandler = theNullHandler == null ? DEFAULT_NULL_HANDLER : theNullHandler;
             configuration.metaDataFactory = theMetaDataFactory == null ? DEFAULT_META_DATA_FACTORY : theMetaDataFactory;
-            configuration.recursor = theRecursor == null ? DEFAULT_RECURSOR : theRecursor;
+            configuration.objectGraphRecursor = theObjectGraphRecursor == null ? DEFAULT_OBJECT_GRAPH_RECURSOR : theObjectGraphRecursor;
+
+            configuration.objectDifferencer = theObjectDifferencer == null ? DEFAULT_OBJECT_DIFFERENCER : theObjectDifferencer;
+
             configuration.equatableThings = theEquatableThings == null ? DEFAULT_EQUATABLE_THINGS : theEquatableThings;
 
             return configuration;
