@@ -1,8 +1,8 @@
 package io.dgj7.jod.model.config;
 
 import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
-import io.dgj7.jod.core.collections.id.ICollectionDetector;
-import io.dgj7.jod.core.collections.id.impl.DefaultCollectionDetector;
+import io.dgj7.jod.core.collections.detect.ICollectionDetector;
+import io.dgj7.jod.core.collections.detect.impl.DefaultCollectionDetector;
 import io.dgj7.jod.core.collections.diff.impl.DefaultCollectionDifferencer;
 import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.collections.transform.impl.DefaultCollectionTransformer;
@@ -14,8 +14,8 @@ import io.dgj7.jod.core.enumerations.IEnumDetector;
 import io.dgj7.jod.core.enumerations.impl.DefaultEnumDetector;
 import io.dgj7.jod.core.equals.DefaultEqualsTester;
 import io.dgj7.jod.core.maps.diff.IMapDifferencer;
-import io.dgj7.jod.core.maps.id.IMapIdentifier;
-import io.dgj7.jod.core.maps.id.impl.DefaultMapIdentifier;
+import io.dgj7.jod.core.maps.detect.IMapDetector;
+import io.dgj7.jod.core.maps.detect.impl.DefaultMapDetector;
 import io.dgj7.jod.core.maps.diff.impl.DefaultMapDifferencer;
 import io.dgj7.jod.core.maps.transform.IMapTransformer;
 import io.dgj7.jod.core.maps.transform.impl.DefaultMapTransformer;
@@ -54,7 +54,7 @@ public class DifferencerConfiguration {
     @Getter
     private ICollectionDifferencer collectionDifferencer;
     @Getter
-    private IMapIdentifier mapIdentifier;
+    private IMapDetector mapDetector;
     @Getter
     private IMapTransformer mapTransformer;
     @Getter
@@ -96,7 +96,7 @@ public class DifferencerConfiguration {
         private static final ICollectionDetector DEFAULT_COLLECTION_DETECTOR = new DefaultCollectionDetector();
         private static final ICollectionTransformer DEFAULT_COLLECTION_TRANSFORMER = new DefaultCollectionTransformer();
         private static final ICollectionDifferencer DEFAULT_COLLECTION_HANDLER = new DefaultCollectionDifferencer();
-        private static final IMapIdentifier DEFAULT_MAP_IDENTIFIER = new DefaultMapIdentifier();
+        private static final IMapDetector DEFAULT_MAP_DETECTOR = new DefaultMapDetector();
         private static final IMapTransformer DEFAULT_MAP_TRANSFORMER = new DefaultMapTransformer();
         private static final IMapDifferencer DEFAULT_MAP_HANDLER = new DefaultMapDifferencer();
         private static final IEnumDetector DEFAULT_ENUM_DETECTOR = new DefaultEnumDetector();
@@ -112,7 +112,7 @@ public class DifferencerConfiguration {
         private ICollectionDetector theCollectionDetector;
         private ICollectionTransformer theCollectionTransformer;
         private ICollectionDifferencer theCollectionHandler;
-        private IMapIdentifier theMapIdentifier;
+        private IMapDetector theMapDetector;
         private IMapTransformer theMapTransformer;
         private IMapDifferencer theMapDifferencer;
         private IEnumDetector theEnumDetector;
@@ -173,8 +173,8 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withMapIdentifier(final IMapIdentifier input) {
-            this.theMapIdentifier = input;
+        public DiffConfigBuilder withMapDetector(final IMapDetector input) {
+            this.theMapDetector = input;
             return this;
         }
 
@@ -254,7 +254,7 @@ public class DifferencerConfiguration {
             configuration.collectionDetector = theCollectionDetector == null ? DEFAULT_COLLECTION_DETECTOR : theCollectionDetector;
             configuration.collectionTransformer = theCollectionTransformer == null ? DEFAULT_COLLECTION_TRANSFORMER : theCollectionTransformer;
             configuration.collectionDifferencer = theCollectionHandler == null ? DEFAULT_COLLECTION_HANDLER : theCollectionHandler;
-            configuration.mapIdentifier = theMapIdentifier == null ? DEFAULT_MAP_IDENTIFIER : theMapIdentifier;
+            configuration.mapDetector = theMapDetector == null ? DEFAULT_MAP_DETECTOR : theMapDetector;
             configuration.mapTransformer = theMapTransformer == null ? DEFAULT_MAP_TRANSFORMER : theMapTransformer;
             configuration.mapDifferencer = theMapDifferencer == null ? DEFAULT_MAP_HANDLER : theMapDifferencer;
             configuration.enumDetector = theEnumDetector == null ? DEFAULT_ENUM_DETECTOR : theEnumDetector;

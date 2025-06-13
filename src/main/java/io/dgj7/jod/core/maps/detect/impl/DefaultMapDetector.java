@@ -1,6 +1,6 @@
-package io.dgj7.jod.core.maps.id.impl;
+package io.dgj7.jod.core.maps.detect.impl;
 
-import io.dgj7.jod.core.maps.id.IMapIdentifier;
+import io.dgj7.jod.core.maps.detect.IMapDetector;
 
 import java.util.Map;
 import java.util.Objects;
@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 
 /**
  * <p>
- * Default {@link IMapIdentifier}.
+ * Default {@link IMapDetector}.
  * </p>
  */
-public class DefaultMapIdentifier implements IMapIdentifier {
+public class DefaultMapDetector implements IMapDetector {
     /**
      * {@inheritDoc}
      */

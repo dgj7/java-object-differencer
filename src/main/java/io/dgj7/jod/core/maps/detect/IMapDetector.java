@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.maps.id;
+package io.dgj7.jod.core.maps.detect;
 
 import java.util.Map;
 
@@ -7,7 +7,7 @@ import java.util.Map;
  * Determine if a given object is a {@link Map}.
  * </p>
  */
-public interface IMapIdentifier {
+public interface IMapDetector {
     /**
      * Determine if the given object is a map.
      */

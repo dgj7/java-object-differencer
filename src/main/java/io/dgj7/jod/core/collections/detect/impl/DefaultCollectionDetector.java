@@ -1,6 +1,6 @@
-package io.dgj7.jod.core.collections.id.impl;
+package io.dgj7.jod.core.collections.detect.impl;
 
-import io.dgj7.jod.core.collections.id.ICollectionDetector;
+import io.dgj7.jod.core.collections.detect.ICollectionDetector;
 
 import java.util.Collection;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.collections.id;
+package io.dgj7.jod.core.collections.detect;
 
 /**
  * <p>

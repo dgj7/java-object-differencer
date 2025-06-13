@@ -1,13 +1,13 @@
 package io.dgj7.jod.core.diff.impl;
 
 import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
-import io.dgj7.jod.core.collections.id.ICollectionDetector;
+import io.dgj7.jod.core.collections.detect.ICollectionDetector;
 import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.enumerations.IEnumDetector;
 import io.dgj7.jod.core.maps.diff.IMapDifferencer;
-import io.dgj7.jod.core.maps.id.IMapIdentifier;
+import io.dgj7.jod.core.maps.detect.IMapDetector;
 import io.dgj7.jod.core.maps.transform.IMapTransformer;
 import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
@@ -34,9 +34,9 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         final ICollectionDetector cd = config.getCollectionDetector();
         final ICollectionTransformer ct = config.getCollectionTransformer();
         final ICollectionDifferencer cdf = config.getCollectionDifferencer();
-        final IMapIdentifier mi = config.getMapIdentifier();
+        final IMapDetector md = config.getMapDetector();
         final IMapTransformer mt = config.getMapTransformer();
-        final IMapDifferencer md = config.getMapDifferencer();
+        final IMapDifferencer mdf = config.getMapDifferencer();
         final IEnumDetector ed = config.getEnumDetector();
         final INullHandler nh = config.getNullHandler();
         final BiPredicate<Object, Object> et = config.getEqualsTester();
@@ -53,10 +53,10 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
             final Collection<Object> expectedCollection = ct.objectToCollection(expected);
             final Collection<Object> actualCollection = ct.objectToCollection(actual);
             cdf.diffCollections(config, deltas, path, expectedCollection, actualCollection);
-        } else if (mi.isMap(expected, actual)) {
+        } else if (md.isMap(expected, actual)) {
             final Map<Object, Object> expectedMap = mt.objectToMap(expected);
             final Map<Object, Object> actualMap = mt.objectToMap(actual);
-            md.diffMaps(config, deltas, path, expectedMap, actualMap);
+            mdf.diffMaps(config, deltas, path, expectedMap, actualMap);
         } else if (srp.test(config, expected, actual)) {
             ogr.diffRecurse(config, deltas, path, expected, actual);
         } else if (!et.test(expected, actual)) {
