@@ -10,7 +10,7 @@ package io.dgj7.jod.core.collections.id;
  * needs.
  * </p>
  */
-public interface ICollectionIdentifier {
+public interface ICollectionDetector {
     /**
      * Determine if the given object is a collection.
      */

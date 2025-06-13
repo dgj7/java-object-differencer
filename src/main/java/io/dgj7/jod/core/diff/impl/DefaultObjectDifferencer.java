@@ -1,7 +1,7 @@
 package io.dgj7.jod.core.diff.impl;
 
 import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
-import io.dgj7.jod.core.collections.id.ICollectionIdentifier;
+import io.dgj7.jod.core.collections.id.ICollectionDetector;
 import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
@@ -31,9 +31,9 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
      */
     @Override
     public <T> void diffObjects(final DifferencerConfiguration config, final List<Delta> deltas, final String path, final T expected, final T actual) {
-        final ICollectionIdentifier ci = config.getCollectionIdentifier();
+        final ICollectionDetector cd = config.getCollectionDetector();
         final ICollectionTransformer ct = config.getCollectionTransformer();
-        final ICollectionDifferencer cd = config.getCollectionDifferencer();
+        final ICollectionDifferencer cdf = config.getCollectionDifferencer();
         final IMapIdentifier mi = config.getMapIdentifier();
         final IMapTransformer mt = config.getMapTransformer();
         final IMapDifferencer md = config.getMapDifferencer();
@@ -49,10 +49,10 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
             if (!et.test(expected, actual)) {
                 deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
             }
-        } else if (ci.isCollection(expected, actual)) {
+        } else if (cd.isCollection(expected, actual)) {
             final Collection<Object> expectedCollection = ct.objectToCollection(expected);
             final Collection<Object> actualCollection = ct.objectToCollection(actual);
-            cd.diffCollections(config, deltas, path, expectedCollection, actualCollection);
+            cdf.diffCollections(config, deltas, path, expectedCollection, actualCollection);
         } else if (mi.isMap(expected, actual)) {
             final Map<Object, Object> expectedMap = mt.objectToMap(expected);
             final Map<Object, Object> actualMap = mt.objectToMap(actual);

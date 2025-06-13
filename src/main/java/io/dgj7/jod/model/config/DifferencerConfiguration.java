@@ -1,8 +1,8 @@
 package io.dgj7.jod.model.config;
 
 import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
-import io.dgj7.jod.core.collections.id.ICollectionIdentifier;
-import io.dgj7.jod.core.collections.id.impl.DefaultCollectionIdentifier;
+import io.dgj7.jod.core.collections.id.ICollectionDetector;
+import io.dgj7.jod.core.collections.id.impl.DefaultCollectionDetector;
 import io.dgj7.jod.core.collections.diff.impl.DefaultCollectionDifferencer;
 import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.collections.transform.impl.DefaultCollectionTransformer;
@@ -48,7 +48,7 @@ public class DifferencerConfiguration {
     @Getter
     private BiPredicate<Object, Object> equalsTester;
     @Getter
-    private ICollectionIdentifier collectionIdentifier;
+    private ICollectionDetector collectionDetector;
     @Getter
     private ICollectionTransformer collectionTransformer;
     @Getter
@@ -93,7 +93,7 @@ public class DifferencerConfiguration {
         private static final IReflection DEFAULT_REFLECTION = new DefaultReflectionImpl();
         private static final IShouldRecursePredicate DEFAULT_RECURSE = new DefaultShouldRecursePredicate();
         private static final BiPredicate<Object, Object> DEFAULT_EQUALS_TESTER = new DefaultEqualsTester();
-        private static final ICollectionIdentifier DEFAULT_COLLECTION_IDENTIFIER = new DefaultCollectionIdentifier();
+        private static final ICollectionDetector DEFAULT_COLLECTION_DETECTOR = new DefaultCollectionDetector();
         private static final ICollectionTransformer DEFAULT_COLLECTION_TRANSFORMER = new DefaultCollectionTransformer();
         private static final ICollectionDifferencer DEFAULT_COLLECTION_HANDLER = new DefaultCollectionDifferencer();
         private static final IMapIdentifier DEFAULT_MAP_IDENTIFIER = new DefaultMapIdentifier();
@@ -109,7 +109,7 @@ public class DifferencerConfiguration {
         private IReflection theReflection;
         private IShouldRecursePredicate theShouldRecursePredicate;
         private BiPredicate<Object, Object> theEqualsTester;
-        private ICollectionIdentifier theCollectionIdentifier;
+        private ICollectionDetector theCollectionDetector;
         private ICollectionTransformer theCollectionTransformer;
         private ICollectionDifferencer theCollectionHandler;
         private IMapIdentifier theMapIdentifier;
@@ -149,8 +149,8 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withCollectionIdentifier(final ICollectionIdentifier input) {
-            this.theCollectionIdentifier = input;
+        public DiffConfigBuilder withCollectionDetector(final ICollectionDetector input) {
+            this.theCollectionDetector = input;
             return this;
         }
 
@@ -251,7 +251,7 @@ public class DifferencerConfiguration {
             configuration.reflection = theReflection == null ? DEFAULT_REFLECTION : theReflection;
             configuration.shouldRecurse = theShouldRecursePredicate == null ? DEFAULT_RECURSE : theShouldRecursePredicate;
             configuration.equalsTester = theEqualsTester == null ? DEFAULT_EQUALS_TESTER : theEqualsTester;
-            configuration.collectionIdentifier = theCollectionIdentifier == null ? DEFAULT_COLLECTION_IDENTIFIER : theCollectionIdentifier;
+            configuration.collectionDetector = theCollectionDetector == null ? DEFAULT_COLLECTION_DETECTOR : theCollectionDetector;
             configuration.collectionTransformer = theCollectionTransformer == null ? DEFAULT_COLLECTION_TRANSFORMER : theCollectionTransformer;
             configuration.collectionDifferencer = theCollectionHandler == null ? DEFAULT_COLLECTION_HANDLER : theCollectionHandler;
             configuration.mapIdentifier = theMapIdentifier == null ? DEFAULT_MAP_IDENTIFIER : theMapIdentifier;
