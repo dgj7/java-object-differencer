@@ -28,8 +28,8 @@ def excludesArray = [
         'io/dgj7/jod/core/behavior/maps/diff/impl/DefaultMapDifferencer.class',
         'io/dgj7/jod/core/behavior/nulls/impl/DefaultNullHandler.class',
         'io/dgj7/jod/core/behavior/path/impl/DefaultRootPathProvider.class',
-
         'io/dgj7/jod/core/behavior/reflect/transform/impl/DefaultFieldTransformer.class',
+        'io/dgj7/jod/core/behavior/reflect/fields/impl/DefaultFieldsEnumerator.class',
 ]
 
 jacoco {
