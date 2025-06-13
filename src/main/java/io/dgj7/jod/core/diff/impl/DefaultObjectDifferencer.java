@@ -14,7 +14,9 @@ import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiPredicate;
 
 /**
@@ -47,9 +49,13 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
                 deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
             }
         } else if (ci.isCollection(expected, actual)) {
-            cd.diffCollections(config, deltas, path, ct.objectToCollection(expected), ct.objectToCollection(actual));
+            final Collection<Object> expectedCollection = ct.objectToCollection(expected);
+            final Collection<Object> actualCollection = ct.objectToCollection(actual);
+            cd.diffCollections(config, deltas, path, expectedCollection, actualCollection);
         } else if (mi.isMap(expected, actual)) {
-            mh.diffMaps(config, deltas, path, mh.findAllElements(expected), mh.findAllElements(actual));
+            final Map<Object, Object> expectedMap = mh.findAllElements(expected);
+            final Map<Object, Object> actualMap = mh.findAllElements(actual);
+            mh.diffMaps(config, deltas, path, expectedMap, actualMap);
         } else if (srp.test(config, expected, actual)) {
             ogr.diffRecurse(config, deltas, path, expected, actual);
         } else if (!et.test(expected, actual)) {

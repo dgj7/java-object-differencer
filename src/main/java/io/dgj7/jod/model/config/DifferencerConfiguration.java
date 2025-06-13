@@ -159,8 +159,7 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        // todo: rename this
-        public DiffConfigBuilder withCollectionHandler(final ICollectionDifferencer input) {
+        public DiffConfigBuilder withCollectionDifferencer(final ICollectionDifferencer input) {
             this.theCollectionHandler = input;
             return this;
         }
@@ -176,8 +175,7 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        // todo: rename this
-        public DiffConfigBuilder withMapHandler(final IMapHandler input) {
+        public DiffConfigBuilder withMapDifferencer(final IMapHandler input) {
             this.theMapHandler = input;
             return this;
         }

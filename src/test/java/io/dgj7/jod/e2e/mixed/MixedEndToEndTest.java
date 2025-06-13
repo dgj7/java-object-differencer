@@ -75,7 +75,7 @@ public class MixedEndToEndTest {
                 .append(x.getDerivedStringValue(), y.getDerivedStringValue())
                 .isEquals());
         final DifferencerConfiguration config = DifferencerConfiguration.builder()
-                .withCollectionHandler(new MixedTypeCollectionDifferencer(map, Object::equals))
+                .withCollectionDifferencer(new MixedTypeCollectionDifferencer(map, Object::equals))
                 .build();
 
         final MixedListOwnerType expected = MixedFactory.create(ScenarioVersion.EXPECTED);
