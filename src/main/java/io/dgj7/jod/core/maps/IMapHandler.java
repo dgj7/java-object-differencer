@@ -13,11 +13,6 @@ import java.util.Map;
  */
 public interface IMapHandler {
     /**
-     * Determine if the given object is a map.
-     */
-    <I> boolean isMap(final I expected, final I actual);
-
-    /**
      * Get elements in the map.
      */
     <K, V> Map<K, V> findAllElements(final Object object);
