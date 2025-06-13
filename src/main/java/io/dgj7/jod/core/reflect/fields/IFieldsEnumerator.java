@@ -1,6 +1,6 @@
 package io.dgj7.jod.core.reflect.fields;
 
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 
 import java.lang.reflect.Field;
 import java.util.List;

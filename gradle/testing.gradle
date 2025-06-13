@@ -13,9 +13,8 @@ def includesArray = [
 def excludesArray = [
         // todo: check if we need these listed here
         /* probably don't need to test these */
-        'io/dgj7/jod/model/exc/ReflectionException.class',
-        'io/dgj7/jod/model/delta/Delta.class',
-        'io/dgj7/jod/config/DifferencerConfiguration$DiffConfigBuilder.class',
+        'io/dgj7/jod/model/**/*.class',
+        'io/dgj7/jod/DifferencerConfiguration$DiffConfigBuilder.class',
 
         // todo: eliminate these
         'io/dgj7/jod/Differencer.class',

@@ -1,4 +1,4 @@
-package io.dgj7.jod.config;
+package io.dgj7.jod.model.eq;
 
 import io.dgj7.jod.pattern.builder.Builder;
 import lombok.Getter;

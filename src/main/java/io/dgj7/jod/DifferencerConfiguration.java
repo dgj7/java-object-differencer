@@ -1,4 +1,4 @@
-package io.dgj7.jod.config;
+package io.dgj7.jod;
 
 import io.dgj7.jod.core.collections.detect.ICollectionDetector;
 import io.dgj7.jod.core.collections.detect.impl.DefaultCollectionDetector;
@@ -35,6 +35,7 @@ import io.dgj7.jod.core.reflect.transform.impl.DefaultFieldTransformer;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.metadata.impl.DefaultMetaDataFactory;
+import io.dgj7.jod.model.eq.EquatableThings;
 import io.dgj7.jod.pattern.builder.Builder;
 import lombok.Getter;
 

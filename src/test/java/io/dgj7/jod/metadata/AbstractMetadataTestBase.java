@@ -1,6 +1,6 @@
 package io.dgj7.jod.metadata;
 
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.metadata.impl.DefaultMetaDataFactory;
 import lombok.Getter;
 import lombok.Setter;

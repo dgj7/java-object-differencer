@@ -1,6 +1,6 @@
 package io.dgj7.jod.metadata;
 
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 
 import java.lang.reflect.Field;
 

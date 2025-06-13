@@ -2,8 +2,8 @@ package io.dgj7.jod.core.reflect.fields.impl;
 
 import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
-import io.dgj7.jod.config.DifferencerConfiguration;
-import io.dgj7.jod.config.EquatableThings;
+import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.model.eq.EquatableThings;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

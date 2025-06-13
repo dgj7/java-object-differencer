@@ -3,7 +3,7 @@ package io.dgj7.jod.metadata.impl;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.AbstractMetadataTestBase;
 import io.dgj7.jod.metadata.IMetaDataFactory;
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 

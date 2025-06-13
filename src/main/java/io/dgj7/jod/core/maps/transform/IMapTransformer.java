@@ -1,6 +1,6 @@
 package io.dgj7.jod.core.maps.transform;
 
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 
 import java.util.Map;
 

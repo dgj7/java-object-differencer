@@ -1,6 +1,6 @@
 package io.dgj7.jod.core.equals;
 
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import java.util.function.BiPredicate;

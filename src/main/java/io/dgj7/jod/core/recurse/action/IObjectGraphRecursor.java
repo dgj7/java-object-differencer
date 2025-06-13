@@ -1,6 +1,6 @@
 package io.dgj7.jod.core.recurse.action;
 
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 
 import java.util.List;

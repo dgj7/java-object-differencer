@@ -1,6 +1,6 @@
 package io.dgj7.jod.core.recurse.predicate;
 
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 
 /**
  * <p>

@@ -1,7 +1,7 @@
 package io.dgj7.jod.core.collections.detect.impl;
 
 import io.dgj7.jod.core.collections.detect.ICollectionDetector;
-import io.dgj7.jod.config.DifferencerConfiguration;
+import io.dgj7.jod.DifferencerConfiguration;
 
 import java.util.Collection;
 import java.util.Objects;

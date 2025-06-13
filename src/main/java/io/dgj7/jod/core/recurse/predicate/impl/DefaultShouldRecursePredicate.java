@@ -3,8 +3,8 @@ package io.dgj7.jod.core.recurse.predicate.impl;
 import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
-import io.dgj7.jod.config.DifferencerConfiguration;
-import io.dgj7.jod.config.EquatableThings;
+import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.model.eq.EquatableThings;
 
 import java.util.Optional;
 import java.util.function.Predicate;
