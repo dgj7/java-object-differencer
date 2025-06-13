@@ -1,6 +1,6 @@
 package io.dgj7.jod.core.reflect.impl;
 
-import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
+import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.core.reflect.IReflection;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.exc.ReflectionException;

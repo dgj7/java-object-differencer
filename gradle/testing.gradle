@@ -19,18 +19,17 @@ def excludesArray = [
         'io/dgj7/jod/model/exc/ReflectionException.class',
         'io/dgj7/jod/model/delta/Delta.class',
 
-        'io/dgj7/jod/core/collections/diff/impl/DefaultCollectionDifferencer.class',
-        'io/dgj7/jod/core/collections/diff/impl/MixedTypeCollectionDifferencer.class',
-
-        'io/dgj7/jod/core/diff/impl/DefaultObjectDifferencer.class',
-
-
-        'io/dgj7/jod/core/reflect/impl/DefaultReflectionImpl.class',
-        'io/dgj7/jod/core/maps/diff/impl/DefaultMapDifferencer.class',
         'io/dgj7/jod/core/md/impl/DefaultMetaDataFactory.class',
         'io/dgj7/jod/core/md/impl/DefaultMetaDataFactory$DefaultMetaData.class',
-        'io/dgj7/jod/core/nulls/impl/DefaultNullHandler.class',
-        'io/dgj7/jod/core/path/impl/DefaultRootPathProvider.class',
+
+        'io/dgj7/jod/core/behavior/collections/diff/impl/DefaultCollectionDifferencer.class',
+        'io/dgj7/jod/core/behavior/collections/diff/impl/MixedTypeCollectionDifferencer.class',
+        'io/dgj7/jod/core/behavior/diff/impl/DefaultObjectDifferencer.class',
+        'io/dgj7/jod/core/behavior/maps/diff/impl/DefaultMapDifferencer.class',
+        'io/dgj7/jod/core/behavior/nulls/impl/DefaultNullHandler.class',
+        'io/dgj7/jod/core/behavior/path/impl/DefaultRootPathProvider.class',
+
+        'io/dgj7/jod/core/reflect/impl/DefaultReflectionImpl.class',
 ]
 
 jacoco {
