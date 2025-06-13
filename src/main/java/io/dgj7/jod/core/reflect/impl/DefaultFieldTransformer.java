@@ -1,6 +1,6 @@
 package io.dgj7.jod.core.reflect.impl;
 
-import io.dgj7.jod.core.reflect.IReflection;
+import io.dgj7.jod.core.reflect.IFieldTransformer;
 import io.dgj7.jod.model.exc.ReflectionException;
 
 import java.lang.reflect.Field;
@@ -8,15 +8,15 @@ import java.util.Objects;
 
 /**
  * <p>
- * Default IReflect} implementation for the library.
+ * Default {@link IFieldTransformer}.
  * </p>
  */
-public class DefaultReflectionImpl implements IReflection {
+public class DefaultFieldTransformer implements IFieldTransformer {
     /**
      * {@inheritDoc}
      */
     @Override
-    public <I> Object fieldTo(final Field pField, final I input) {
+    public <I> Object fieldToObject(final Field pField, final I input) {
         /* null check */
         if (input == null) {
             return null;

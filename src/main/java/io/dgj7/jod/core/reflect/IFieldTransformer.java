@@ -1,10 +1,6 @@
 package io.dgj7.jod.core.reflect;
 
-import io.dgj7.jod.model.config.DifferencerConfiguration;
-
 import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * <p>
@@ -15,9 +11,9 @@ import java.util.Optional;
  * their own reflection methods, if desired.
  * </p>
  */
-public interface IReflection {
+public interface IFieldTransformer {
     /**
      * Map field on input I to Object.
      */
-    <I> Object fieldTo(final Field field, final I input);
+    <I> Object fieldToObject(final Field field, final I input);
 }
