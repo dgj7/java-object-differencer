@@ -1,20 +1,18 @@
-package io.dgj7.jod.core.maps.impl;
+package io.dgj7.jod.core.maps.diff.impl;
 
 import io.dgj7.jod.core.diff.IObjectDifferencer;
-import io.dgj7.jod.core.maps.IMapHandler;
+import io.dgj7.jod.core.maps.diff.IMapDifferencer;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
- * Default {@link IMapHandler}.
+ * Default {@link IMapDifferencer}.
  */
-public class DefaultMapHandler implements IMapHandler {
+public class DefaultMapDifferencer implements IMapDifferencer {
     /**
      * {@inheritDoc}
      */

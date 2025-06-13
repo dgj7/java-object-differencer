@@ -1,4 +1,4 @@
-package io.dgj7.jod.core.maps;
+package io.dgj7.jod.core.maps.diff;
 
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
@@ -11,7 +11,7 @@ import java.util.Map;
  * Handle maps.
  * </p>
  */
-public interface IMapHandler {
+public interface IMapDifferencer {
     /**
      * Diff maps.
      */

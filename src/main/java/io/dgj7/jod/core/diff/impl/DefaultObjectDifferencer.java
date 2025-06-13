@@ -6,7 +6,7 @@ import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.diff.IObjectGraphRecursor;
 import io.dgj7.jod.core.enumerations.IEnumHandler;
-import io.dgj7.jod.core.maps.IMapHandler;
+import io.dgj7.jod.core.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.maps.id.IMapIdentifier;
 import io.dgj7.jod.core.maps.transform.IMapTransformer;
 import io.dgj7.jod.core.nulls.INullHandler;
@@ -33,10 +33,10 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
     public <T> void diffObjects(final DifferencerConfiguration config, final List<Delta> deltas, final String path, final T expected, final T actual) {
         final ICollectionIdentifier ci = config.getCollectionIdentifier();
         final ICollectionTransformer ct = config.getCollectionTransformer();
-        final ICollectionDifferencer cd = config.getCollectionHandler();
+        final ICollectionDifferencer cd = config.getCollectionDifferencer();
         final IMapIdentifier mi = config.getMapIdentifier();
         final IMapTransformer mt = config.getMapTransformer();
-        final IMapHandler mh = config.getMapHandler();
+        final IMapDifferencer md = config.getMapDifferencer();
         final IEnumHandler eh = config.getEnumHandler();
         final INullHandler nh = config.getNullHandler();
         final BiPredicate<Object, Object> et = config.getEqualsTester();
@@ -56,7 +56,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         } else if (mi.isMap(expected, actual)) {
             final Map<Object, Object> expectedMap = mt.objectToMap(expected);
             final Map<Object, Object> actualMap = mt.objectToMap(actual);
-            mh.diffMaps(config, deltas, path, expectedMap, actualMap);
+            md.diffMaps(config, deltas, path, expectedMap, actualMap);
         } else if (srp.test(config, expected, actual)) {
             ogr.diffRecurse(config, deltas, path, expected, actual);
         } else if (!et.test(expected, actual)) {
