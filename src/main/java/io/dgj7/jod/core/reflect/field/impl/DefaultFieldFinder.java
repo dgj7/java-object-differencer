@@ -1,7 +1,7 @@
 package io.dgj7.jod.core.reflect.field.impl;
 
 import io.dgj7.jod.core.reflect.field.IFieldFinder;
-import io.dgj7.jod.core.reflect.fields.IFieldsFinder;
+import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 import java.lang.reflect.Field;
@@ -22,9 +22,9 @@ public class DefaultFieldFinder implements IFieldFinder {
         final I input = Objects.requireNonNull(pInput, "Input(I) is null");
         final String name = Objects.requireNonNull(pName, "Name(String) is null");
 
-        final IFieldsFinder fsf = config.getFieldsFinder();
+        final IFieldsEnumerator fe = config.getFieldsEnumerator();
 
-        return fsf.fields(config, input)
+        return fe.fields(config, input)
                 .stream()
                 .filter(f -> name.equals(f.getName()))
                 .findFirst();

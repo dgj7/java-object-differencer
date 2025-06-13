@@ -10,7 +10,7 @@ import java.util.List;
  * Find all fields on an object.
  * </p>
  */
-public interface IFieldsFinder {
+public interface IFieldsEnumerator {
     /**
      * List all {@link Field}s.
      */

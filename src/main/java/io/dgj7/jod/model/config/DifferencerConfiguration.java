@@ -31,8 +31,8 @@ import io.dgj7.jod.core.behavior.recurse.predicate.impl.DefaultShouldRecursePred
 import io.dgj7.jod.core.reflect.IReflection;
 import io.dgj7.jod.core.reflect.field.IFieldFinder;
 import io.dgj7.jod.core.reflect.field.impl.DefaultFieldFinder;
-import io.dgj7.jod.core.reflect.fields.IFieldsFinder;
-import io.dgj7.jod.core.reflect.fields.impl.DefaultFieldsFinder;
+import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
+import io.dgj7.jod.core.reflect.fields.impl.DefaultFieldsEnumerator;
 import io.dgj7.jod.core.reflect.impl.DefaultReflectionImpl;
 import io.dgj7.jod.pattern.builder.Builder;
 import lombok.Getter;
@@ -46,7 +46,7 @@ import java.util.function.BiPredicate;
  */
 public class DifferencerConfiguration {
     @Getter
-    private IFieldsFinder fieldsFinder;
+    private IFieldsEnumerator fieldsEnumerator;
     @Getter
     private IFieldFinder fieldFinder;
     @Getter
@@ -98,7 +98,7 @@ public class DifferencerConfiguration {
      * Internal builder.
      */
     public static class DiffConfigBuilder implements Builder<DifferencerConfiguration> {
-        private static final IFieldsFinder DEFAULT_FIELDS_FINDER = new DefaultFieldsFinder();
+        private static final IFieldsEnumerator DEFAULT_FIELDS_ENUMERATOR = new DefaultFieldsEnumerator();
         private static final IFieldFinder DEFAULT_FIELD_FINDER = new DefaultFieldFinder();
         private static final IReflection DEFAULT_REFLECTION = new DefaultReflectionImpl();
         private static final IShouldRecursePredicate DEFAULT_RECURSE = new DefaultShouldRecursePredicate();
@@ -116,7 +116,7 @@ public class DifferencerConfiguration {
         private static final IMetaDataFactory<? extends AbstractMetaData> DEFAULT_META_DATA_FACTORY = new DefaultMetaDataFactory();
         private static final IObjectGraphRecursor DEFAULT_RECURSOR = new DefaultObjectGraphRecursor();
 
-        private IFieldsFinder theFieldsFinder;
+        private IFieldsEnumerator theFieldsEnumerator;
         private IFieldFinder theFieldFinder;
         private IReflection theReflection;
         private IShouldRecursePredicate theShouldRecursePredicate;
@@ -137,8 +137,8 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withFieldsFinder(final IFieldsFinder input) {
-            this.theFieldsFinder = input;
+        public DiffConfigBuilder withFieldsEnumerator(final IFieldsEnumerator input) {
+            this.theFieldsEnumerator = input;
             return this;
         }
 
@@ -276,7 +276,7 @@ public class DifferencerConfiguration {
         public DifferencerConfiguration build() {
             final DifferencerConfiguration configuration = new DifferencerConfiguration();
 
-            configuration.fieldsFinder = theFieldsFinder == null ? DEFAULT_FIELDS_FINDER : theFieldsFinder;
+            configuration.fieldsEnumerator = theFieldsEnumerator == null ? DEFAULT_FIELDS_ENUMERATOR : theFieldsEnumerator;
             configuration.fieldFinder = theFieldFinder == null ? DEFAULT_FIELD_FINDER : theFieldFinder;
             configuration.reflection = theReflection == null ? DEFAULT_REFLECTION : theReflection;
             configuration.shouldRecurse = theShouldRecursePredicate == null ? DEFAULT_RECURSE : theShouldRecursePredicate;

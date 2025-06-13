@@ -1,7 +1,7 @@
 package io.dgj7.jod.core.reflect.fields.impl;
 
 import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
-import io.dgj7.jod.core.reflect.fields.IFieldsFinder;
+import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
 import io.dgj7.jod.model.config.DifferencerConfiguration;
 
 import java.lang.reflect.Field;
@@ -12,10 +12,10 @@ import java.util.Objects;
 
 /**
  * <p>
- * Default {@link IFieldsFinder}.
+ * Default {@link IFieldsEnumerator}.
  * </p>
  */
-public class DefaultFieldsFinder implements IFieldsFinder {
+public class DefaultFieldsEnumerator implements IFieldsEnumerator {
     /**
      * {@inheritDoc}
      */
