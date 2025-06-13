@@ -1,11 +1,11 @@
 package io.dgj7.jod;
 
 import io.dgj7.jod.core.diff.IObjectDifferencer;
-import io.dgj7.jod.core.behavior.nulls.INullHandler;
-import io.dgj7.jod.core.behavior.path.IRootPathProvider;
-import io.dgj7.jod.core.md.AbstractMetaData;
-import io.dgj7.jod.core.md.IMetaDataFactory;
-import io.dgj7.jod.model.config.DifferencerConfiguration;
+import io.dgj7.jod.core.nulls.INullHandler;
+import io.dgj7.jod.core.path.IRootPathProvider;
+import io.dgj7.jod.metadata.AbstractMetaData;
+import io.dgj7.jod.metadata.IMetaDataFactory;
+import io.dgj7.jod.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 

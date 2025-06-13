@@ -1,0 +1,26 @@
+package io.dgj7.jod.core.maps.detect.impl;
+
+import io.dgj7.jod.core.maps.detect.IMapDetector;
+import io.dgj7.jod.config.DifferencerConfiguration;
+
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+/**
+ * <p>
+ * Default {@link IMapDetector}.
+ * </p>
+ */
+public class DefaultMapDetector implements IMapDetector {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public <I> boolean isMap(final DifferencerConfiguration config, final I expected, final I actual) {
+        return Stream.of(expected, actual)
+                .filter(Objects::nonNull)
+                .map(Object::getClass)
+                .allMatch(Map.class::isAssignableFrom);
+    }
+}

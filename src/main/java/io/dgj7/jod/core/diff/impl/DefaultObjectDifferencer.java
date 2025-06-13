@@ -1,25 +1,24 @@
 package io.dgj7.jod.core.diff.impl;
 
-import io.dgj7.jod.core.behavior.collections.detect.ICollectionDetector;
-import io.dgj7.jod.core.behavior.collections.diff.ICollectionDifferencer;
-import io.dgj7.jod.core.behavior.collections.transform.ICollectionTransformer;
-import io.dgj7.jod.core.behavior.equals.IEqualityChecker;
+import io.dgj7.jod.core.collections.detect.ICollectionDetector;
+import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
+import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
-import io.dgj7.jod.core.behavior.enumerations.IEnumDetector;
-import io.dgj7.jod.core.behavior.maps.detect.IMapDetector;
-import io.dgj7.jod.core.behavior.maps.diff.IMapDifferencer;
-import io.dgj7.jod.core.behavior.maps.transform.IMapTransformer;
-import io.dgj7.jod.core.behavior.nulls.INullHandler;
-import io.dgj7.jod.core.behavior.recurse.action.IObjectGraphRecursor;
-import io.dgj7.jod.core.behavior.recurse.predicate.IShouldRecursePredicate;
-import io.dgj7.jod.model.config.DifferencerConfiguration;
+import io.dgj7.jod.core.equals.IEqualityChecker;
+import io.dgj7.jod.core.enumerations.IEnumDetector;
+import io.dgj7.jod.core.maps.detect.IMapDetector;
+import io.dgj7.jod.core.maps.diff.IMapDifferencer;
+import io.dgj7.jod.core.maps.transform.IMapTransformer;
+import io.dgj7.jod.core.nulls.INullHandler;
+import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
+import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
+import io.dgj7.jod.config.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiPredicate;
 
 /**
  * <p>

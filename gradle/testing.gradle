@@ -11,25 +11,24 @@ def includesArray = [
         'io.dgj7.jod.*'
 ]
 def excludesArray = [
+        // todo: check if we need these listed here
+        /* probably don't need to test these */
+        'io/dgj7/jod/model/exc/ReflectionException.class',
+        'io/dgj7/jod/model/delta/Delta.class',
+        'io/dgj7/jod/config/DifferencerConfiguration$DiffConfigBuilder.class',
+
         // todo: eliminate these
         'io/dgj7/jod/Differencer.class',
 
-        'io/dgj7/jod/model/config/DifferencerConfiguration.class',
-        'io/dgj7/jod/model/config/DifferencerConfiguration$DiffConfigBuilder.class',
-        'io/dgj7/jod/model/exc/ReflectionException.class',
-        'io/dgj7/jod/model/delta/Delta.class',
+        'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory.class',
+        'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory$DefaultMetaData.class',
 
-        'io/dgj7/jod/core/md/impl/DefaultMetaDataFactory.class',
-        'io/dgj7/jod/core/md/impl/DefaultMetaDataFactory$DefaultMetaData.class',
-
-        'io/dgj7/jod/core/behavior/collections/diff/impl/DefaultCollectionDifferencer.class',
-        'io/dgj7/jod/core/behavior/collections/diff/impl/MixedTypeCollectionDifferencer.class',
-        'io/dgj7/jod/core/behavior/maps/diff/impl/DefaultMapDifferencer.class',
-        'io/dgj7/jod/core/behavior/nulls/impl/DefaultNullHandler.class',
-        'io/dgj7/jod/core/behavior/path/impl/DefaultRootPathProvider.class',
-        'io/dgj7/jod/core/behavior/reflect/transform/impl/DefaultFieldTransformer.class',
-        'io/dgj7/jod/core/behavior/reflect/fields/impl/DefaultFieldsEnumerator.class',
-
+        'io/dgj7/jod/core/reflect/fields/impl/DefaultFieldsEnumerator.class',
+        'io/dgj7/jod/core/reflect/transform/impl/DefaultFieldTransformer.class',
+        'io/dgj7/jod/core/maps/diff/impl/DefaultMapDifferencer.class',
+        'io/dgj7/jod/core/nulls/impl/DefaultNullHandler.class',
+        'io/dgj7/jod/core/collections/diff/impl/DefaultCollectionDifferencer.class',
+        'io/dgj7/jod/core/collections/diff/impl/MixedTypeCollectionDifferencer.class',
         'io/dgj7/jod/core/diff/impl/DefaultObjectDifferencer.class',
 ]
 

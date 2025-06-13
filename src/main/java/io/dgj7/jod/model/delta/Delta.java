@@ -1,8 +1,8 @@
 package io.dgj7.jod.model.delta;
 
-import io.dgj7.jod.core.md.AbstractMetaData;
-import io.dgj7.jod.core.md.IMetaDataFactory;
-import io.dgj7.jod.model.config.DifferencerConfiguration;
+import io.dgj7.jod.metadata.AbstractMetaData;
+import io.dgj7.jod.metadata.IMetaDataFactory;
+import io.dgj7.jod.config.DifferencerConfiguration;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
