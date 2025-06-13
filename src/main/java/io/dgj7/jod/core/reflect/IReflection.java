@@ -17,11 +17,6 @@ import java.util.Optional;
  */
 public interface IReflection {
     /**
-     * Find field with the given name.
-     */
-    <I> Optional<Field> findField(final DifferencerConfiguration config, final I input, final String name);
-
-    /**
      * Map field on input I to Object.
      */
     <I> Object fieldTo(final Field field, final I input);
