@@ -5,6 +5,7 @@ import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
+import io.dgj7.jod.util.FirstNonNull;
 
 import java.util.*;
 import java.util.function.BiPredicate;
@@ -102,12 +103,10 @@ public class MixedTypeCollectionDifferencer extends DefaultCollectionDifferencer
      */
     @SuppressWarnings("unchecked")
     private <T> BiPredicate<T, T> findEqualityStrategy(final T expected, final T actual) {
-        final Class<T> clazz;
-        if (expected != null) {
-            clazz = (Class<T>) expected.getClass();
-        } else {
-            clazz = actual != null ? (Class<T>) actual.getClass() : null;
-        }
+        final Class<T> clazz = (Class<T>) FirstNonNull
+                .find(expected, actual)
+                .map(o -> o.getClass())
+                .orElse(null);
         return (BiPredicate<T, T>) equalityStrategies.getOrDefault(clazz, defaultEqualityStrategy);
     }
 }

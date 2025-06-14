@@ -61,7 +61,6 @@ public class DefaultCollectionDifferencerTest {
         Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[3] (java.lang.Integer): no matching element for expected=[4]", deltas.get(1).toString());
     }
 
-    // todo: fix this
     @Test
     public final void testActualLargerLeft() {
         final List<Delta> deltas = new LinkedList<>();

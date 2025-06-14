@@ -31,6 +31,8 @@ def excludesArray = [
         'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory.class',
         'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory$DefaultMetaData.class',
 
+        'io/dgj7/jod/util/FirstNonNull.class',
+
         'io/dgj7/jod/Differencer.class',
 ]
 
