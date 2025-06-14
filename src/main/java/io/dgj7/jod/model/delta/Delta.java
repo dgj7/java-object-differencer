@@ -3,10 +3,12 @@ package io.dgj7.jod.model.delta;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.util.FirstNonNull;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * <p>
@@ -79,6 +81,26 @@ public class Delta {
 
         delta.expectedValue = expected == null ? "null" : expected.toString();
         delta.actualValue = "null";
+
+        return delta;
+    }
+
+    /**
+     * Factory.
+     */
+    public static <T> Delta extraElement(final DifferencerConfiguration config, final String path, final T actual) {
+        final String dataType = Optional.ofNullable(actual)
+                .map(obj -> {
+                    final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
+                    final AbstractMetaData md = mdf.from(config, actual);
+                    return md.describeTypeName();
+                })
+                .orElse("unknown");
+
+        final Delta delta = new Delta(DeltaType.COLLECTION_EXTRA_ACTUAL_ELEMENT, path, dataType);
+
+        delta.expectedValue = "null";
+        delta.actualValue = actual == null ? "null" : actual.toString();
 
         return delta;
     }

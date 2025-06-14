@@ -56,7 +56,7 @@ public class DefaultCollectionDifferencer implements ICollectionDifferencer {
         int e = 1;
         while (actualIterator.hasNext()) {
             final T extra = actualIterator.next();
-            deltas.add(Delta.from(config, DeltaType.COLLECTION_EXTRA_ACTUAL_ELEMENT, prefixPath + "[" + c + "+" + e++ + "]", null, extra));
+            deltas.add(Delta.extraElement(config, prefixPath + "[" + c + "+" + e++ + "]", extra));
         }
     }
 }

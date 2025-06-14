@@ -81,7 +81,7 @@ public class MixedTypeCollectionDifferencer extends DefaultCollectionDifferencer
         /* add a diff for any 'extra' elements in the actual list */
         for (int e = 0; e < actualListCopy.size(); e++) {
             final T extra = actualListCopy.get(e);
-            deltas.add(Delta.from(config, DeltaType.COLLECTION_EXTRA_ACTUAL_ELEMENT, prefixPath + "[" + c + "+" + (e+1) + "]", null, extra));
+            deltas.add(Delta.extraElement(config, prefixPath + "[" + c + "+" + (e+1) + "]", extra));
         }
     }
 
