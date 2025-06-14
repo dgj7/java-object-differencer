@@ -41,7 +41,9 @@ public class Delta {
     public String toString() {
         final String theDataType = StringUtils.isBlank(dataType) ? "" : " (" + dataType + ")";
         if (DeltaType.NO_MATCHING_ELEMENT.equals(deltaType)) {
-            return deltaType + ": " + path + theDataType + ": no matching element for [" + expectedValue + "]";
+            return deltaType + ": " + path + theDataType + ": no matching element for expected=[" + expectedValue + "]";
+        } else if (DeltaType.COLLECTION_EXTRA_ACTUAL_ELEMENT.equals(deltaType)) {
+            return deltaType + ": " + path + theDataType + ": extra unmatched element; actual=[" + actualValue + "]";
         } else {
             return deltaType + ": " + path + theDataType + ": expected=[" + expectedValue + "], actual=[" + actualValue + "]";
         }

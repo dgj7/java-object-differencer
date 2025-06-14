@@ -4,6 +4,7 @@ import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
+import io.dgj7.jod.model.delta.DeltaType;
 
 import java.util.*;
 import java.util.function.BiPredicate;
@@ -32,9 +33,19 @@ public class MixedTypeCollectionDifferencer extends DefaultCollectionDifferencer
      */
     @Override
     public <T> void diffCollections(final DifferencerConfiguration config, final List<Delta> deltas, final String prefixPath, final Collection<T> expectedList, final Collection<T> actualList) {
+        /* lookup behaviors */
         final IObjectDifferencer od = config.getObjectDifferencer();
+
+        /* get "iterators" */
         final List<T> actualListCopy = new ArrayList<>(actualList);
         int c = 0;
+
+        /* add delta if collections are different sizes */
+        if (expectedList.size() != actualList.size()) {
+            deltas.add(Delta.from(config, DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
+        }
+
+        /* attempt to find a match for each element in the expected collection */
         for (T expectedElement : expectedList) {
             if (expectedElement == null) {
                 int index = -1;
@@ -64,6 +75,12 @@ public class MixedTypeCollectionDifferencer extends DefaultCollectionDifferencer
                     deltas.add(Delta.noMatchingElement(config, path, expectedElement));
                 }
             }
+        }
+
+        /* add a diff for any 'extra' elements in the actual list */
+        for (int e = 0; e < actualListCopy.size(); e++) {
+            final T extra = actualListCopy.get(e);
+            deltas.add(Delta.from(config, DeltaType.COLLECTION_EXTRA_ACTUAL_ELEMENT, prefixPath + "[" + c + "+" + (e+1) + "]", null, extra));
         }
     }
 

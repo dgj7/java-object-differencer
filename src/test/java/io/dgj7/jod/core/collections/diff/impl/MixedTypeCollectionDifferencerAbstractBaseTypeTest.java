@@ -40,8 +40,9 @@ public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(1, deltas.size());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[0] (java.lang.Integer): no matching element for [3]", deltas.get(0).toString());
+        Assert.assertEquals(2, deltas.size());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[4], actual=[3]", deltas.get(0).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[0] (java.lang.Integer): no matching element for expected=[3]", deltas.get(1).toString());
     }
 
     @Test
@@ -53,11 +54,11 @@ public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(1, deltas.size());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[3] (java.lang.Integer): no matching element for [7]", deltas.get(0).toString());
+        Assert.assertEquals(2, deltas.size());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[4], actual=[3]", deltas.get(0).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[3] (java.lang.Integer): no matching element for expected=[7]", deltas.get(1).toString());
     }
 
-    // todo: fix this
     @Test
     public final void testActualLargerLeft() {
         final List<Delta> deltas = new LinkedList<>();
@@ -67,10 +68,11 @@ public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(0, deltas.size());
+        Assert.assertEquals(2, deltas.size());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[3], actual=[4]", deltas.get(0).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1] (java.lang.Integer): extra unmatched element; actual=[3]", deltas.get(1).toString());
     }
 
-    // todo: fix this
     @Test
     public final void testActualLargerRight() {
         final List<Delta> deltas = new LinkedList<>();
@@ -80,7 +82,9 @@ public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(0, deltas.size());
+        Assert.assertEquals(2, deltas.size());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[3], actual=[4]", deltas.get(0).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1] (java.lang.Integer): extra unmatched element; actual=[7]", deltas.get(1).toString());
     }
 
     @Test
@@ -92,8 +96,9 @@ public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(1, deltas.size());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[2] (java.lang.Integer): no matching element for [6]", deltas.get(0).toString());
+        Assert.assertEquals(2, deltas.size());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[2] (java.lang.Integer): no matching element for expected=[6]", deltas.get(0).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1] (java.lang.Double): extra unmatched element; actual=[7.1]", deltas.get(1).toString());
     }
 
     @Test
