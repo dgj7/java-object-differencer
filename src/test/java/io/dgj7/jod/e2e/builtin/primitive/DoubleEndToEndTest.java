@@ -1,4 +1,4 @@
-package io.dgj7.jod.e2e.primitive;
+package io.dgj7.jod.e2e.builtin.primitive;
 
 import io.dgj7.jod.Differencer;
 import io.dgj7.jod.model.delta.Delta;
@@ -7,39 +7,39 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class BooleanEndToEndTest {
+public class DoubleEndToEndTest {
     private final Differencer differencer = new Differencer();
 
     @Test
     public final void testExpectedNull() {
-        final List<Delta> results = differencer.difference(null, true);
+        final List<Delta> results = differencer.difference(null, 0.5);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NULLITY: java.lang.Boolean (java.lang.Boolean): expected=[null], actual=[true]", results.get(0).toString());
+        Assert.assertEquals("NULLITY: java.lang.Double (java.lang.Double): expected=[null], actual=[0.5]", results.get(0).toString());
     }
 
     @Test
     public final void testActualNull() {
-        final List<Delta> results = differencer.difference(false, null);
+        final List<Delta> results = differencer.difference(0.75, null);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NULLITY: java.lang.Boolean (java.lang.Boolean): expected=[false], actual=[null]", results.get(0).toString());
+        Assert.assertEquals("NULLITY: java.lang.Double (java.lang.Double): expected=[0.75], actual=[null]", results.get(0).toString());
     }
 
     @Test
     public final void testNotEqual() {
-        final List<Delta> results = differencer.difference(false, true);
+        final List<Delta> results = differencer.difference(0.75, 0.5);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(1, results.size());
-        Assert.assertEquals("NOT_EQUAL: java.lang.Boolean (java.lang.Boolean): expected=[false], actual=[true]", results.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.lang.Double (java.lang.Double): expected=[0.75], actual=[0.5]", results.get(0).toString());
     }
 
     @Test
     public final void testEqual() {
-        final List<Delta> results = differencer.difference(false, false);
+        final List<Delta> results = differencer.difference(0.75, 0.75);
 
         Assert.assertNotNull(results);
         Assert.assertEquals(0, results.size());

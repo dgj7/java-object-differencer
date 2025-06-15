@@ -6,7 +6,8 @@ intended to be a unit testing tool.
 
 ## Internal Testing Priorities
 - [x] priority 1
-  - [x] built-in types (Integer, Double, etc) ([io.dgj7.jod.e2e.builtin](src/test/java/io/dgj7/jod/e2e/builtin/types))
+  - [x] built-in primitives (int, float, etc) ([io.dgj7.jod.e2e.builtin.primitive](src/test/java/io/dgj7/jod/e2e/builtin/primitive))
+  - [x] built-in types (BigInteger, BigDecimal, etc) ([io.dgj7.jod.e2e.builtin.types](src/test/java/io/dgj7/jod/e2e/builtin/types))
   - [x] object with inherited fields ([io.dgj7.jod.e2e.inherit](src/test/java/io/dgj7/jod/e2e/inherit))
 - [x] priority 2
   - [x] small graph containing collection, enum ([io.dgj7.jod.e2e.custom.business](src/test/java/io/dgj7/jod/e2e/custom/business))
