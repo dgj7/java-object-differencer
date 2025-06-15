@@ -72,10 +72,13 @@ public class Delta {
      * Factory.
      */
     public static <T> Delta noMatchingElement(final DifferencerConfiguration config, final String path, final T expected) {
-        final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
-
-        final AbstractMetaData md = mdf.from(config, expected, null);
-        final String dataType = md.describeTypeName();
+        final String dataType = Optional.ofNullable(expected)
+                .map(obj -> {
+                    final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
+                    final AbstractMetaData md = mdf.from(config, expected, null);
+                    return md.describeTypeName();
+                })
+                .orElse("");
 
         final Delta delta = new Delta(DeltaType.NO_MATCHING_ELEMENT, path, dataType);
 
@@ -95,7 +98,7 @@ public class Delta {
                     final AbstractMetaData md = mdf.from(config, actual);
                     return md.describeTypeName();
                 })
-                .orElse("unknown");
+                .orElse("");
 
         final Delta delta = new Delta(DeltaType.COLLECTION_EXTRA_ACTUAL_ELEMENT, path, dataType);
 

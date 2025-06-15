@@ -56,7 +56,7 @@ public class MixedTypeCollectionDifferencerNullElementTest {
 
         Assert.assertEquals(2, deltas.size());
         Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[3], actual=[4]", deltas.get(0).toString());
-        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1] (unknown): extra unmatched element; actual=[null]", deltas.get(1).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1]: extra unmatched element; actual=[null]", deltas.get(1).toString());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class MixedTypeCollectionDifferencerNullElementTest {
 
         Assert.assertEquals(2, deltas.size());
         Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[3], actual=[4]", deltas.get(0).toString());
-        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1] (unknown): extra unmatched element; actual=[null]", deltas.get(1).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1]: extra unmatched element; actual=[null]", deltas.get(1).toString());
     }
     
     private List<Integer> makeList(final Integer ... elements) {
