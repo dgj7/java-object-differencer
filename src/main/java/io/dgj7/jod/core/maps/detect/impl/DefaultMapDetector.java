@@ -1,7 +1,7 @@
 package io.dgj7.jod.core.maps.detect.impl;
 
-import io.dgj7.jod.core.maps.detect.IMapDetector;
 import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.core.maps.detect.IMapDetector;
 
 import java.util.Map;
 import java.util.Objects;

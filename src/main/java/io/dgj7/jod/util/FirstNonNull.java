@@ -17,7 +17,7 @@ public class FirstNonNull {
      * Find the first non-null element in the given array.
      */
     @SuppressWarnings("unchecked")
-    public static <T> Optional<T> find(final T ... array) {
+    public static <T> Optional<T> find(final T... array) {
         final List<T> list = Optional.ofNullable(array)
                 .map(List::of)
                 .orElse(new ArrayList<>(0));

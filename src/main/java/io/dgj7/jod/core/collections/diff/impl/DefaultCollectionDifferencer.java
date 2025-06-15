@@ -1,8 +1,8 @@
 package io.dgj7.jod.core.collections.diff.impl;
 
+import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
-import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 

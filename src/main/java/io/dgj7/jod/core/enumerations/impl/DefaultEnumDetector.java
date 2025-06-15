@@ -1,7 +1,7 @@
 package io.dgj7.jod.core.enumerations.impl;
 
-import io.dgj7.jod.core.enumerations.IEnumDetector;
 import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.core.enumerations.IEnumDetector;
 
 import java.util.Objects;
 import java.util.stream.Stream;

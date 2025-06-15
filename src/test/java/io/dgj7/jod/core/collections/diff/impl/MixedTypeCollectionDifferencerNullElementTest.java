@@ -6,7 +6,10 @@ import io.dgj7.jod.model.delta.Delta;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Test {@link MixedTypeCollectionDifferencer} with nulls in the input list.
@@ -21,8 +24,8 @@ public class MixedTypeCollectionDifferencerNullElementTest {
     public final void testExpectedNullBefore() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = makeList(null, 7, 8, 9);
-        final List<Integer> actual = makeList(7, 8, 9);
+        final List<Integer> expected = Arrays.asList(null, 7, 8, 9);
+        final List<Integer> actual = Arrays.asList(7, 8, 9);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
@@ -35,8 +38,8 @@ public class MixedTypeCollectionDifferencerNullElementTest {
     public final void testExpectedNullAfter() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = makeList(7, 8, 9, null);
-        final List<Integer> actual = makeList(7, 8, 9);
+        final List<Integer> expected = Arrays.asList(7, 8, 9, null);
+        final List<Integer> actual = Arrays.asList(7, 8, 9);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
@@ -49,8 +52,8 @@ public class MixedTypeCollectionDifferencerNullElementTest {
     public final void testActualNullBefore() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = makeList(7, 8, 9);
-        final List<Integer> actual = makeList(null, 7, 8, 9);
+        final List<Integer> expected = Arrays.asList(7, 8, 9);
+        final List<Integer> actual = Arrays.asList(null, 7, 8, 9);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
@@ -63,18 +66,13 @@ public class MixedTypeCollectionDifferencerNullElementTest {
     public final void testActualNullAfter() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = makeList(7, 8, 9);
-        final List<Integer> actual = makeList(7, 8, 9, null);
+        final List<Integer> expected = Arrays.asList(7, 8, 9);
+        final List<Integer> actual = Arrays.asList(7, 8, 9, null);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
         Assert.assertEquals(2, deltas.size());
         Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[3], actual=[4]", deltas.get(0).toString());
         Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1]: extra unmatched element; actual=[null]", deltas.get(1).toString());
-    }
-    
-    private List<Integer> makeList(final Integer ... elements) {
-        Objects.requireNonNull(elements, "Integer[] is null");
-        return new LinkedList<>(Arrays.asList(elements));
     }
 }

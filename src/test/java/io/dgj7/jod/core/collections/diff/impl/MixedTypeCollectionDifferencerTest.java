@@ -6,7 +6,10 @@ import io.dgj7.jod.model.delta.Delta;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Test {@link MixedTypeCollectionDifferencer}.
@@ -21,8 +24,8 @@ public class MixedTypeCollectionDifferencerTest {
     public final void testEmptyLists() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = List.of();
-        final List<Integer> actual = List.of();
+        final List<Integer> expected = Arrays.asList();
+        final List<Integer> actual = Arrays.asList();
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
@@ -33,8 +36,8 @@ public class MixedTypeCollectionDifferencerTest {
     public final void testExpectedLargerLeft() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = List.of(0, 1, 2, 3);
-        final List<Integer> actual = List.of(1, 2, 3);
+        final List<Integer> expected = Arrays.asList(0, 1, 2, 3);
+        final List<Integer> actual = Arrays.asList(1, 2, 3);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
@@ -47,8 +50,8 @@ public class MixedTypeCollectionDifferencerTest {
     public final void testExpectedLargerRight() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = List.of(1, 2, 3, 4);
-        final List<Integer> actual = List.of(1, 2, 3);
+        final List<Integer> expected = Arrays.asList(1, 2, 3, 4);
+        final List<Integer> actual = Arrays.asList(1, 2, 3);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
@@ -61,8 +64,8 @@ public class MixedTypeCollectionDifferencerTest {
     public final void testActualLargerLeft() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = List.of(1, 2, 3);
-        final List<Integer> actual = List.of(0, 1, 2, 3);
+        final List<Integer> expected = Arrays.asList(1, 2, 3);
+        final List<Integer> actual = Arrays.asList(0, 1, 2, 3);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
@@ -75,8 +78,8 @@ public class MixedTypeCollectionDifferencerTest {
     public final void testActualLargerRight() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = List.of(1, 2, 3);
-        final List<Integer> actual = List.of(1, 2, 3, 4);
+        final List<Integer> expected = Arrays.asList(1, 2, 3);
+        final List<Integer> actual = Arrays.asList(1, 2, 3, 4);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
@@ -89,8 +92,8 @@ public class MixedTypeCollectionDifferencerTest {
     public final void testSameSizeNotEqual() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = List.of(1, 2, 3);
-        final List<Integer> actual = List.of(1, 2, 4);
+        final List<Integer> expected = Arrays.asList(1, 2, 3);
+        final List<Integer> actual = Arrays.asList(1, 2, 4);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 

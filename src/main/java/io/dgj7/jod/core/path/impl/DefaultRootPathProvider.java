@@ -1,9 +1,9 @@
 package io.dgj7.jod.core.path.impl;
 
+import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.core.path.IRootPathProvider;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
-import io.dgj7.jod.DifferencerConfiguration;
 
 /**
  * Default {@link IRootPathProvider}.

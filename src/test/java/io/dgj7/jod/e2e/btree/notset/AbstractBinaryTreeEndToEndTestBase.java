@@ -2,8 +2,8 @@ package io.dgj7.jod.e2e.btree.notset;
 
 import io.dgj7.jod.Differencer;
 import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.model.eq.EquatableThings;
 import io.dgj7.jod.model.delta.Delta;
+import io.dgj7.jod.model.eq.EquatableThings;
 import io.dgj7.jod.testonly.model.binarytree.notset.BinaryNode;
 
 import java.util.List;

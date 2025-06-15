@@ -1,8 +1,8 @@
 package io.dgj7.jod.core.collections.diff.impl;
 
+import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
-import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 import io.dgj7.jod.util.FirstNonNull;
@@ -81,7 +81,7 @@ public class MixedTypeCollectionDifferencer extends DefaultCollectionDifferencer
         /* add a diff for any 'extra' elements in the actual list */
         for (int e = 0; e < actualListCopy.size(); e++) {
             final T extra = actualListCopy.get(e);
-            deltas.add(Delta.extraElement(config, prefixPath + "[" + c + "+" + (e+1) + "]", extra));
+            deltas.add(Delta.extraElement(config, prefixPath + "[" + c + "+" + (e + 1) + "]", extra));
         }
     }
 

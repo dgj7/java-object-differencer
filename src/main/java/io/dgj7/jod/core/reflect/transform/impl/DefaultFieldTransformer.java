@@ -1,7 +1,7 @@
 package io.dgj7.jod.core.reflect.transform.impl;
 
-import io.dgj7.jod.core.reflect.transform.IFieldTransformer;
 import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.core.reflect.transform.IFieldTransformer;
 import io.dgj7.jod.model.exc.ReflectionException;
 
 import java.lang.reflect.Field;

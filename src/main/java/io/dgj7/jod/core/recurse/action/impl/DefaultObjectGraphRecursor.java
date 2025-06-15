@@ -1,10 +1,10 @@
 package io.dgj7.jod.core.recurse.action.impl;
 
+import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
 import io.dgj7.jod.core.reflect.transform.IFieldTransformer;
-import io.dgj7.jod.core.diff.IObjectDifferencer;
-import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 
 import java.lang.reflect.Field;
