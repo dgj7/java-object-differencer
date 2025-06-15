@@ -13,6 +13,7 @@ import java.util.List;
  * This needs to be it's own object because it's called from multiple clients.
  * </p>
  */
+// todo: this needs a new name; should have 'Internal' in the name to clarify that clients shouldn't call it; also update the method name
 public interface IObjectDifferencer {
     /**
      * <p>

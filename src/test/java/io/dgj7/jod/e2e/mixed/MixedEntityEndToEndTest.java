@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
-public class MixedEndToEndTest {
+public class MixedEntityEndToEndTest {
     private final Differencer differencer = new Differencer();
 
     @Test
