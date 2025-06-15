@@ -1,4 +1,4 @@
-package io.dgj7.jod.e2e.builtin;
+package io.dgj7.jod.e2e.builtin.types;
 
 import io.dgj7.jod.Differencer;
 import io.dgj7.jod.model.delta.Delta;
