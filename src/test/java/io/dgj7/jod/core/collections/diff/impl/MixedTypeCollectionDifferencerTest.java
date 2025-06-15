@@ -6,9 +6,7 @@ import io.dgj7.jod.model.delta.Delta;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Test {@link MixedTypeCollectionDifferencer}.
@@ -105,8 +103,8 @@ public class MixedTypeCollectionDifferencerTest {
     public final void testSameSizeEqual() {
         final List<Delta> deltas = new LinkedList<>();
 
-        final List<Integer> expected = List.of(1, 2, 3);
-        final List<Integer> actual = List.of(1, 2, 3);
+        final List<Integer> expected = Arrays.asList(null, 1, 2, 3);
+        final List<Integer> actual = Arrays.asList(3, 2, 1, null);
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 

@@ -17,8 +17,6 @@ def excludesArray = [
         'io/dgj7/jod/DifferencerConfiguration$DiffConfigBuilder.class',
 
         // todo: eliminate these
-        'io/dgj7/jod/core/collections/diff/impl/MixedTypeCollectionDifferencer.class',
-
         'io/dgj7/jod/core/diff/impl/DefaultObjectDifferencer.class',
 
         'io/dgj7/jod/core/maps/diff/impl/DefaultMapDifferencer.class',
