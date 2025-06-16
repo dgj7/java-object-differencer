@@ -2,7 +2,6 @@ package io.dgj7.jod.e2e.mixed;
 
 import io.dgj7.jod.Differencer;
 import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.core.collections.diff.impl.MixedTypeCollectionDifferencer;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.testonly.model.ScenarioVersion;
 import io.dgj7.jod.testonly.model.mixed.*;
@@ -56,34 +55,8 @@ public class MixedEntityEndToEndTest {
         final MixedListOwnerType expected = MixedFactory.create(ScenarioVersion.EXPECTED);
         final MixedListOwnerType actual = MixedFactory.create(ScenarioVersion.EXPECTED, true);
 
+        // todo: is there a way around this with default diff?
         Assert.assertThrows(IllegalArgumentException.class, () -> differencer.difference(expected, actual));
-    }
-
-    @Test
-    public final void testEqualDifferentOrderCustomCollectionHandler() {
-        final Map<Class<?>, BiPredicate<?, ?>> map = new HashMap<>();
-        map.put(DerivedDoubleType.class, (DerivedDoubleType x, DerivedDoubleType y) -> new EqualsBuilder()
-                .append(x.getBaseTypeValue(), y.getBaseTypeValue())
-                .append(x.getDerivedDoubleValue(), y.getDerivedDoubleValue())
-                .isEquals());
-        map.put(DerivedIntegerType.class, (DerivedIntegerType x, DerivedIntegerType y) -> new EqualsBuilder()
-                .append(x.getBaseTypeValue(), y.getBaseTypeValue())
-                .append(x.getDerivedIntegerValue(), y.getDerivedIntegerValue())
-                .isEquals());
-        map.put(DerivedStringType.class, (DerivedStringType x, DerivedStringType y) -> new EqualsBuilder()
-                .append(x.getBaseTypeValue(), y.getBaseTypeValue())
-                .append(x.getDerivedStringValue(), y.getDerivedStringValue())
-                .isEquals());
-        final DifferencerConfiguration config = DifferencerConfiguration.builder()
-                .withCollectionDifferencer(new MixedTypeCollectionDifferencer(map, Object::equals))
-                .build();
-
-        final MixedListOwnerType expected = MixedFactory.create(ScenarioVersion.EXPECTED);
-        final MixedListOwnerType actual = MixedFactory.create(ScenarioVersion.EXPECTED, true);
-
-        final List<Delta> diffs = differencer.difference(config, expected, actual);
-
-        Assert.assertEquals(0, diffs.size());
     }
 
     @Test

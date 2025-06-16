@@ -67,8 +67,14 @@ public class BinaryTreeSortedSet<T extends Comparable<T>> extends BinaryTree<T> 
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public <T1> T1[] toArray(final T1[] a) {
-        throw new UnsupportedOperationException("not yet implemented");
+        final Iterator<T1> iterator = (Iterator<T1>) iterator();
+        int c = 0;
+        while (iterator.hasNext()) {
+            a[c++] = iterator.next();
+        }
+        return a;
     }
 
     /**

@@ -28,12 +28,9 @@ public class DefaultCollectionDifferencerNullElementTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(5, deltas.size());
+        Assert.assertEquals(2, deltas.size());
         Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[4], actual=[3]", deltas.get(0).toString());
-        Assert.assertEquals("NULLITY: java.util.List[0] (java.lang.Integer): expected=[null], actual=[7]", deltas.get(1).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.List[1] (java.lang.Integer): expected=[7], actual=[8]", deltas.get(2).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.List[2] (java.lang.Integer): expected=[8], actual=[9]", deltas.get(3).toString());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[3] (java.lang.Integer): no matching element for expected=[9]", deltas.get(4).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[0] (java.lang.String): no matching element for expected=[null]", deltas.get(1).toString());
     }
 
     @Test
@@ -47,7 +44,7 @@ public class DefaultCollectionDifferencerNullElementTest {
 
         Assert.assertEquals(2, deltas.size());
         Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[4], actual=[3]", deltas.get(0).toString());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[3]: no matching element for expected=[null]", deltas.get(1).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[3] (java.lang.String): no matching element for expected=[null]", deltas.get(1).toString());
     }
 
     @Test

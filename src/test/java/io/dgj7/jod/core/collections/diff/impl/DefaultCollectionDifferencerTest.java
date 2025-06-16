@@ -106,6 +106,21 @@ public class DefaultCollectionDifferencerTest {
         Assert.assertEquals("NOT_EQUAL: java.util.List[2] (java.lang.Integer): expected=[3], actual=[4]", deltas.get(0).toString());
     }
 
+    // todo: can/should this test pass?
+    @Test
+    public final void testSameSizeEqualOutOfOrder() {
+        final List<Delta> deltas = new LinkedList<>();
+
+        final List<Integer> expected = Arrays.asList(null, 1, 2, 3);
+        final List<Integer> actual = Arrays.asList(3, 2, 1, null);
+
+        objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
+
+        Assert.assertEquals(2, deltas.size());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[1] (java.lang.Integer): expected=[1], actual=[3]", deltas.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[3] (java.lang.Integer): expected=[3], actual=[1]", deltas.get(1).toString());
+    }
+
     @Test
     public final void testSameSizeEqual() {
         final List<Delta> deltas = new LinkedList<>();

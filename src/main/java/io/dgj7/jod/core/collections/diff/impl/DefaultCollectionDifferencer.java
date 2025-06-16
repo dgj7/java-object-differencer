@@ -6,6 +6,7 @@ import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -33,30 +34,40 @@ public class DefaultCollectionDifferencer implements ICollectionDifferencer {
             deltas.add(Delta.from(config, DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
         }
 
-        /* get an iterator for each */
-        final Iterator<T> expectedIterator = expectedList.iterator();
-        final Iterator<T> actualIterator = actualList.iterator();
+        /* get "iterators" */
+        final List<T> actualListCopy = new ArrayList<>(actualList);
         int c = 0;
 
         /* attempt to find a match for each element in the expected collection */
-        while (expectedIterator.hasNext()) {
-            final T expected = expectedIterator.next();
+        for (T expected : expectedList) {
             final String path = prefixPath + "[" + c++ + "]";
-
-            if (actualIterator.hasNext()) {
-                final T actual = actualIterator.next();
-
-                od.diffObjects(config, deltas, path, expected, actual);
+            if (expected == null) {
+                int index = -1;
+                for (int d = 0; d < actualListCopy.size(); d++) {
+                    if (actualListCopy.get(d) == null) {
+                        index = d;
+                    }
+                }
+                if (index >= 0) {
+                    actualListCopy.remove(index);
+                } else {
+                    deltas.add(Delta.noMatchingElement(config, path, "null"));
+                }
             } else {
-                deltas.add(Delta.noMatchingElement(config, path, expected));
+                if (actualListCopy.isEmpty()) {
+                    deltas.add(Delta.noMatchingElement(config, path, expected));
+                } else {
+                    final T actual = actualListCopy.get(0);
+                    od.diffObjects(config, deltas, path, expected, actual);
+                    actualListCopy.remove(actual);
+                }
             }
         }
 
         /* add a diff for any 'extra' elements in the actual list */
-        int e = 1;
-        while (actualIterator.hasNext()) {
-            final T extra = actualIterator.next();
-            deltas.add(Delta.extraElement(config, prefixPath + "[" + c + "+" + e++ + "]", extra));
+        for (int e = 0; e < actualListCopy.size(); e++) {
+            final T extra = actualListCopy.get(e);
+            deltas.add(Delta.extraElement(config, prefixPath + "[" + c + "+" + (e + 1) + "]", extra));
         }
     }
 }

@@ -7,18 +7,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Test {@link MixedTypeCollectionDifferencer} with a list of an abstract base type.
+ * Test {@link DefaultCollectionDifferencer} with a list of an abstract base type.
  */
-public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
+public class DefaultCollectionDifferencerAbstractBaseTypeTest {
     private static final String PATH = List.class.getName();
     private final DifferencerConfiguration config = DifferencerConfiguration.builder()
             .build();
-    private final ICollectionDifferencer objectUnderTest = new MixedTypeCollectionDifferencer(new HashMap<>(), Object::equals);
+    private final ICollectionDifferencer objectUnderTest = new DefaultCollectionDifferencer();
 
     @Test
     public final void testEmptyLists() {
@@ -41,9 +40,12 @@ public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(2, deltas.size());
+        Assert.assertEquals(5, deltas.size());
         Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[4], actual=[3]", deltas.get(0).toString());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[0] (java.lang.Integer): no matching element for expected=[3]", deltas.get(1).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[0] (java.lang.Integer): expected=[3], actual=[4]", deltas.get(1).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[1] (java.lang.Integer): expected=[4], actual=[5]", deltas.get(2).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[2] (java.lang.Integer): expected=[5], actual=[6]", deltas.get(3).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[3] (java.lang.Integer): no matching element for expected=[6]", deltas.get(4).toString());
     }
 
     @Test
@@ -69,9 +71,12 @@ public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(2, deltas.size());
+        Assert.assertEquals(5, deltas.size());
         Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.List (java.lang.Integer): expected=[3], actual=[4]", deltas.get(0).toString());
-        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1] (java.lang.Integer): extra unmatched element; actual=[3]", deltas.get(1).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[0] (java.lang.Integer): expected=[4], actual=[3]", deltas.get(1).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[1] (java.lang.Integer): expected=[5], actual=[4]", deltas.get(2).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[2] (java.lang.Integer): expected=[6], actual=[5]", deltas.get(3).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1] (java.lang.Integer): extra unmatched element; actual=[6]", deltas.get(4).toString());
     }
 
     @Test
@@ -97,9 +102,8 @@ public class MixedTypeCollectionDifferencerAbstractBaseTypeTest {
 
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
-        Assert.assertEquals(2, deltas.size());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.List[2] (java.lang.Integer): no matching element for expected=[6]", deltas.get(0).toString());
-        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.List[3+1] (java.lang.Double): extra unmatched element; actual=[7.1]", deltas.get(1).toString());
+        Assert.assertEquals(1, deltas.size());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[2] (java.lang.Integer): expected=[6], actual=[7.1]", deltas.get(0).toString());
     }
 
     @Test
