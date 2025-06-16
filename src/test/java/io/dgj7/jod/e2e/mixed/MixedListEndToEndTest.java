@@ -174,6 +174,20 @@ public class MixedListEndToEndTest {
         Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[0] (java.lang.Integer): expected=[1], actual=[2]", diffs.get(0).toString());
     }
 
+    // todo: can/should this test pass?
+    @Test
+    public final void testEqualReverseOrder() {
+        final List<Number> expected = Arrays.asList(Integer.valueOf(1), Float.valueOf(2.71828F), Double.valueOf(3.14159265358979323846));
+        final List<Number> actual = Arrays.asList(Double.valueOf(3.14159265358979323846), Float.valueOf(2.71828F), Integer.valueOf(1));
+
+        final List<Delta> diffs = differencer.difference(expected, actual);
+
+        Assert.assertNotNull(diffs);
+        Assert.assertEquals(2, diffs.size());
+        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[0] (java.lang.Integer): expected=[1], actual=[3.141592653589793]", diffs.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[2] (java.lang.Double): expected=[3.141592653589793], actual=[1]", diffs.get(1).toString());
+    }
+
     @Test
     public final void testEqual() {
         final List<Number> expected = Arrays.asList(Integer.valueOf(1), Float.valueOf(2.71828F), Double.valueOf(3.14159265358979323846));
