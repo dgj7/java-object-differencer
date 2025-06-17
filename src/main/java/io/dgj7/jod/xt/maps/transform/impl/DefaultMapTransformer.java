@@ -1,7 +1,6 @@
-package io.dgj7.jod.core.maps.transform.impl;
+package io.dgj7.jod.xt.maps.transform.impl;
 
-import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.core.maps.transform.IMapTransformer;
+import io.dgj7.jod.xt.maps.transform.IMapTransformer;
 
 import java.util.Map;
 
@@ -16,7 +15,7 @@ public class DefaultMapTransformer implements IMapTransformer {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <K, V> Map<K, V> objectToMap(final DifferencerConfiguration config, final Object object) {
+    public <K, V> Map<K, V> objectToMap(final Object object) {
         return (Map<K, V>) object;
     }
 }

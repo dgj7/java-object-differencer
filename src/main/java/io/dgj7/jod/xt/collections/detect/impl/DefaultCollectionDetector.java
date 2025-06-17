@@ -1,7 +1,6 @@
-package io.dgj7.jod.core.collections.detect.impl;
+package io.dgj7.jod.xt.collections.detect.impl;
 
-import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.core.collections.detect.ICollectionDetector;
+import io.dgj7.jod.xt.collections.detect.ICollectionDetector;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,7 +17,7 @@ public class DefaultCollectionDetector implements ICollectionDetector {
      * {@inheritDoc}
      */
     @Override
-    public <I> boolean isCollection(final DifferencerConfiguration config, final I expected, final I actual) {
+    public <I> boolean isCollection(final I expected, final I actual) {
         final List<? extends Class<?>> matches = Stream.of(expected, actual)
                 .filter(Objects::nonNull)
                 .map(Object::getClass)

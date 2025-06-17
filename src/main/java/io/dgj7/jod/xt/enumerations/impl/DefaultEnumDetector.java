@@ -1,7 +1,6 @@
-package io.dgj7.jod.core.enumerations.impl;
+package io.dgj7.jod.xt.enumerations.impl;
 
-import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.core.enumerations.IEnumDetector;
+import io.dgj7.jod.xt.enumerations.IEnumDetector;
 
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -16,7 +15,7 @@ public class DefaultEnumDetector implements IEnumDetector {
      * {@inheritDoc}
      */
     @Override
-    public boolean isEnum(final DifferencerConfiguration config, final Object expected, final Object actual) {
+    public boolean isEnum(final Object expected, final Object actual) {
         return Stream.of(expected, actual)
                 .filter(Objects::nonNull)
                 .map(Object::getClass)

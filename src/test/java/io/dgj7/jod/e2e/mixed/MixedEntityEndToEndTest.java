@@ -1,18 +1,14 @@
 package io.dgj7.jod.e2e.mixed;
 
 import io.dgj7.jod.Differencer;
-import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.testonly.model.ScenarioVersion;
-import io.dgj7.jod.testonly.model.mixed.*;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import io.dgj7.jod.testonly.model.mixed.MixedFactory;
+import io.dgj7.jod.testonly.model.mixed.MixedListOwnerType;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiPredicate;
 
 public class MixedEntityEndToEndTest {
     private final Differencer differencer = new Differencer();

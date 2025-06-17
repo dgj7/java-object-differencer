@@ -1,23 +1,11 @@
 package io.dgj7.jod;
 
-import io.dgj7.jod.core.collections.detect.ICollectionDetector;
-import io.dgj7.jod.core.collections.detect.impl.DefaultCollectionDetector;
 import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.collections.diff.impl.DefaultCollectionDifferencer;
-import io.dgj7.jod.core.collections.transform.ICollectionTransformer;
-import io.dgj7.jod.core.collections.transform.impl.DefaultCollectionTransformer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.diff.impl.DefaultObjectDifferencer;
-import io.dgj7.jod.core.enumerations.IEnumDetector;
-import io.dgj7.jod.core.enumerations.impl.DefaultEnumDetector;
-import io.dgj7.jod.core.equals.DefaultEqualityChecker;
-import io.dgj7.jod.core.equals.IEqualityChecker;
-import io.dgj7.jod.core.maps.detect.IMapDetector;
-import io.dgj7.jod.core.maps.detect.impl.DefaultMapDetector;
 import io.dgj7.jod.core.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.maps.diff.impl.DefaultMapDifferencer;
-import io.dgj7.jod.core.maps.transform.IMapTransformer;
-import io.dgj7.jod.core.maps.transform.impl.DefaultMapTransformer;
 import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.core.nulls.impl.DefaultNullHandler;
 import io.dgj7.jod.core.path.IRootPathProvider;
@@ -37,6 +25,18 @@ import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.metadata.impl.DefaultMetaDataFactory;
 import io.dgj7.jod.model.eq.EquatableThings;
 import io.dgj7.jod.pattern.builder.Builder;
+import io.dgj7.jod.xt.collections.detect.ICollectionDetector;
+import io.dgj7.jod.xt.collections.detect.impl.DefaultCollectionDetector;
+import io.dgj7.jod.xt.collections.transform.ICollectionTransformer;
+import io.dgj7.jod.xt.collections.transform.impl.DefaultCollectionTransformer;
+import io.dgj7.jod.xt.enumerations.IEnumDetector;
+import io.dgj7.jod.xt.enumerations.impl.DefaultEnumDetector;
+import io.dgj7.jod.xt.equals.IEqualityChecker;
+import io.dgj7.jod.xt.equals.impl.DefaultEqualityChecker;
+import io.dgj7.jod.xt.maps.detect.IMapDetector;
+import io.dgj7.jod.xt.maps.detect.impl.DefaultMapDetector;
+import io.dgj7.jod.xt.maps.transform.IMapTransformer;
+import io.dgj7.jod.xt.maps.transform.impl.DefaultMapTransformer;
 import lombok.Getter;
 
 /**

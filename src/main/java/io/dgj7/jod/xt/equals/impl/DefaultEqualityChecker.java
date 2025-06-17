@@ -1,6 +1,6 @@
-package io.dgj7.jod.core.equals;
+package io.dgj7.jod.xt.equals.impl;
 
-import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.xt.equals.IEqualityChecker;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import java.util.function.BiPredicate;
@@ -15,7 +15,7 @@ public class DefaultEqualityChecker implements IEqualityChecker {
      * {@inheritDoc}
      */
     @Override
-    public boolean check(final DifferencerConfiguration config, final Object expected, final Object actual) {
+    public boolean check(final Object expected, final Object actual) {
         return new EqualsBuilder()
                 .append(expected, actual)
                 .isEquals();

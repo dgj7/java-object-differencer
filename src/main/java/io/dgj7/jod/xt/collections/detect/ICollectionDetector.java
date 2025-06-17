@@ -1,6 +1,4 @@
-package io.dgj7.jod.core.collections.detect;
-
-import io.dgj7.jod.DifferencerConfiguration;
+package io.dgj7.jod.xt.collections.detect;
 
 /**
  * <p>
@@ -16,5 +14,5 @@ public interface ICollectionDetector {
     /**
      * Determine if the given object is a collection.
      */
-    <I> boolean isCollection(final DifferencerConfiguration config, final I expected, final I actual);
+    <I> boolean isCollection(final I expected, final I actual);
 }
