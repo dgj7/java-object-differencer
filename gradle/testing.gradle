@@ -32,6 +32,8 @@ def excludesArray = [
         'io/dgj7/jod/util/FirstNonNull.class',
 
         'io/dgj7/jod/Differencer.class',
+
+        'io/dgj7/jod/util/GenericTypeUtility.class',
 ]
 
 jacoco {

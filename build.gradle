@@ -5,7 +5,7 @@ plugins {
     id "jacoco"
 }
 
-version = '0.4.55'
+version = '0.4.56'
 
 apply from: 'gradle/testing.gradle'
 

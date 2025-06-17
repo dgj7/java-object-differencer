@@ -10,4 +10,11 @@ public class ReflectionException extends RuntimeException {
     public ReflectionException(IllegalAccessException iaex) {
         super(iaex);
     }
+
+    /**
+     * Create a new instance.
+     */
+    public ReflectionException(NoSuchMethodException iaex) {
+        super(iaex);
+    }
 }
