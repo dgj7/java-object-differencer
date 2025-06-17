@@ -47,7 +47,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
             nh.handleNulls(config, path, deltas, expected, actual);
         } else if (ed.isEnum(expected, actual)) {
             if (!ec.check(expected, actual)) {
-                deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
+                deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
             }
         } else if (cd.isCollection(expected, actual)) {
             final Collection<Object> expectedCollection = ct.objectToCollection(expected);
@@ -60,7 +60,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         } else if (srp.test(config, expected, actual)) {
             ogr.diffRecurse(config, deltas, path, expected, actual);
         } else if (!ec.check(expected, actual)) {
-            deltas.add(Delta.from(config, DeltaType.NOT_EQUAL, path, expected, actual));
+            deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));
         }
     }
 }

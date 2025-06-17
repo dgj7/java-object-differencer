@@ -1,13 +1,9 @@
 package io.dgj7.jod.model.delta;
 
-import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.metadata.AbstractMetaData;
-import io.dgj7.jod.metadata.IMetaDataFactory;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * <p>
@@ -53,12 +49,8 @@ public class Delta {
     /**
      * Factory.
      */
-    public static <T, U> Delta from(final DifferencerConfiguration config, final DeltaType deltaType, final String path, final T expected, final U actual) {
-        final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
-
-        final AbstractMetaData md = mdf.from(config, expected, actual);
-        final String dataType = md.describeTypeName();
-
+    public static <T, U> Delta from(final DeltaType deltaType, final String path, final T expected, final U actual) {
+        final String dataType = determineTypeName(expected, actual);
         final Delta delta = new Delta(deltaType, path, dataType);
 
         delta.expectedValue = expected == null ? "null" : expected.toString();
@@ -70,14 +62,8 @@ public class Delta {
     /**
      * Factory.
      */
-    public static <T> Delta noMatchingElement(final DifferencerConfiguration config, final String path, final T expected) {
-        final String dataType = Optional.ofNullable(expected)
-                .map(obj -> {
-                    final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
-                    final AbstractMetaData md = mdf.from(config, expected, null);
-                    return md.describeTypeName();
-                })
-                .orElse("");
+    public static <T> Delta noMatchingElement(final String path, final T expected) {
+        final String dataType = determineTypeName(expected, null);
 
         final Delta delta = new Delta(DeltaType.NO_MATCHING_ELEMENT, path, dataType);
 
@@ -90,14 +76,8 @@ public class Delta {
     /**
      * Factory.
      */
-    public static <T> Delta extraElement(final DifferencerConfiguration config, final String path, final T actual) {
-        final String dataType = Optional.ofNullable(actual)
-                .map(obj -> {
-                    final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
-                    final AbstractMetaData md = mdf.from(config, actual);
-                    return md.describeTypeName();
-                })
-                .orElse("");
+    public static <T> Delta extraElement(final String path, final T actual) {
+        final String dataType = determineTypeName(null, actual);
 
         final Delta delta = new Delta(DeltaType.COLLECTION_EXTRA_ACTUAL_ELEMENT, path, dataType);
 
@@ -105,5 +85,24 @@ public class Delta {
         delta.actualValue = actual == null ? "null" : actual.toString();
 
         return delta;
+    }
+
+    /**
+     * Determine the type name.
+     */
+    private static <T, U> String determineTypeName(final T expected, final U actual) {
+        if (expected != null && actual != null) {
+            if (expected.getClass().equals(actual.getClass())) {
+                return expected.getClass().getName();
+            } else {
+                return expected.getClass().getName() + "/" + actual.getClass().getName();
+            }
+        } else if (expected != null) {
+            return expected.getClass().getName();
+        } else if (actual != null) {
+            return actual.getClass().getName();
+        } else {
+            return "";
+        }
     }
 }

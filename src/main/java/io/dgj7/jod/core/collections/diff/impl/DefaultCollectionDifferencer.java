@@ -30,7 +30,7 @@ public class DefaultCollectionDifferencer implements ICollectionDifferencer {
 
         /* add delta if collections are different sizes */
         if (expectedList.size() != actualList.size()) {
-            deltas.add(Delta.from(config, DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
+            deltas.add(Delta.from(DeltaType.COLLECTION_SIZES_NOT_EQUAL, prefixPath, expectedList.size(), actualList.size()));
         }
 
         /* get "iterators" */
@@ -50,11 +50,11 @@ public class DefaultCollectionDifferencer implements ICollectionDifferencer {
                 if (index >= 0) {
                     actualListCopy.remove(index);
                 } else {
-                    deltas.add(Delta.noMatchingElement(config, path, "null"));
+                    deltas.add(Delta.noMatchingElement(path, "null"));
                 }
             } else {
                 if (actualListCopy.isEmpty()) {
-                    deltas.add(Delta.noMatchingElement(config, path, expected));
+                    deltas.add(Delta.noMatchingElement(path, expected));
                 } else {
                     final T actual = actualListCopy.get(0);
                     od.diffObjects(config, deltas, path, expected, actual);
@@ -66,7 +66,7 @@ public class DefaultCollectionDifferencer implements ICollectionDifferencer {
         /* add a diff for any 'extra' elements in the actual list */
         for (int e = 0; e < actualListCopy.size(); e++) {
             final T extra = actualListCopy.get(e);
-            deltas.add(Delta.extraElement(config, prefixPath + "[" + c + "+" + (e + 1) + "]", extra));
+            deltas.add(Delta.extraElement(prefixPath + "[" + c + "+" + (e + 1) + "]", extra));
         }
     }
 }

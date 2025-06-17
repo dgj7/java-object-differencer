@@ -103,7 +103,7 @@ public class DefaultCollectionDifferencerAbstractBaseTypeTest {
         objectUnderTest.diffCollections(config, deltas, PATH, expected, actual);
 
         Assert.assertEquals(1, deltas.size());
-        Assert.assertEquals("NOT_EQUAL: java.util.List[2] (java.lang.Integer): expected=[6], actual=[7.1]", deltas.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.List[2] (java.lang.Integer/java.lang.Double): expected=[6], actual=[7.1]", deltas.get(0).toString());
     }
 
     @Test

@@ -63,7 +63,7 @@ public class Differencer {
             if (emd.equals(amd)) {
                 od.diffObjects(config, deltas, path, expected, actual);
             } else {
-                deltas.add(Delta.from(config, DeltaType.DIFFERENT_TYPES, path, expected, actual));
+                deltas.add(Delta.from(DeltaType.DIFFERENT_TYPES, path, expected, actual));
             }
         }
 

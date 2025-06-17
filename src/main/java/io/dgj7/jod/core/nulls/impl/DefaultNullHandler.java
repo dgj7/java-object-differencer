@@ -21,7 +21,7 @@ public class DefaultNullHandler implements INullHandler {
         if (expected == null && actual == null) {
             return;
         } else if (expected == null || actual == null) {
-            deltas.add(Delta.from(config, DeltaType.NULLITY, path, expected, actual));
+            deltas.add(Delta.from(DeltaType.NULLITY, path, expected, actual));
         } else {
             throw new IllegalStateException("handleNulls() called with no nulls supplied");
         }
