@@ -4,7 +4,6 @@ import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.maps.diff.IMapDifferencer;
-import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.model.delta.Delta;
@@ -15,6 +14,7 @@ import io.dgj7.jod.xt.enumerations.IEnumDetector;
 import io.dgj7.jod.xt.equals.IEqualityChecker;
 import io.dgj7.jod.xt.maps.detect.IMapDetector;
 import io.dgj7.jod.xt.maps.transform.IMapTransformer;
+import io.dgj7.jod.xt.nulls.INullHandler;
 
 import java.util.Collection;
 import java.util.List;
@@ -44,7 +44,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         final IObjectGraphRecursor ogr = config.getObjectGraphRecursor();
 
         if (expected == null || actual == null) {
-            nh.handleNulls(config, path, deltas, expected, actual);
+            nh.handleNulls(path, deltas, expected, actual);
         } else if (ed.isEnum(expected, actual)) {
             if (!ec.check(expected, actual)) {
                 deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));

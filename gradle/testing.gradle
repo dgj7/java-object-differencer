@@ -21,7 +21,7 @@ def excludesArray = [
 
         'io/dgj7/jod/core/maps/diff/impl/DefaultMapDifferencer.class',
 
-        'io/dgj7/jod/core/nulls/impl/DefaultNullHandler.class',
+        'io/dgj7/jod/xt/nulls/impl/DefaultNullHandler.class',
 
         'io/dgj7/jod/xt/reflect/impl/DefaultFieldFinder.class',
 

@@ -1,12 +1,12 @@
 package io.dgj7.jod;
 
 import io.dgj7.jod.core.diff.IObjectDifferencer;
-import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.core.path.IRootPathProvider;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
+import io.dgj7.jod.xt.nulls.INullHandler;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class Differencer {
 
         /* diff root objects, starting with null and type equality check, before recurse */
         if (expected == null || actual == null) {
-            nh.handleNulls(config, path, deltas, expected, actual);
+            nh.handleNulls(path, deltas, expected, actual);
         } else {
             final AbstractMetaData emd = mdf.from(config, expected);
             final AbstractMetaData amd = mdf.from(config, actual);

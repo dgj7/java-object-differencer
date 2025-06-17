@@ -1,9 +1,8 @@
-package io.dgj7.jod.core.nulls.impl;
+package io.dgj7.jod.xt.nulls.impl;
 
-import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.core.nulls.INullHandler;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
+import io.dgj7.jod.xt.nulls.INullHandler;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class DefaultNullHandler implements INullHandler {
      * {@inheritDoc}
      */
     @Override
-    public <T> void handleNulls(final DifferencerConfiguration config, final String path, final List<Delta> deltas, final T expected, final T actual) {
+    public <T> void handleNulls(final String path, final List<Delta> deltas, final T expected, final T actual) {
         if (expected == null && actual == null) {
             return;
         } else if (expected == null || actual == null) {
