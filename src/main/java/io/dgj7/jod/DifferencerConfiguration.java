@@ -14,12 +14,6 @@ import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
 import io.dgj7.jod.core.recurse.action.impl.DefaultObjectGraphRecursor;
 import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
 import io.dgj7.jod.core.recurse.predicate.impl.DefaultShouldRecursePredicate;
-import io.dgj7.jod.core.reflect.field.IFieldFinder;
-import io.dgj7.jod.core.reflect.field.impl.DefaultFieldFinder;
-import io.dgj7.jod.core.reflect.fields.IFieldsEnumerator;
-import io.dgj7.jod.core.reflect.fields.impl.DefaultFieldsEnumerator;
-import io.dgj7.jod.core.reflect.transform.IFieldTransformer;
-import io.dgj7.jod.core.reflect.transform.impl.DefaultFieldTransformer;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.metadata.impl.DefaultMetaDataFactory;
@@ -37,6 +31,8 @@ import io.dgj7.jod.xt.maps.detect.IMapDetector;
 import io.dgj7.jod.xt.maps.detect.impl.DefaultMapDetector;
 import io.dgj7.jod.xt.maps.transform.IMapTransformer;
 import io.dgj7.jod.xt.maps.transform.impl.DefaultMapTransformer;
+import io.dgj7.jod.xt.reflect.IFieldFinder;
+import io.dgj7.jod.xt.reflect.impl.DefaultFieldFinder;
 import lombok.Getter;
 
 /**
@@ -46,11 +42,7 @@ import lombok.Getter;
  */
 public class DifferencerConfiguration {
     @Getter
-    private IFieldsEnumerator fieldsEnumerator;
-    @Getter
     private IFieldFinder fieldFinder;
-    @Getter
-    private IFieldTransformer fieldTransformer;
     @Getter
     private IShouldRecursePredicate shouldRecursePredicate;
     @Getter
@@ -102,9 +94,7 @@ public class DifferencerConfiguration {
      * Internal builder.
      */
     public static class DiffConfigBuilder implements Builder<DifferencerConfiguration> {
-        private static final IFieldsEnumerator DEFAULT_FIELDS_ENUMERATOR = new DefaultFieldsEnumerator();
         private static final IFieldFinder DEFAULT_FIELD_FINDER = new DefaultFieldFinder();
-        private static final IFieldTransformer DEFAULT_FIELD_TRANSFORMER = new DefaultFieldTransformer();
         private static final IShouldRecursePredicate DEFAULT_SHOULD_RECURSE_PREDICATE = new DefaultShouldRecursePredicate();
         private static final IEqualityChecker DEFAULT_EQUALITY_CHECKER = new DefaultEqualityChecker();
         private static final ICollectionDetector DEFAULT_COLLECTION_DETECTOR = new DefaultCollectionDetector();
@@ -123,9 +113,7 @@ public class DifferencerConfiguration {
 
         private static final IObjectDifferencer DEFAULT_OBJECT_DIFFERENCER = new DefaultObjectDifferencer();
 
-        private IFieldsEnumerator theFieldsEnumerator;
         private IFieldFinder theFieldFinder;
-        private IFieldTransformer theFieldTransformer;
         private IShouldRecursePredicate theShouldRecursePredicate;
         private IEqualityChecker theEqualityChecker;
         private ICollectionDetector theCollectionDetector;
@@ -147,24 +135,8 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withFieldsEnumerator(final IFieldsEnumerator input) {
-            this.theFieldsEnumerator = input;
-            return this;
-        }
-
-        /**
-         * Feed the builder.
-         */
         public DiffConfigBuilder withFieldFinder(final IFieldFinder input) {
             this.theFieldFinder = input;
-            return this;
-        }
-
-        /**
-         * Feed the builder.
-         */
-        public DiffConfigBuilder withFieldTransformer(final IFieldTransformer input) {
-            this.theFieldTransformer = input;
             return this;
         }
 
@@ -294,9 +266,7 @@ public class DifferencerConfiguration {
         public DifferencerConfiguration build() {
             final DifferencerConfiguration configuration = new DifferencerConfiguration();
 
-            configuration.fieldsEnumerator = theFieldsEnumerator == null ? DEFAULT_FIELDS_ENUMERATOR : theFieldsEnumerator;
             configuration.fieldFinder = theFieldFinder == null ? DEFAULT_FIELD_FINDER : theFieldFinder;
-            configuration.fieldTransformer = theFieldTransformer == null ? DEFAULT_FIELD_TRANSFORMER : theFieldTransformer;
             configuration.shouldRecursePredicate = theShouldRecursePredicate == null ? DEFAULT_SHOULD_RECURSE_PREDICATE : theShouldRecursePredicate;
             configuration.equalityChecker = theEqualityChecker == null ? DEFAULT_EQUALITY_CHECKER : theEqualityChecker;
             configuration.collectionDetector = theCollectionDetector == null ? DEFAULT_COLLECTION_DETECTOR : theCollectionDetector;

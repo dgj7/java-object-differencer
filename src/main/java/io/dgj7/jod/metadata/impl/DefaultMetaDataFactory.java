@@ -1,9 +1,9 @@
 package io.dgj7.jod.metadata.impl;
 
 import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.core.reflect.transform.IFieldTransformer;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
+import io.dgj7.jod.xt.reflect.IFieldFinder;
 import lombok.Getter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -147,9 +147,9 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
     public <P> DefaultMetaData from(final DifferencerConfiguration config, final Field pField, final P pParent) {
         final Field field = Objects.requireNonNull(pField, "Field is null");
         final P parent = Objects.requireNonNull(pParent, "Parent(P) is null");
-        final IFieldTransformer ft = config.getFieldTransformer();
+        final IFieldFinder ff = config.getFieldFinder();
 
-        final Object value = ft.fieldToObject(config, field, parent);
+        final Object value = ff.fieldToObject(field, parent);
 
         final String packageName = value == null ? "" : value.getClass().getPackageName();
         final String className = value == null ? "" : value.getClass().getSimpleName();

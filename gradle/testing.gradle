@@ -23,8 +23,7 @@ def excludesArray = [
 
         'io/dgj7/jod/core/nulls/impl/DefaultNullHandler.class',
 
-        'io/dgj7/jod/core/reflect/fields/impl/DefaultFieldsEnumerator.class',
-        'io/dgj7/jod/core/reflect/transform/impl/DefaultFieldTransformer.class',
+        'io/dgj7/jod/xt/reflect/impl/DefaultFieldFinder.class',
 
         'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory.class',
         'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory$DefaultMetaData.class',
