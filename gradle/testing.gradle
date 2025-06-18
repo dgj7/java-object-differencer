@@ -17,9 +17,6 @@ def excludesArray = [
         'io/dgj7/jod/DifferencerConfiguration$DiffConfigBuilder.class',
 
         // todo: eliminate these
-        'io/dgj7/jod/core/AbstractDifferentTypeDifferencer.class',
-        'io/dgj7/jod/core/AbstractSameTypeDifferencer.class',
-
         'io/dgj7/jod/xt/nulls/impl/DefaultNullHandler.class',
         'io/dgj7/jod/xt/reflect/impl/DefaultFieldFinder.class',
         'io/dgj7/jod/xt/recurse/impl/DefaultShouldRecursePredicate.class',
