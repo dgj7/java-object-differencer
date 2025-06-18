@@ -1,8 +1,6 @@
 package io.dgj7.jod.core;
 
 import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.metadata.AbstractMetaData;
-import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.model.eq.EquatableThings;
 import io.dgj7.jod.xt.collections.detect.ICollectionDetector;
 import io.dgj7.jod.xt.collections.transform.ICollectionTransformer;
@@ -31,7 +29,6 @@ public class AbstractDifferencer {
     protected final IEnumDetector ed;
     protected final IRootPathProvider rpp;
     protected final INullHandler nh;
-    protected final IMetaDataFactory<? extends AbstractMetaData> mdf;
     protected final EquatableThings et;
 
     /**
@@ -49,7 +46,6 @@ public class AbstractDifferencer {
         this.ed = config.getEnumDetector();
         this.rpp = config.getRootPathProvider();
         this.nh = config.getNullHandler();
-        this.mdf = config.getMetaDataFactory();
         this.et = config.getEquatableThings();
     }
 }

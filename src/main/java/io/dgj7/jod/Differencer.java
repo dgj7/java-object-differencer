@@ -33,9 +33,6 @@ public class Differencer extends AbstractDifferentTypeDifferencer {
      * <p>
      * Find and return a list of differences between the two given objects.
      * </p>
-     * <p>
-     * This method uses the default configuration.
-     * </p>
      */
     public List<Delta> difference(final Object expected, final Object actual) {
         return differenceDifferentTypes(expected, actual);

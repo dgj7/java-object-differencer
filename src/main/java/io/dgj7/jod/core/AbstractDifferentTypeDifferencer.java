@@ -1,7 +1,6 @@
 package io.dgj7.jod.core;
 
 import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 
@@ -35,11 +34,8 @@ public class AbstractDifferentTypeDifferencer extends AbstractSameTypeDifference
         if (expected == null || actual == null) {
             nh.handleNulls(path, deltas, expected, actual);
         } else {
-            final AbstractMetaData emd = mdf.fromObject(expected);
-            final AbstractMetaData amd = mdf.fromObject(actual);
-
             /* if objects are same type, we can begin to actually diff them; otherwise, add delta and exit */
-            if (emd.equals(amd)) {
+            if (expected.getClass().equals(actual.getClass())) {
                 differenceSameTypes(deltas, path, expected, actual);
             } else {
                 deltas.add(Delta.from(DeltaType.DIFFERENT_TYPES, path, expected, actual));

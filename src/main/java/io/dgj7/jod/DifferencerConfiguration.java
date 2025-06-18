@@ -1,8 +1,5 @@
 package io.dgj7.jod;
 
-import io.dgj7.jod.metadata.AbstractMetaData;
-import io.dgj7.jod.metadata.IMetaDataFactory;
-import io.dgj7.jod.metadata.impl.DefaultMetaDataFactory;
 import io.dgj7.jod.model.eq.EquatableThings;
 import io.dgj7.jod.pattern.builder.Builder;
 import io.dgj7.jod.xt.collections.detect.ICollectionDetector;
@@ -53,8 +50,6 @@ public class DifferencerConfiguration {
     private IRootPathProvider rootPathProvider;
     @Getter
     private INullHandler nullHandler;
-    @Getter
-    private IMetaDataFactory<? extends AbstractMetaData> metaDataFactory;
 
     @Getter
     private EquatableThings equatableThings;
@@ -87,7 +82,6 @@ public class DifferencerConfiguration {
         private static final IEnumDetector DEFAULT_ENUM_DETECTOR = new DefaultEnumDetector();
         private static final IRootPathProvider DEFAULT_ROOT_PATH_PROVIDER = new DefaultRootPathProvider();
         private static final INullHandler DEFAULT_NULL_HANDLER = new DefaultNullHandler();
-        private static final IMetaDataFactory<? extends AbstractMetaData> DEFAULT_META_DATA_FACTORY = new DefaultMetaDataFactory();
 
         private static final EquatableThings DEFAULT_EQUATABLE_THINGS = EquatableThings.createDefault();
 
@@ -101,7 +95,6 @@ public class DifferencerConfiguration {
         private IEnumDetector theEnumDetector;
         private IRootPathProvider theRootPathProvider;
         private INullHandler theNullHandler;
-        private IMetaDataFactory<? extends AbstractMetaData> theMetaDataFactory;
 
         private EquatableThings theEquatableThings;
 
@@ -188,14 +181,6 @@ public class DifferencerConfiguration {
         /**
          * Feed the builder.
          */
-        public DiffConfigBuilder withMetaDataFactory(final IMetaDataFactory<? extends AbstractMetaData> input) {
-            this.theMetaDataFactory = input;
-            return this;
-        }
-
-        /**
-         * Feed the builder.
-         */
         public DiffConfigBuilder withEquatableThings(final EquatableThings input) {
             this.theEquatableThings = input;
             return this;
@@ -217,7 +202,6 @@ public class DifferencerConfiguration {
             configuration.enumDetector = theEnumDetector == null ? DEFAULT_ENUM_DETECTOR : theEnumDetector;
             configuration.rootPathProvider = theRootPathProvider == null ? DEFAULT_ROOT_PATH_PROVIDER : theRootPathProvider;
             configuration.nullHandler = theNullHandler == null ? DEFAULT_NULL_HANDLER : theNullHandler;
-            configuration.metaDataFactory = theMetaDataFactory == null ? DEFAULT_META_DATA_FACTORY : theMetaDataFactory;
 
             configuration.equatableThings = theEquatableThings == null ? DEFAULT_EQUATABLE_THINGS : theEquatableThings;
 
