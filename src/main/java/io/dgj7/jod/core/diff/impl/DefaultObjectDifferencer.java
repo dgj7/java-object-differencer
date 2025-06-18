@@ -5,9 +5,10 @@ import io.dgj7.jod.core.collections.diff.ICollectionDifferencer;
 import io.dgj7.jod.core.diff.IObjectDifferencer;
 import io.dgj7.jod.core.maps.diff.IMapDifferencer;
 import io.dgj7.jod.core.recurse.action.IObjectGraphRecursor;
-import io.dgj7.jod.core.recurse.predicate.IShouldRecursePredicate;
+import io.dgj7.jod.xt.recurse.IShouldRecursePredicate;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
+import io.dgj7.jod.model.eq.EquatableThings;
 import io.dgj7.jod.xt.collections.detect.ICollectionDetector;
 import io.dgj7.jod.xt.collections.transform.ICollectionTransformer;
 import io.dgj7.jod.xt.enumerations.IEnumDetector;
@@ -42,6 +43,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
         final IEqualityChecker ec = config.getEqualityChecker();
         final IShouldRecursePredicate srp = config.getShouldRecursePredicate();
         final IObjectGraphRecursor ogr = config.getObjectGraphRecursor();
+        final EquatableThings et = config.getEquatableThings();
 
         if (expected == null || actual == null) {
             nh.handleNulls(path, deltas, expected, actual);
@@ -57,7 +59,7 @@ public class DefaultObjectDifferencer implements IObjectDifferencer {
             final Map<Object, Object> expectedMap = mt.objectToMap(expected);
             final Map<Object, Object> actualMap = mt.objectToMap(actual);
             mdf.diffMaps(config, deltas, path, expectedMap, actualMap);
-        } else if (srp.test(config, expected, actual)) {
+        } else if (srp.test(et, expected, actual)) {
             ogr.diffRecurse(config, deltas, path, expected, actual);
         } else if (!ec.check(expected, actual)) {
             deltas.add(Delta.from(DeltaType.NOT_EQUAL, path, expected, actual));

@@ -1,6 +1,6 @@
-package io.dgj7.jod.core.recurse.predicate;
+package io.dgj7.jod.xt.recurse;
 
-import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.model.eq.EquatableThings;
 
 /**
  * <p>
@@ -11,5 +11,5 @@ public interface IShouldRecursePredicate {
     /**
      * Determine if the application should recurse into the given object(s).
      */
-    boolean test(final DifferencerConfiguration config, final Object expected, final Object actual);
+    <T> boolean test(final EquatableThings et, final T expected, final T actual);
 }

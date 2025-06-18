@@ -25,6 +25,8 @@ def excludesArray = [
 
         'io/dgj7/jod/xt/reflect/impl/DefaultFieldFinder.class',
 
+        'io/dgj7/jod/xt/recurse/impl/DefaultShouldRecursePredicate.class',
+
         'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory.class',
         'io/dgj7/jod/metadata/impl/DefaultMetaDataFactory$DefaultMetaData.class',
 
