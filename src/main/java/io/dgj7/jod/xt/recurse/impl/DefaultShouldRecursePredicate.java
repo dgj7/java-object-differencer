@@ -1,7 +1,7 @@
 package io.dgj7.jod.xt.recurse.impl;
 
-import io.dgj7.jod.xt.recurse.IShouldRecursePredicate;
 import io.dgj7.jod.model.eq.EquatableThings;
+import io.dgj7.jod.xt.recurse.IShouldRecursePredicate;
 
 import java.util.Optional;
 import java.util.function.Predicate;
