@@ -21,7 +21,7 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(1, diffs.size());
-        Assert.assertEquals("NULLITY: java.util.ArrayList (java.util.Arrays$ArrayList): expected=[null], actual=[[1, 2.71828, 3.141592653589793]]", diffs.get(0).toString());
+        Assert.assertEquals("NULLITY: java.util.Arrays$ArrayList (java.util.Arrays$ArrayList): expected=[null], actual=[[1, 2.71828, 3.141592653589793]]", diffs.get(0).toString());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(1, diffs.size());
-        Assert.assertEquals("NULLITY: java.util.ArrayList (java.util.Arrays$ArrayList): expected=[[1, 2.71828, 3.141592653589793]], actual=[null]", diffs.get(0).toString());
+        Assert.assertEquals("NULLITY: java.util.Arrays$ArrayList (java.util.Arrays$ArrayList): expected=[[1, 2.71828, 3.141592653589793]], actual=[null]", diffs.get(0).toString());
     }
 
     @Test
@@ -46,10 +46,10 @@ public class MixedListEndToEndTest {
         // todo: merge collection differencers; the last diff makes no sense, and it's because the default coll-diff goes by index
         Assert.assertNotNull(diffs);
         Assert.assertEquals(4, diffs.size());
-        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.ArrayList (java.lang.Integer): expected=[3], actual=[2]", diffs.get(0).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[0] (java.lang.Integer/java.lang.Float): expected=[1], actual=[2.71828]", diffs.get(1).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[1] (java.lang.Float/java.lang.Double): expected=[2.7182], actual=[3.141592653589793]", diffs.get(2).toString());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.ArrayList[2] (java.lang.Double): no matching element for expected=[3.141592653589793]", diffs.get(3).toString());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.Arrays$ArrayList (java.lang.Integer): expected=[3], actual=[2]", diffs.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[0] (java.lang.Integer/java.lang.Float): expected=[1], actual=[2.71828]", diffs.get(1).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[1] (java.lang.Float/java.lang.Double): expected=[2.7182], actual=[3.141592653589793]", diffs.get(2).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.Arrays$ArrayList[2] (java.lang.Double): no matching element for expected=[3.141592653589793]", diffs.get(3).toString());
     }
 
     @Test
@@ -61,9 +61,9 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(3, diffs.size());
-        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.ArrayList (java.lang.Integer): expected=[3], actual=[2]", diffs.get(0).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[1] (java.lang.Float): expected=[2.7182], actual=[2.71828]", diffs.get(1).toString());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.ArrayList[2] (java.lang.Double): no matching element for expected=[3.141592653589793]", diffs.get(2).toString());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.Arrays$ArrayList (java.lang.Integer): expected=[3], actual=[2]", diffs.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[1] (java.lang.Float): expected=[2.7182], actual=[2.71828]", diffs.get(1).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.Arrays$ArrayList[2] (java.lang.Double): no matching element for expected=[3.141592653589793]", diffs.get(2).toString());
     }
 
     @Test
@@ -75,10 +75,10 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(4, diffs.size());
-        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.ArrayList (java.lang.Integer): expected=[2], actual=[3]", diffs.get(0).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[0] (java.lang.Float/java.lang.Integer): expected=[2.7182], actual=[1]", diffs.get(1).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[1] (java.lang.Double/java.lang.Float): expected=[3.141592653589793], actual=[2.71828]", diffs.get(2).toString());
-        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.ArrayList[2+1] (java.lang.Double): extra unmatched element; actual=[3.141592653589793]", diffs.get(3).toString());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.Arrays$ArrayList (java.lang.Integer): expected=[2], actual=[3]", diffs.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[0] (java.lang.Float/java.lang.Integer): expected=[2.7182], actual=[1]", diffs.get(1).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[1] (java.lang.Double/java.lang.Float): expected=[3.141592653589793], actual=[2.71828]", diffs.get(2).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.Arrays$ArrayList[2+1] (java.lang.Double): extra unmatched element; actual=[3.141592653589793]", diffs.get(3).toString());
     }
 
     @Test
@@ -90,9 +90,9 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(3, diffs.size());
-        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.ArrayList (java.lang.Integer): expected=[2], actual=[3]", diffs.get(0).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[1] (java.lang.Float): expected=[2.7182], actual=[2.71828]", diffs.get(1).toString());
-        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.ArrayList[2+1] (java.lang.Double): extra unmatched element; actual=[3.141592653589793]", diffs.get(2).toString());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.Arrays$ArrayList (java.lang.Integer): expected=[2], actual=[3]", diffs.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[1] (java.lang.Float): expected=[2.7182], actual=[2.71828]", diffs.get(1).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.Arrays$ArrayList[2+1] (java.lang.Double): extra unmatched element; actual=[3.141592653589793]", diffs.get(2).toString());
     }
 
     @Test
@@ -104,8 +104,8 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(2, diffs.size());
-        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.ArrayList (java.lang.Integer): expected=[4], actual=[3]", diffs.get(0).toString());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.ArrayList[0] (java.lang.String): no matching element for expected=[null]", diffs.get(1).toString());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.Arrays$ArrayList (java.lang.Integer): expected=[4], actual=[3]", diffs.get(0).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.Arrays$ArrayList[0] (java.lang.String): no matching element for expected=[null]", diffs.get(1).toString());
     }
 
     @Test
@@ -117,8 +117,8 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(2, diffs.size());
-        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.ArrayList (java.lang.Integer): expected=[4], actual=[3]", diffs.get(0).toString());
-        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.ArrayList[3] (java.lang.String): no matching element for expected=[null]", diffs.get(1).toString());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.Arrays$ArrayList (java.lang.Integer): expected=[4], actual=[3]", diffs.get(0).toString());
+        Assert.assertEquals("NO_MATCHING_ELEMENT: java.util.Arrays$ArrayList[3] (java.lang.String): no matching element for expected=[null]", diffs.get(1).toString());
     }
 
     @Test
@@ -130,11 +130,11 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(5, diffs.size());
-        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.ArrayList (java.lang.Integer): expected=[3], actual=[4]", diffs.get(0).toString());
-        Assert.assertEquals("NULLITY: java.util.ArrayList[0] (java.lang.Integer): expected=[1], actual=[null]", diffs.get(1).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[1] (java.lang.Float/java.lang.Integer): expected=[2.71828], actual=[1]", diffs.get(2).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[2] (java.lang.Double/java.lang.Float): expected=[3.141592653589793], actual=[2.71828]", diffs.get(3).toString());
-        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.ArrayList[3+1] (java.lang.Double): extra unmatched element; actual=[3.141592653589793]", diffs.get(4).toString());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.Arrays$ArrayList (java.lang.Integer): expected=[3], actual=[4]", diffs.get(0).toString());
+        Assert.assertEquals("NULLITY: java.util.Arrays$ArrayList[0] (java.lang.Integer): expected=[1], actual=[null]", diffs.get(1).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[1] (java.lang.Float/java.lang.Integer): expected=[2.71828], actual=[1]", diffs.get(2).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[2] (java.lang.Double/java.lang.Float): expected=[3.141592653589793], actual=[2.71828]", diffs.get(3).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.Arrays$ArrayList[3+1] (java.lang.Double): extra unmatched element; actual=[3.141592653589793]", diffs.get(4).toString());
     }
 
     @Test
@@ -146,8 +146,8 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(2, diffs.size());
-        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.ArrayList (java.lang.Integer): expected=[3], actual=[4]", diffs.get(0).toString());
-        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.ArrayList[3+1]: extra unmatched element; actual=[null]", diffs.get(1).toString());
+        Assert.assertEquals("COLLECTION_SIZES_NOT_EQUAL: java.util.Arrays$ArrayList (java.lang.Integer): expected=[3], actual=[4]", diffs.get(0).toString());
+        Assert.assertEquals("COLLECTION_EXTRA_ACTUAL_ELEMENT: java.util.Arrays$ArrayList[3+1]: extra unmatched element; actual=[null]", diffs.get(1).toString());
     }
 
     @Test
@@ -159,7 +159,7 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(1, diffs.size());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[1] (java.lang.Float): expected=[2.7182], actual=[2.71828]", diffs.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[1] (java.lang.Float): expected=[2.7182], actual=[2.71828]", diffs.get(0).toString());
     }
 
     @Test
@@ -171,7 +171,7 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(1, diffs.size());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[0] (java.lang.Integer): expected=[1], actual=[2]", diffs.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[0] (java.lang.Integer): expected=[1], actual=[2]", diffs.get(0).toString());
     }
 
     // todo: can/should this test pass?
@@ -184,8 +184,8 @@ public class MixedListEndToEndTest {
 
         Assert.assertNotNull(diffs);
         Assert.assertEquals(2, diffs.size());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[0] (java.lang.Integer/java.lang.Double): expected=[1], actual=[3.141592653589793]", diffs.get(0).toString());
-        Assert.assertEquals("NOT_EQUAL: java.util.ArrayList[2] (java.lang.Double/java.lang.Integer): expected=[3.141592653589793], actual=[1]", diffs.get(1).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[0] (java.lang.Integer/java.lang.Double): expected=[1], actual=[3.141592653589793]", diffs.get(0).toString());
+        Assert.assertEquals("NOT_EQUAL: java.util.Arrays$ArrayList[2] (java.lang.Double/java.lang.Integer): expected=[3.141592653589793], actual=[1]", diffs.get(1).toString());
     }
 
     @Test

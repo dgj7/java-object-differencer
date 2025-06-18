@@ -1,7 +1,5 @@
 package io.dgj7.jod;
 
-import io.dgj7.jod.core.path.IRootPathProvider;
-import io.dgj7.jod.core.path.impl.DefaultRootPathProvider;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.metadata.impl.DefaultMetaDataFactory;
@@ -21,6 +19,8 @@ import io.dgj7.jod.xt.maps.transform.IMapTransformer;
 import io.dgj7.jod.xt.maps.transform.impl.DefaultMapTransformer;
 import io.dgj7.jod.xt.nulls.INullHandler;
 import io.dgj7.jod.xt.nulls.impl.DefaultNullHandler;
+import io.dgj7.jod.xt.path.IRootPathProvider;
+import io.dgj7.jod.xt.path.impl.DefaultRootPathProvider;
 import io.dgj7.jod.xt.recurse.IShouldRecursePredicate;
 import io.dgj7.jod.xt.recurse.impl.DefaultShouldRecursePredicate;
 import io.dgj7.jod.xt.reflect.IFieldFinder;

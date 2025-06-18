@@ -1,12 +1,12 @@
 package io.dgj7.jod.core;
 
 import io.dgj7.jod.DifferencerConfiguration;
-import io.dgj7.jod.core.path.IRootPathProvider;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
 import io.dgj7.jod.xt.nulls.INullHandler;
+import io.dgj7.jod.xt.path.IRootPathProvider;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class AbstractDifferentTypeDifferencer extends AbstractSameTypeDifference
         final List<Delta> deltas = new LinkedList<>();
 
         /* determine the root path */
-        final String path = rpp.provideRootPath(config, expected, actual);
+        final String path = rpp.provideRootPath(expected, actual);
 
         /* diff root objects, starting with null and type equality check, before recurse */
         if (expected == null || actual == null) {
