@@ -2,11 +2,8 @@ package io.dgj7.jod.core;
 
 import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.metadata.AbstractMetaData;
-import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.model.delta.Delta;
 import io.dgj7.jod.model.delta.DeltaType;
-import io.dgj7.jod.xt.nulls.INullHandler;
-import io.dgj7.jod.xt.path.IRootPathProvider;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,14 +15,16 @@ import java.util.List;
  */
 public class AbstractDifferentTypeDifferencer extends AbstractSameTypeDifferencer {
     /**
+     * Create a new instance.
+     */
+    protected AbstractDifferentTypeDifferencer(final DifferencerConfiguration config) {
+        super(config);
+    }
+
+    /**
      * Find differences between two objects that may be different types.
      */
-    protected <T, U> List<Delta> differenceDifferentTypes(final DifferencerConfiguration config, final T expected, final U actual) {
-        /* retrieve behaviors */
-        final INullHandler nh = config.getNullHandler();
-        final IMetaDataFactory<? extends AbstractMetaData> mdf = config.getMetaDataFactory();
-        final IRootPathProvider rpp = config.getRootPathProvider();
-
+    protected <T, U> List<Delta> differenceDifferentTypes(final T expected, final U actual) {
         /* storage */
         final List<Delta> deltas = new LinkedList<>();
 
@@ -36,12 +35,12 @@ public class AbstractDifferentTypeDifferencer extends AbstractSameTypeDifference
         if (expected == null || actual == null) {
             nh.handleNulls(path, deltas, expected, actual);
         } else {
-            final AbstractMetaData emd = mdf.from(config, expected);
-            final AbstractMetaData amd = mdf.from(config, actual);
+            final AbstractMetaData emd = mdf.fromObject(expected);
+            final AbstractMetaData amd = mdf.fromObject(actual);
 
             /* if objects are same type, we can begin to actually diff them; otherwise, add delta and exit */
             if (emd.equals(amd)) {
-                differenceSameTypes(config, deltas, path, expected, actual);
+                differenceSameTypes(deltas, path, expected, actual);
             } else {
                 deltas.add(Delta.from(DeltaType.DIFFERENT_TYPES, path, expected, actual));
             }

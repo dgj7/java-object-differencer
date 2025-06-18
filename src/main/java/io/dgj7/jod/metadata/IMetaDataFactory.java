@@ -1,6 +1,6 @@
 package io.dgj7.jod.metadata;
 
-import io.dgj7.jod.DifferencerConfiguration;
+import io.dgj7.jod.xt.reflect.IFieldFinder;
 
 import java.lang.reflect.Field;
 
@@ -13,20 +13,20 @@ public interface IMetaDataFactory<M extends AbstractMetaData> {
     /**
      * Simple factory.
      */
-    <T> M from(final DifferencerConfiguration config, final Class<T> pClazz);
+    <T> M fromClass(final Class<T> pClazz);
 
     /**
      * Simple factory.
      */
-    <T> M from(final DifferencerConfiguration config, final T pInput);
+    <T> M fromObject(final T pInput);
 
     /**
      * Simple factory.
      */
-    <T> M from(final DifferencerConfiguration config, final T expected, final T actual);
+    <T> M fromObjects(final T expected, final T actual);
 
     /**
      * Simple factory.
      */
-    <P> M from(final DifferencerConfiguration config, final Field pField, final P pParent);
+    <P> M fromField(final IFieldFinder ff, final Field pField, final P pParent);
 }

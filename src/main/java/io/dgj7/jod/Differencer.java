@@ -16,6 +16,20 @@ import java.util.List;
  */
 public class Differencer extends AbstractDifferentTypeDifferencer {
     /**
+     * Create a new instance.
+     */
+    public Differencer() {
+        super(DifferencerConfiguration.builder().build());
+    }
+
+    /**
+     * Create a new instance.
+     */
+    public Differencer(final DifferencerConfiguration config) {
+        super(config);
+    }
+
+    /**
      * <p>
      * Find and return a list of differences between the two given objects.
      * </p>
@@ -24,11 +38,6 @@ public class Differencer extends AbstractDifferentTypeDifferencer {
      * </p>
      */
     public List<Delta> difference(final Object expected, final Object actual) {
-        final DifferencerConfiguration config = DifferencerConfiguration.builder().build();
-        return difference(config, expected, actual);
-    }
-
-    public List<Delta> difference(final DifferencerConfiguration config, final Object expected, final Object actual) {
-        return differenceDifferentTypes(config, expected, actual);
+        return differenceDifferentTypes(expected, actual);
     }
 }

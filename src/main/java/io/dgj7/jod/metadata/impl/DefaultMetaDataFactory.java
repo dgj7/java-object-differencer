@@ -1,6 +1,5 @@
 package io.dgj7.jod.metadata.impl;
 
-import io.dgj7.jod.DifferencerConfiguration;
 import io.dgj7.jod.metadata.AbstractMetaData;
 import io.dgj7.jod.metadata.IMetaDataFactory;
 import io.dgj7.jod.xt.reflect.IFieldFinder;
@@ -108,7 +107,7 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
      * {@inheritDoc}
      */
     @Override
-    public <T> DefaultMetaData from(final DifferencerConfiguration config, final Class<T> pClazz) {
+    public <T> DefaultMetaData fromClass(final Class<T> pClazz) {
         final Class<T> clazz = Objects.requireNonNull(pClazz, "Class<T> is null");
 
         final String packageName = clazz.getPackageName();
@@ -122,7 +121,7 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
      * {@inheritDoc}
      */
     @Override
-    public <T> DefaultMetaData from(final DifferencerConfiguration config, final T pInput) {
+    public <T> DefaultMetaData fromObject(final T pInput) {
         final T input = Objects.requireNonNull(pInput, "T is null");
 
         final String packageName = input.getClass().getPackageName();
@@ -136,18 +135,17 @@ public class DefaultMetaDataFactory implements IMetaDataFactory<DefaultMetaDataF
      * {@inheritDoc}
      */
     @Override
-    public <T> DefaultMetaData from(final DifferencerConfiguration config, final T expected, final T actual) {
+    public <T> DefaultMetaData fromObjects(final T expected, final T actual) {
         final T object = Optional.ofNullable(expected).orElse(actual);
-        return from(config, object);
+        return fromObject(object);
     }
 
     /**
      * {@inheritDoc}
      */
-    public <P> DefaultMetaData from(final DifferencerConfiguration config, final Field pField, final P pParent) {
+    public <P> DefaultMetaData fromField(final IFieldFinder ff, final Field pField, final P pParent) {
         final Field field = Objects.requireNonNull(pField, "Field is null");
         final P parent = Objects.requireNonNull(pParent, "Parent(P) is null");
-        final IFieldFinder ff = config.getFieldFinder();
 
         final Object value = ff.fieldToObject(field, parent);
 
