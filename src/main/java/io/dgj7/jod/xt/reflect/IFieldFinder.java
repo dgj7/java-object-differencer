@@ -15,7 +15,7 @@ public interface IFieldFinder {
     /**
      * List all {@link Field}s.
      */
-    <I> List<Field> fields(final EquatableThings et, final I input);
+    <I> List<Field> findFields(final EquatableThings et, final I input);
 
     /**
      * Find field with the given name.

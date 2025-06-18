@@ -52,7 +52,7 @@ public class AbstractSameTypeDifferencer extends AbstractDifferencer {
      * Recurse into the fields of both objects.
      */
     public <T> void differenceRecurse(final List<Delta> deltas, final String prefixPath, final T expected, final T actual) {
-        for (Field field : ff.fields(et, expected)) {
+        for (Field field : ff.findFields(et, expected)) {
             final String path = prefixPath + "." + field.getName();
 
             final Object expectedFieldValue = ff.fieldToObject(field, expected);

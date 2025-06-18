@@ -19,7 +19,7 @@ public class DefaultFieldFinder implements IFieldFinder {
         final I input = Objects.requireNonNull(pInput, "Input(I) is null");
         final String name = Objects.requireNonNull(pName, "Name(String) is null");
 
-        return fields(et, input)
+        return findFields(et, input)
                 .stream()
                 .filter(f -> name.equals(f.getName()))
                 .findFirst();
@@ -29,7 +29,7 @@ public class DefaultFieldFinder implements IFieldFinder {
      * {@inheritDoc}
      */
     @Override
-    public <I> List<Field> fields(final EquatableThings et, final I pInput) {
+    public <I> List<Field> findFields(final EquatableThings et, final I pInput) {
         final I input = Objects.requireNonNull(pInput, "Input(I) is null");
 
         final List<Field> fields = new LinkedList<>();
