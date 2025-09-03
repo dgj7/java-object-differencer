@@ -1,8 +1,7 @@
 # Java Object Differencer
 ## Purpose
-returns a list of 'differences' between two java objects.
-
-intended to be a unit testing tool.
+![build](https://github.com/dgj7/java-object-differencer/actions/workflows/build.yml/badge.svg)
+returns a list of 'differences' between two java objects; intended to be a unit testing tool.
 
 ## Internal Testing Priorities
 - [x] priority 1
