@@ -16,7 +16,7 @@ jobs:
       with:
         java-version: '20'
         distribution: 'temurin'
-        cache: maven
+        cache: gradle
     - name: Permissions
       run: chmod +x gradlew
     - name: BuildGradle

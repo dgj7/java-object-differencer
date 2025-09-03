@@ -1,7 +1,15 @@
 # Java Object Differencer
-## Purpose
 ![build](https://github.com/dgj7/java-object-differencer/actions/workflows/build.yml/badge.svg)
+## Purpose
 returns a list of 'differences' between two java objects; intended to be a unit testing tool.
+
+## History
+- [x] `0.0.x`, `2025-05-11`: create initial project files
+- [x] `0.1.x`, `2025-05-11`: initial implementation
+- [x] `0.2.x`, `2025-05-11`: initial refactoring and refinement
+- [x] `0.3.x`, `2025-05-22`: end-to-end automated tests
+- [ ] `0.4.x`: final refactoring and refinement; additional unit tests, if necessary
+- [ ] `1.0.0`: release
 
 ## Internal Testing Priorities
 - [x] priority 1
@@ -16,13 +24,5 @@ returns a list of 'differences' between two java objects; intended to be a unit 
   - [ ] jaxb-generated object graph
 - [ ] priority 4
   - [ ] large object graph
-
-## History
-- [x] `0.0.x`, `2025-05-11`: create initial project files
-- [x] `0.1.x`, `2025-05-11`: initial implementation
-- [x] `0.2.x`, `2025-05-11`: initial refactoring and refinement
-- [x] `0.3.x`, `2025-05-22`: end-to-end automated tests
-- [ ] `0.4.x`: final refactoring and refinement; additional unit tests, if necessary
-- [ ] `1.0.0`: release
 
 ---
